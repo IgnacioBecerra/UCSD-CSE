@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 2_ Unix, GDB, Valgrind, JDB_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 2_ Unix, GDB, Valgrind, JDB_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 2_ Unix, GDB, Valgrind, JDB_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 2_ Unix, GDB, Valgrind, JDB_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 2: Unix, GDB, Valgrind, JDB</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#lab2unixgdbvalgrindjdb">Lab 2: Unix, GDB, Valgrind, JDB</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#welcome">Welcome!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#whydothislab">Why Do This Lab?</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#gettingstarted">Getting Started</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goaldebugccodebyanalyzingthecodeduringprogramexecution">Goal: Debug C Code by analyzing the code during program execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#checkpoint">Checkpoint!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goaldetectmemoryleaksinyourcode">Goal: Detect memory leaks in your code.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goaldebugccodebyanalyzingthecodeduringprogramexecution-1">Goal: Debug C++ code by analyzing the code during program execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goaldebugjavacodebylookingattheprogramwhileitsrunning">Goal: Debug Java code by looking at the program while it's running.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goalknowwhereyouareinyoursystem">Goal: Know where you are in your system.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goalgrabinformationfromfileswithoutneedingtomanuallysortthroughthem">Goal: Grab information from files without needing to manually sort through them.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goalmanipulatefileswithoutopeningthem">Goal: Manipulate files without opening them.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goalcompressandcombinefilestogether">Goal: Compress and combine files together.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#goalbeabletohandleprocessesrunninginyourenvironment">Goal: Be able to handle processes running in your environment.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab2_asdfkf/index.html#checkoff">Checkoff</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab2unixgdbvalgrindjdb">Lab 2: Unix, GDB, Valgrind, JDB</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab test.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+      For the lab homework, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="welcome">Welcome!</h1><hr id="hrline">
+
+<p>Welcome to Lab 2 (which will henceforth be referred to as hw0). Before we begin this lab, please make sure you have read through the "Lab 0: General Lab Guide" found <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab0_general">here</a>. This is your guide to navigating all labs and making sure you get the most out of every lab we provide (and all the credit you deserve as well!).</p>
+
+<p>For this lab, please record the answers to all questions in a README file (see next section), which will be used for the checkoff at the end of this lab.</p>
+
+<h1 id="whydothislab">Why Do This Lab?</h1><hr id="hrline">
+
+<p>The purpose of this assignment is to acquaint you with some of the tools in 
+the programming lab, and with the standard procedures and guidelines for working 
+on the homework assignments. This assignment walks you through using the GDB debugger, 
+valgrind memory management tool, and the jdb debugger. This assignment contains 
+programs in C, C++, and Java, and a number of questions and exercises which need 
+to be answered in ~/hw0/README. Further, this lab also goes through some more advanced UNIX tools.</p>
+
+<h1 id="gettingstarted">Getting Started</h1><hr id="hrline">
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/1.png" alt="Terminal"></p>
+
+<p>Log in to a computer in the lab, under Linux using your cs15f username. 
+If you do not know your login, it can be found with the ACS account lookup tool.
+Your password is the same as your personal ACS account password.</p>
+
+<p>Open a new terminal by right-clicking on the desktop and then choosing Open Terminal.</p>
+
+<h3 id="acquirethelabfiles">Acquire The Lab Files</h3>
+
+<p>Acquire the assignment from the public area. To avoid clobbering your work when 
+repeating installation steps for an assignment, assignments contain one or more 
+.empty files that need to be renamed to remove the .empty file extension. Those 
+will contain the code that you will write for an assignment.</p>
+
+<pre><code>$ cd ~/../public/hw0
+$ make directories
+$ make install
+$ cd ~/hw0/c
+$ mv hw0.c.empty hw0.c
+$ cd ../cpp
+$ mv hw0.cpp.empty hw0.cpp
+$ cd ../java
+$ mv hw0.java.empty hw0.java
+</code></pre>
+
+<h3 id="preparethereadmefile">Prepare the README file</h3>
+
+<p>Back in the terminal window, rename the README.empty file, and open it for editing. 
+You will use this file to record your answers to the lab questions.</p>
+
+<pre><code>$ cd ~/hw0
+$ mv README.empty README
+$ gvim README
+</code></pre>
+
+<p>If you're new to vim/gvim, it may be helpful to use a search engine, and search for "vim commands".</p>
+
+<h3 id="buildallfiles">Build all Files</h3>
+
+<pre><code>$ cd ~/hw0
+$ make
+</code></pre>
+
+<p>If the make command failed, you may have made a mistake when renaming your files.
+Please review your directories to ensure the expected files are present.</p>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/2.png" alt="Make"></p>
+
+<h1 id="goaldebugccodebyanalyzingthecodeduringprogramexecution">Goal: Debug C Code by analyzing the code during program execution.</h1><hr id="hrline">
+
+<p>This exercise will teach you how to use the gdb debugger. It will cover the <code>break</code>, 
+<code>next</code>, <code>step</code>, <code>print</code>, <code>continue</code>, <code>where</code>, <code>finish</code>, and <code>quit</code> commands.</p>
+
+<h3 id="changedirectoriestothecsubfolderofthehw0assignmentandbuild">Change directories to the c subfolder of the hw0 assignment and build.</h3>
+
+<pre><code>$ cd ~/hw0/c
+$ make
+</code></pre>
+
+<p>If you followed the last step on the previous page, make should say "Nothing to be done for 'all'."</p>
+
+<p>An executable file named <code>a.out</code> will be created. Run the program by typing:</p>
+
+<pre><code>$ a.out
+</code></pre>
+
+<p>If you get an error saying "bash: a.out: command not found", then the computer doesn't 
+know where to look to find the a.out executable file. You can tell the computer to look 
+in the current directory by typing "./". Here is the full command to run the executable, 
+which is located in the current directory:</p>
+
+<pre><code>$ ./a.out
+</code></pre>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/3.png" alt="C"></p>
+
+<p><strong>NOTE: For some of you, you will get <code>nums[0] = 0</code> instead of a random number. This is fine.</strong></p>
+
+<h3 id="openhw0cingvimoryourfavoritetexteditor">Open hw0.c in gvim, or your favorite text editor.</h3>
+
+<pre><code>$ gvim hw0.c
+</code></pre>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/4.png" alt="Gvim"></p>
+
+<h3 id="startaoutinthegdbdebugger">Start a.out in the gdb debugger.</h3>
+
+<pre><code>$ gdb a.out
+</code></pre>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/5.png" alt="Gdb"></p>
+
+<p><strong>NOTE: If you are getting an "'import site' failed" error, that's okay. This should not affect your program, so just continue)</strong></p>
+
+<p>All command line C/C++ programs start execution in main(). Set a breakpoint at main():</p>
+
+<pre><code>(gdb) break main
+</code></pre>
+
+<h3 id="question1whatwouldyoutypeifyouknewyourerroroccuredonline42instead">Question 1: What would you type if you knew your error occured on line 42 instead?</h3>
+
+<p>Run your program.</p>
+
+<pre><code>(gdb) run
+</code></pre>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/6.png" alt="Run"></p>
+
+<p><strong>(NOTE: If you get a "Missing separate debuginfos" error, you can ignore this as well)</strong></p>
+
+<p>Execution will stop at the breakpoint, and the next line to be executed will be displayed. To see more lines nearby, type</p>
+
+<pre><code>(gdb) list
+</code></pre>
+
+<p>Notice the variables argc and argv. argc is the number of command line arguments passed to the program, 
+and argv is an array of strings containing those command line arguments.</p>
+
+<h3 id="question2howmanycommandlineargumentswerepassedtoaout">Question 2: How many command line arguments were passed to a.out?</h3>
+
+<p>Print out argc as a signed decimal integer:</p>
+
+<pre><code>(gdb) print/d argc
+</code></pre>
+
+<p>Funny, I don't remember passing any arguments to a.out, do you? Let's examine the value of the first argument as a string:</p>
+
+<pre><code>(gdb) x/s argv[0]
+</code></pre>
+
+<h3 id="question3whatdoesthefirstargumentrepresent">Question 3: What does the first argument represent?</h3>
+
+<p>Execute the next line of code in your program:</p>
+
+<pre><code>(gdb) next
+</code></pre>
+
+<h3 id="question4whatisthevalueofnums2why">Question 4: What is the value of nums[2]? Why?</h3>
+
+<pre><code>(gdb) print/d nums[2]
+</code></pre>
+
+<p>Execute the next line of code.</p>
+
+<pre><code>(gdb) next
+</code></pre>
+
+<h3 id="question5nowwhatisthevalueofnums2whichlineofcodejustgotexecuted">Question 5: Now what is the value of nums[2]? Which line of code just got executed?</h3>
+
+<p>Set a breakpoint on the first call to doMath() and continue execution. The break command, b for short, also takes line numbers.</p>
+
+<pre><code>(gdb) break 153
+(gdb) continue
+</code></pre>
+
+<p>Execute the next line of code, stepping into function calls.</p>
+
+<pre><code>(gdb) step
+</code></pre>
+
+<p>Find out which function is currently executing:</p>
+
+<pre><code>(gdb) where
+</code></pre>
+
+<h3 id="question6whatfunctioniscurrentlyexecuting">Question 6: What function is currently executing?</h3>
+
+<p>Finish executing that function.</p>
+
+<pre><code>(gdb) finish
+</code></pre>
+
+<h3 id="question7whatvaluewasreturnedbythatfunction">Question 7: What value was returned by that function?</h3>
+
+<pre><code>(gdb) continue
+(gdb) quit
+</code></pre>
+
+<h1 id="checkpoint">Checkpoint!</h1><hr id="hrline">
+
+<p>Verify that you have completed the following tasks (you don't need to show this to a tutor): starting gdb, creating a breakpoint, 
+using step and next, and printing the value of a variable. Be sure to know what each of these commands does.</p>
+
+<h1 id="goaldetectmemoryleaksinyourcode">Goal: Detect memory leaks in your code.</h1><hr id="hrline">
+
+<p>There are some not-so-obvious problems with this program. Valgrind is a memory mismanagement detector that can help track down memory issues such as memory leaks, access violations and uninitialized memory reads.</p>
+
+<p>Make a valgrind build of your program.</p>
+
+<pre><code>$ make valgrind
+</code></pre>
+
+<p><img src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/7.png" alt="Valgrind"></p>
+
+<p>Valgrind should have reported four problems of two types: a use of uninitialized value (also known as a UMR) and a memory leak. Answer the following questions by referring to the output of valgrind. </p>
+
+<h3 id="question8whatdoesumrstandforwhatlineofcodecausedthiserrorwhennums0isprintedoutwhydoesitappeartoberandom">Question 8: What does UMR stand for? What line of code caused this error? When nums[0] is printed out, why does it appear to be random?</h3>
+
+<h3 id="question9howmanybyteswereleakedfromwhichfunctioninyourprogramwasthismemoryallocated">Question 9: How many bytes were leaked? From which function in your program was this memory allocated?</h3>
+
+<h2 id="exercise1putthisinyourreadmeaswell">Exercise 1: (Put this in your README as well.)</h2>
+
+<p>Eliminate the valgrind warnings by adding code to hw0.c. You need to add 2 lines of code;</p>
+
+<p>Look for /* YOUR CODE GOES HERE */ in main(). (Hint: look around hw0.c for a certain helpful method). Ask a tutor if you need help. </p>
+
+<p><strong>What did you add, and where?</strong></p>
+
+<h3 id="question10howdoyouknowthatyourcodehasnomorememoryleaks">Question 10: How do you know that your code has no more memory leaks?</h3>
+
+<h1 id="goaldebugccodebyanalyzingthecodeduringprogramexecution-1">Goal: Debug C++ code by analyzing the code during program execution.</h1><hr id="hrline">
+
+<p>Change directories to the cpp subdirectory of hw0, compile, and run.</p>
+
+<pre><code>$ cd ~/hw0/cpp
+$ make
+$ ./a.out
+</code></pre>
+
+<p>Open hw0.cpp for editing:</p>
+
+<pre><code>$ gvim hw0.cpp
+</code></pre>
+
+<p>Start a.out in the gdb debugger:</p>
+
+<pre><code>$ gdb a.out
+</code></pre>
+
+<p>Set a breakpoint on the declaration of myHolder() (line 117) and run.</p>
+
+<pre><code>(gdb) break 117
+(gdb) run
+</code></pre>
+
+<p>Step once.</p>
+
+<pre><code>(gdb) step
+</code></pre>
+
+<h3 id="question11whatfunctionareyouinwhatarethenamesandvaluesoftheparameterstothisfunctionhintyoumightwanttouseprints">Question 11: What function are you in? What are the names and values of the parameters to this function? (Hint: You might want to use print/s)</h3>
+
+<p>Finish executing the current function.</p>
+
+<pre><code>(gdb) finish
+</code></pre>
+
+<p>You should now be back in main. </p>
+
+<h3 id="question12whatistheaddressofmyholderinhexadecimaltoprintoutahexadecimalvalueuseprintxinsteadofprintdtogetanaddressusemyholderinsteadofmyholder">Question 12: What is the address of myHolder in hexadecimal? To print out a hexadecimal value, use print/x instead of print/d. To get an address, use &amp;myHolder instead of myHolder.</h3>
+
+<p>Continue execution and let the program exit normally, then quit gdb.</p>
+
+<pre><code>(gdb) continue
+(gdb) quit
+</code></pre>
+
+<h2 id="exercise2addthistoyourreadme">Exercise 2: (Add this to your README)</h2>
+
+<p>Given that you can print a string in C++ with the following:</p>
+
+<pre><code>cout &lt;&lt; "print me!";
+</code></pre>
+
+<p>Add a line of code that will print myHolder after the call to myHolder.mutate(). </p>
+
+<p>Look for <code>/* YOUR CODE GOES HERE */</code></p>
+
+<p>C++ can be a very difficult language to follow because there are so many implicit 
+function calls and conversions. While it may not be obvious, the line of code you 
+added actually called a function in hw0.cpp. You will now use gdb to figure out 
+which function was called. Don't forget to run <code>make</code> in the terminal.</p>
+
+<p><strong>What code did you add, and where?</strong></p>
+
+<p>Restart the gdb debugger.</p>
+
+<pre><code>$ gdb a.out
+</code></pre>
+
+<p>Set a breakpoint on the line of code that you added in exercise 2 and run. If you don't remember how to do this, review <strong>Goal: Debug C Code by analyzing the code during program execution</strong>. Begin execution with run. The program should stop at the breakpoint. Use step to execute the very next line of code.</p>
+
+<pre><code>(gdb) run
+(gdb) step
+</code></pre>
+
+<p>See which function is currently executing by typing</p>
+
+<pre><code>(gdb) where 
+</code></pre>
+
+<h3 id="question13whichfunctioniscurrentlyexecuting">Question 13: Which function is currently executing?</h3>
+
+<h1 id="goaldebugjavacodebylookingattheprogramwhileitsrunning">Goal: Debug Java code by looking at the program while it's running.</h1><hr id="hrline">
+
+<p>Just like how there is a debugging tool for C/C++ programs (gdb), Java also provides you with jdb. 
+The jdb tool works slightly different from gdb although they both serve the same purpose.</p>
+
+<p><strong>Change directories to the java folder and then compile the java program.</strong>
+Note: It is important to compile with the "-g" modifier so that the program compiles 
+with debugging information, otherwise jdb will not work as expected.</p>
+
+<pre><code>$ cd ~/hw0/java
+$ javac -g hw0.java
+</code></pre>
+
+<p>This will create a hw0.class file in the directory. (Don't worry about the a.out 
+file. We will work with the class file for jdb since otherwise jdb gives unexpected 
+behavior, see previous note). jdb is not the easiest debugger to use, so we would 
+recommend going through the docs for a detailed guide.</p>
+
+<p><strong>Open the java file to look at the code given to you</strong></p>
+
+<pre><code>$ gvim hw0.java
+</code></pre>
+
+<p><strong>Now we'll start debugging using jdb</strong>
+The Java debugger differs from gdb in a number of ways. The biggest difference is
+that your program will execute in one window while the debugger executes in another 
+window. Here's a short tutorial to get you started. The following commands help you 
+to set a break point at hw0's static main method and to step through the HashTable's 
+constructor. A short but more complete documentation on the debugger can be found 
+using a link from the course web page. In the window where your program will execute, at the command prompt, type...</p>
+
+<pre><code>$ java -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y hw0
+</code></pre>
+
+<p>Note: In the above command, spaces are important. "Driver" is the name of the class with the static main method. The address 8000 is a number selected by you that is unique to you. You'll need this number so that the two windows will be able to coordinate with each other. If the number that you select is already in use, you'll get the error: "Address already in use". If you see that error, you'll need to try again with another number. If the window appears to "hang", your program has begun but it is suspended waiting for the debugging window to begin. Once you are successful, IN ANOTHER WINDOW (where the debugger will execute) at the command prompt, type...</p>
+
+<pre><code>$ jdb -attach 8000
+</code></pre>
+
+<p>where 8000 is the address successfully used in the previous command. Upon success, you should see:</p>
+
+<pre><code>Initializing jdb...
+
+VM Started: &gt; No frames on the current call stack
+
+main[1]
+</code></pre>
+
+<p><strong>Setting a breakpoint differs in jdb.</strong>
+You can set a breakpoint by using the "stop" command. The stop command can be used in two ways. Let's set two breakpoints in two different way.</p>
+
+<pre><code>&gt; stop at hw0:32
+&gt; stop in DataHolder.DataHolder
+</code></pre>
+
+<p>Now you can start your program by typing in</p>
+
+<pre><code>&gt; run
+</code></pre>
+
+<p>You should see some progress and something being printed. </p>
+
+<h3 id="question14whatpartoftheprogramgetsprintedsofar">Question 14: What part of the program gets printed so far?</h3>
+
+<p>Type the following to step 1 line into your program</p>
+
+<pre><code>&gt; step
+</code></pre>
+
+<p><strong>Printing variables</strong>
+You can print out the values of local variables declared so far. Try running these two-</p>
+
+<pre><code>&gt; print num1
+&gt; print num2
+</code></pre>
+
+<h3 id="question15whatarethevaluesyougetwhenyouprintnum1andnum2doesthattellyouwhichwasthelastlinethatwasexecuted">Question 15: What are the values you get when you print num1 and num2? Does that tell you which was the last line that was executed?</h3>
+
+<h3 id="question16whatisthedifferencebetweenstepandnextcommandsyoucangooglethis">Question 16: What is the difference between "step" and "next" commands (You can Google this)?</h3>
+
+<p>You can continue your program until you hit another breakpoint by doing this</p>
+
+<pre><code>&gt; cont
+</code></pre>
+
+<p>Step again and then use "where" to get the stack trace</p>
+
+<pre><code>&gt; step
+&gt; where
+</code></pre>
+
+<h3 id="question17whichmethodisyourprogramcurrentlyin">Question 17: Which method is your program currently in?</h3>
+
+<p>You can quit at any time by doing this.</p>
+
+<pre><code>&gt; quit
+</code></pre>
+
+<h2 id="checkpoint-1">Checkpoint!</h2>
+
+<p>Congratulations! Now you should be able to apply these debugging strategies to your programming assignments.
+Make sure you understand the differences between jdb and gdb, as well as the significance of valgrind.</p>
+
+<p>We will now go over some extra Unix commands to help you gain even more mastery.</p>
+
+<h1 id="goalknowwhereyouareinyoursystem">Goal: Know where you are in your system.</h1><hr id="hrline">
+
+<p>After logging in, open a terminal window. Type:</p>
+
+<pre><code>$ pwd
+</code></pre>
+
+<h3 id="question18whatgetsprintedout">Question 18: What gets printed out?</h3>
+
+<p>In your home directory, create a directory named Lab2, 
+and cd to it. You will work within that directory when doing this lab:</p>
+
+<pre><code>$ mkdir Lab2
+$ cd Lab2
+</code></pre>
+
+<p>Copy the Lab2 directory contents to your account:</p>
+
+<pre><code>$ cp -r ~/../public/Lab2/* .
+</code></pre>
+
+<p>Change the current directory to Lab2/sectionA.</p>
+
+<h3 id="question19whatcommandwouldyouusetoverifythatyouareinthesubdirectorysectiona">Question 19: What command would you use to verify that you are in the subdirectory sectionA?</h3>
+
+<h1 id="goalgrabinformationfromfileswithoutneedingtomanuallysortthroughthem">Goal: Grab information from files without needing to manually sort through them.</h1><hr id="hrline">
+
+<h2 id="thediffcommand">The <code>diff</code> command</h2>
+
+<p>The <code>diff</code> command displays differences between two files on a line-by-line basis. 
+It displays the differences as instructions that you can use to edit one of the files 
+(using the vi editor) to make it the same as the other. When you use <code>diff</code>, it produces 
+a series of lines containing Append a, Delete d, and Change c instructions. Each of these 
+lines is followed by the lines from the file that you need to append, delete, or change. 
+A less than symbol &lt; precedes lines from file1. A greater than symbol &gt; precedes lines from file2.</p>
+
+<p>You will now need four files: telnos, telnos2, telnos3, telnos4. These files are 
+all short files that contain names, departments, and telephone numbers. This is what they look like.</p>
+
+<table>
+<thead>
+<tr>
+<th>telnos</th>
+<th>telnos2</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Hale Elizabeth Bot 744-6892</td>
+<td>Hale Elizabeth Bot 744-6892</td>
+</tr>
+
+<tr>
+<td>Harris Thomas Stat 744-7623</td>
+<td>Harris Thomas Stat 744-7623</td>
+</tr>
+
+<tr>
+<td>Davis Paulette Phys 744-9579</td>
+<td>Davis Paulette Phys 744-9579</td>
+</tr>
+
+<tr>
+<td>Cross Joseph MS 744-0320</td>
+<td>Holland Tod A&amp;S 744-8368</td>
+</tr>
+
+<tr>
+<td>Holland Tod A&amp;S 744-8368</td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>telnos3</th>
+<th>telnos 4</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Hale Elizabeth Bot 744-6892</td>
+<td>Hale Elizabeth Bot 744-6892</td>
+</tr>
+
+<tr>
+<td>Harris Thomas Stat 744-7623</td>
+<td>Smith John Comsc 744-4444</td>
+</tr>
+
+<tr>
+<td>Smith John Comsc 744-4444</td>
+<td>Davis Paulette Phys 744-9579</td>
+</tr>
+
+<tr>
+<td>Davis Paulette Phys 744-9579</td>
+<td>Cross Joseph MS 744-0320</td>
+</tr>
+
+<tr>
+<td>Cross Joseph MS 744-0320</td>
+<td>Holland Tod A&amp;S 744-8368</td>
+</tr>
+
+<tr>
+<td>Holland Tod A&amp;S 744-8368</td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+
+<p>Verify that you have these four files in your sectionA directory.</p>
+
+<p>In order to see how <code>diff</code> works, type in:</p>
+
+<pre><code>$ diff telnos telnos2
+</code></pre>
+
+<p>What was the result?</p>
+
+<p>The difference between these two files (telnos and telnos2) is that the 4th line 
+in telnos is missing from telnos2. The first line that <code>diff</code> displays 4d3 indicates 
+that you need to delete the 4th line from file telnos to make the two files match. 
+The 4 is the line number and the (d) is delete. The line number to the left of each 
+of the a, c, or d instructions always pertains to file1. Numbers to the right of the 
+instructions apply to file2. The <code>diff</code> command assumes that you are going to change 
+file1 to file2. The next line that <code>diff</code> displays starts with a less than &lt; symbol 
+indicating that this line of text is from file1.</p>
+
+<p>Next type in:</p>
+
+<pre><code>$ diff telnos telnos3
+</code></pre>
+
+<p>What was the result?</p>
+
+<p>In this case, the second line has the <code>&gt;</code> greater than sign which means that the extra 
+line is in file2. The a means you must append a line to the file telnos after line 2 
+to make it match telnos3. Append means to add on to the end.</p>
+
+<p>Next is an example of the change feature. Type in the following command:</p>
+
+<pre><code>$ diff telnos telnos4
+</code></pre>
+
+<p>What was the result?</p>
+
+<h3 id="question20whatlinesdoyouneedtochangeinordertomakethetwofilesalike">Question 20: What lines do you need to change in order to make the two files alike?</h3>
+
+<p>Notice that the three hyphens indicate the end of the text in the first file that 
+needs to be changed and the start of the second file that needs to be changed. 
+Next, copy telnos to telnos5.</p>
+
+<h3 id="question21whatcommanddidyouusetodothis">Question 21: What command did you use to do this?</h3>
+
+<p>Next, type in:</p>
+
+<pre><code>$ diff telnos5 telnos2
+</code></pre>
+
+<h3 id="question22whatisprinted">Question 22: What is printed?</h3>
+
+<p>Use the vi editor to change telnos5 to match the file telnos2. Then check to see if they are now alike.</p>
+
+<h3 id="question23howwouldyouknowwhentwofilescontainexactlythesamecontents">Question 23: How would you know when two files contain exactly the same contents?</h3>
+
+<h2 id="theuniqcommand">The uniq command.</h2>
+
+<p>The <code>uniq</code> command displays a file, removing all but one copy of successive repeated lines.
+If the file has been sorted, <code>uniq</code> ensures that no two lines that it displays are the same.
+Sort telnos and telnos3 and then send them to a new file called tel2.</p>
+
+<p>Type in the following:</p>
+
+<pre><code>$ sort telnos telnos3 &gt; tel2
+</code></pre>
+
+<h3 id="question24lookatthefiletel2whatdoesitcontain">Question 24: Look at the file, tel2. What does it contain?</h3>
+
+<p>Next issue the command:</p>
+
+<pre><code>$ uniq tel2
+</code></pre>
+
+<h3 id="question25whatwastheresult">Question 25: What was the result?</h3>
+
+<p>The <code>uniq</code> command has three options. These are:</p>
+
+<p><code>-c</code> Causes to precede each line with the number of consecutive occurrences of the line in the input file</p>
+
+<p><code>-d</code> only lines that are repeated</p>
+
+<p><code>-u</code> only lines that are not repeated</p>
+
+<p>Issue the command:</p>
+
+<pre><code>$ uniq -u tel2
+</code></pre>
+
+<p>Next, issue the command:</p>
+
+<pre><code>$ uniq -d tel2
+</code></pre>
+
+<h3 id="question26givenadictionaryfilecontainingwordsseperatedbynewlineswhatcommandwouldyouusetochecktomakesuretherearenoduplicatewords">Question 26: Given a dictionary file containing words seperated by newlines, what command would you use to check to make sure there are no duplicate words?</h3>
+
+<h2 id="thegrepcommand">The grep command.</h2>
+
+<p>The grep command searches one or more files for a specified pattern. Normally each matching line is copied to the standard output. Two options that can be used with grep are:</p>
+
+<ul>
+<li><code>-i</code> ignore case of alphabetic characters</li>
+
+<li><code>-n</code> precede each line printed by its relative line number in the input file</li>
+</ul>
+
+<p>Use the line numbers in the output of grep to answer the questions in the following sections.</p>
+
+<p>Issue the command:</p>
+
+<pre><code>$ grep -n H telnos
+</code></pre>
+
+<p>Note what is printed.</p>
+
+<p>Issue the command:</p>
+
+<pre><code>$ grep -ni m telnos
+</code></pre>
+
+<h3 id="question27whatchangedbetweenthetwopreviouscommands">Question 27: What changed between the two previous commands?</h3>
+
+<p>These are the files that should be in your sectionA folder.</p>
+
+<ul>
+<li>books</li>
+
+<li>dept</li>
+
+<li>employee</li>
+
+<li>name</li>
+
+<li>salary</li>
+
+<li>telnos</li>
+
+<li>telnos2</li>
+
+<li>telnos3</li>
+
+<li>telnos4</li>
+
+<li>telnos5</li>
+
+<li>tel2</li>
+</ul>
+
+<h3 id="question28whatistheoutputofthefollowingcommands">Question 28: What is the output of the following commands?</h3>
+
+<p>Option <code>-v</code> will display all the lines except the match. In the example below, it displays all the records from telnos3 that doesn't match Joseph.</p>
+
+<pre><code>$ grep -v Joseph ./telnos3
+</code></pre>
+
+<p><strong>What is the output?</strong></p>
+
+<p>How many lines matched the text pattern in a particular file?</p>
+
+<p>In the example below, it displays the total number of lines that contains the text Joseph in telnos3 file.</p>
+
+<pre><code>$ grep -c Joseph ./telnos3
+</code></pre>
+
+<p><strong>What is the output?</strong></p>
+
+<p>You can also get the total number of lines that did not match the specific pattern by passing option <code>-cv</code>.</p>
+
+<pre><code>$ grep -cv Joseph ./telnos3
+</code></pre>
+
+<p><strong>What is the output?</strong></p>
+
+<p>How to search a text by ignoring the case?</p>
+
+<p>Pass the option <code>-i</code> (ignore case), which will ignore the case while searching.</p>
+
+<pre><code>$ grep -i joseph ./telnos3
+</code></pre>
+
+<p><strong>What is the output?</strong></p>
+
+<h1 id="goalmanipulatefileswithoutopeningthem">Goal: Manipulate files without opening them.</h1><hr id="hrline">
+
+<h2 id="thecutcommand">The <code>cut</code> command.</h2>
+
+<p>Sometimes you only want to list part of a file. One example would be the dates of employment or just the departments. Instead of listing the entire file, you may just take one part of it. If you wanted to list just departments, you can use the cut command to do this.</p>
+
+<p>The basic format for this is:</p>
+
+<pre><code>$ cut -clist filename
+</code></pre>
+
+<p>The <code>-c</code> option specifies that you want to cut out specific character positions from each line of a file. The specified files list tells which character positions to cut. To list only the departments, type in the following:</p>
+
+<p>Note: Be sure that you type in a number 1 after the <code>-c</code> in this example. If you type in the letter "l", you will get an error message. You would then get a list of the departments only.</p>
+
+<pre><code>$ cut -c1-3 employee
+</code></pre>
+
+<p>You can also choose to list from a certain character to the end of the line. Type in the following:</p>
+
+<pre><code>$ cut -c5- employee
+</code></pre>
+
+<p>This would give you the names of the employees and all other information on them. Obviously, you need to count the characters of the fields in order to make sure you have the characters that you want to include.</p>
+
+<p>You can also list two fields that are not next to each other. Type in the following:</p>
+
+<pre><code>$ cut -c1-3,34-38 employee
+</code></pre>
+
+<p>Note the results.</p>
+
+<p>This will list out the first field on department and also salary. Unfortunately, there are no spaces between the fields when they are listed. One solution would be to type in a space between the two. Type in:</p>
+
+<pre><code>$ cut -c1-4,34-38 employee
+</code></pre>
+
+<p>Try some other examples. Use the <code>cut</code> command to list out only the names in the file employee.</p>
+
+<p>Hint, the names are in columns 5 to 21.</p>
+
+<h3 id="question29whatcommanddidyouuse">Question 29: What command did you use?</h3>
+
+<p>Try one more <code>cut</code> example with the employee file.</p>
+
+<p>Use two fields, name 5-24, and salary 34-38.</p>
+
+<h3 id="question30whatcommanddidyouuse">Question 30: What command did you use?</h3>
+
+<p>Next, type in:</p>
+
+<pre><code>$ date
+</code></pre>
+
+<p>Note which spaces the month covers.</p>
+
+<p>Try the following command:</p>
+
+<pre><code>$ cut -c5-7 date
+</code></pre>
+
+<p>What happened?</p>
+
+<p>Try typing in the following:</p>
+
+<pre><code>$ date | cut -c5-7
+</code></pre>
+
+<h3 id="question31whydoyouthinkthatitworkedthesecondtimeandnotthefirsttime">Question 31: Why do you think that it worked the second time and not the first time?</h3>
+
+<p>You can use other commands with <code>cut</code>. In this next example, you could <code>sort</code> the file employee and then pass it on to the <code>cut</code> command by using the pipe command.</p>
+
+<p>Try one more example using <code>uniq</code>, with the <code>finger</code> and <code>cut</code> command. Many times when you use the <code>finger</code> command, 
+there are names of people who appear on the list several times. These people are using the x-windows features. 
+Every time they have a different window, it looks like they are logged on another time.</p>
+
+<p><code>finger</code> will print an entry for each user currently logged into the system.</p>
+
+<p>Try the following command (replace cs15xxx with your login):</p>
+
+<pre><code>$ finger cs15xxx
+$ finger | cut -c9-28 | sort | uniq -c &gt; lists
+</code></pre>
+
+<p>After you have completed this, use the cat command to look at the lists file. </p>
+
+<h3 id="question32whatdoesthelistsfilecontain">Question 32: What does the lists file contain?</h3>
+
+<p>If you want to change the order of the fields in a file, you can do this by using the <code>cut</code> and <code>paste</code> command. </p>
+
+<p>The <code>paste</code> command combines columns of data. It gives you some flexibility. You can combine several files--each of which has a single column of data--into a large table. You can also combine consecutive lines of data to build multiple columns.</p>
+
+<p>The <code>paste</code> command is similar to this: <code>paste [ -d char] filename</code></p>
+
+<p>The "char" is a character to be used as a separator, and filename is the name of the input file. You use <code>paste</code> to combine columns of data into one large table. In order to see how <code>paste</code> works, first use the <code>cut</code> command to cut columns out of the employee file.</p>
+
+<p>Do the following:</p>
+
+<pre><code>$ cut -c1-3 employee &gt; dept 
+$ cut -c5-24 employee &gt; name 
+$ cut -c34-38 employee &gt; salary
+</code></pre>
+
+<p>You will now have three new files, dept, name, and salary. You can now combine them in a different order by using the paste command. Type in the following:</p>
+
+<pre><code>$ paste dept name salary &gt; employ2
+</code></pre>
+
+<p>List out the file, employ2. Note what the file contains.</p>
+
+<p>Notice that there are large spaces between the columns. This is because paste puts a tab character between each column. UNIX assumes tabs are set every 8 positions, starting with position 1. This means that tabs are set at 1, 9, 17, 25, and so on. If you would like paste to use a different character between columns, use the -d (delimiter) option followed by an alternative character in single quotes. To create a table with a space between columns, type in:</p>
+
+<pre><code>$ paste -d' ' dept name salary &gt; employ3
+</code></pre>
+
+<p>List out the file, employ3. </p>
+
+<h3 id="question33whatisthedifferencebetweenthefileemploy2andemploy3">Question 33: What is the difference between the file employ2 and employ3?</h3>
+
+<h1 id="goalcompressandcombinefilestogether">Goal: Compress and combine files together.</h1><hr id="hrline">
+
+<h2 id="thetarcommand">The <code>tar</code> command.</h2>
+
+<p>Ever wondered how to create a single backup file of all files and subdirectories under the home directory?</p>
+
+<p>The following command creates a single archive backup file called my<em>cs15Lxx</em>directory.tar under /tmp. This archive will contain all the files and subdirectories under ./</p>
+
+<p>Option <code>c</code>, stands for create an archive.</p>
+
+<p>Option <code>v</code> stands for verbose mode, displays additional information while executing the command.</p>
+
+<p>Option <code>f</code> indicates the archive file name mentioned in the command.</p>
+
+<p>Replace cs15Lxx with your login account name to ensure the filename is unique:</p>
+
+<pre><code>$ tar cvf /tmp/my_cs15Lxx_directory.tar ./
+</code></pre>
+
+<p><strong>How do I view all the files inside the tar archive?</strong></p>
+
+<p>Option t will display all the files from the tar archive.</p>
+
+<pre><code>$ tar tvf /tmp/my_cs15Lxx_directory.tar
+</code></pre>
+
+<p>How do I extract all the files from a tar archive?</p>
+
+<p>Option x will extract the files from the tar archive as shown below. This will extract the content to the current directory location from where the command is executed.</p>
+
+<pre><code>$ tar xvf /tmp/my_cs15Lxx_directory.tar
+</code></pre>
+
+<p><strong>Please remove your file from /tmp folder.</strong></p>
+
+<h3 id="question34whatcommandwouldyouusetotoremoveyourfilefromtmp">Question 34: What command would you use to to remove your file from /tmp?</h3>
+
+<h3 id="question35howwouldyouusetartocompressadirectorycalledfileslocatedintherootdirectory">Question 35: How would you use tar to compress a directory called <code>files</code> located in the root directory?</h3>
+
+<h1 id="goalbeabletohandleprocessesrunninginyourenvironment">Goal: Be able to handle processes running in your environment.</h1><hr id="hrline">
+
+<p>Have you ever had a program freeze up on you? Have you accidentally put a process to sleep using ^Z?
+This next section will help you learn ways to deal with issues like those.</p>
+
+<h2 id="thepscommand">The <code>ps</code> command.</h2>
+
+<p>The <code>ps</code> command will display the current processes that are running. It stands for “process status”. To use it, simply type ps:</p>
+
+<p>Let’s add two more processes by running them in the background. One useful trick with vim is pressing <code>[Ctrl]-Z</code> to pause vim and interact with the console (such as to compile code) and typing <code>fg</code> (stands for foreground) in the console to go back to vim.</p>
+
+<pre><code>$ cd ~/lab3B
+$ vim practice.txt
+  # add some text and press ctrl-z to put vim into the background
+$ vim makesperfect.txt
+  # add some other text and press ctrl-z
+$ ps
+</code></pre>
+
+<p>Now we can see that there are more processes in the background. However, we can't distinguish between the two vim processes, we need more information. The <code>-f</code> option shows more info.</p>
+
+<pre><code>$ ps -f
+</code></pre>
+
+<h3 id="question36whichcolumnswereadded">Question 36: Which columns were added?</h3>
+
+<p>Now type fg in the console to open makesperfect.txt back up in vim. Save and quit. Type fg again to open up practice.txt. Save and quit again. Another useful option in ps is <code>-e</code>, which displays the processes for all users.</p>
+
+<pre><code>$ fg # This brings up makesperfect.txt. Save and quit
+$ fg # This brings up the practice.txt. Save and quit
+$ ps -ef
+</code></pre>
+
+<h2 id="thekillcommand">The <code>kill</code> command.</h2>
+
+<p>The <code>kill</code> command kills unresponsive programs. It’s syntax is:</p>
+
+<pre><code>$ kill -9 [pid]
+</code></pre>
+
+<h2 id="exercise3practicekillingaunresponsiveprogram">Exercise 3: Practice killing a unresponsive program.</h2>
+
+<p>The -9 is the kill signal, to make sure we completely terminate it's execution. We need a process to kill. Try out the yes command.</p>
+
+<pre><code>$ yes
+</code></pre>
+
+<p>It doesn’t really do anything but print a bunch of “y”s! Let's put it in the background by pressing <code>[Ctrl]-Z</code>. Another way to run processes in the background is by adding a &amp; at the end of the command. Try it:</p>
+
+<pre><code>$ yes &amp;
+</code></pre>
+
+<p>Great now you have an unresponsive terminal. Don’t worry this is intended. We need to some how stop this process. Don’t close the terminal, let’s solve this more humanely by killing the process instead.</p>
+
+<p>We need to open up a new terminal, find the process, and kill it.</p>
+
+<pre><code>  # in a new terminal…
+$ ps -ef | grep your_username | grep yes
+  # look for the pid of the yes process
+</code></pre>
+
+<p>Find the pid of the processes. The ps should return two "yes" processes. The pid is the first number after your username.</p>
+
+<pre><code>cs15wxx  30214 29103 21 23:05 pts/0    00:00:14 yes
+cs15wxx  31080 29103 21 23:07 pts/0    00:00:16 yes
+</code></pre>
+
+<p>Now you can kill the two processes.</p>
+
+<pre><code>$ kill -9 [PID_of_yes_process]
+$ kill -9 [PID_of_other_process]
+  # use ps again to make sure its dead
+$ ps -ef | grep your_username
+</code></pre>
+
+<p>If you have problems killing the process, ask a tutor. </p>
+
+<h3 id="question37whatcommandwouldyouusetoopenupgvimasabackgroundprocess">Question 37: What command would you use to open up gvim as a background process?</h3>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ol>
+<li>Lab 2 README with the 37 questions above answered.</li>
+</ol></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 2_ Unix, GDB, Valgrind, JDB_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

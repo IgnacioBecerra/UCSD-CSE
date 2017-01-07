@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 3: Unix Commands and Intro to Eclipse Debugging</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#lab3unixcommandsandintrotoeclipsedebugging">Lab 3: Unix Commands and Intro to Eclipse Debugging</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#welcome">Welcome!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#whydothislab">Why Do This Lab?</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#sectionaunixcommands">Section A. Unix Commands</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalcopyfilesbetweendifferentcomputersusingscp">Goal: Copy files between different computers, using scp</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goallearnaboutaccesspermissionstoafileandhowtomodifypermissions">Goal: Learn about access permissions to a file, and how to modify permissions.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalsearchforfilesfromthecommandline">Goal: Search for files from the command line</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalsavespaceondiskbycompressingfiles">Goal: Save space on disk by compressing files.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalexamineandanalyzetheexitcodesofunixprograms">Goal: Examine and analyze the Exit Codes of UNIX programs</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalusethelesscommandtomakelargeblocksoftextontheconsoleeasiertoread">Goal: Use the <code>less</code> command to make large blocks of text on the console easier to read.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#checkpoint">Checkpoint!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#sectionbintroductiontoeclipseide">Section B: Introduction to Eclipse IDE</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goaluseeclipsetoobservethevalueofvariablesinacprogramduringexecution">Goal: Use Eclipse to observe the value of variables in a C program during execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goaluseeclipsetoobservethevalueofvariablesinacprogramduringexecution-1">Goal: Use Eclipse to observe the value of variables in a C++ program during execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goaluseeclipsetoobservethevalueofvariablesinajavaprogramduringexecution">Goal: Use Eclipse to observe the value of variables in a Java program during execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#checkpoint-1">Checkpoint!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#sectioncscientificmethodofdebugging">Section C: Scientific Method of Debugging</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goalutilizedebuggingtoolstocorrectlyimplementasortingalgorithm">Goal: Utilize debugging tools to correctly implement a sorting algorithm.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#goaldebugcodeusingthescientificmethod">Goal: Debug code using the Scientific Method</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab3_lkkasd/index.html#checkoff">Checkoff</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab3unixcommandsandintrotoeclipsedebugging">Lab 3: Unix Commands and Intro to Eclipse Debugging</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has one component: a lab exercise.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+      For the homework, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="welcome">Welcome!</h1><hr id="hrline">
+
+<p>Welcome to Lab 3. Before we begin this lab, please make sure you have read through the "Lab 0: General Lab Guide" found <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab0_general">here</a>. This is your guide to navigating all labs and making sure you get the most out of every lab we provide (and all the credit you deserve as well!).</p>
+
+<p>For this lab, please record the answers to all questions in a README file (see next section), which will be used for the checkoff at the end of this lab.</p>
+
+<h1 id="whydothislab">Why Do This Lab?</h1><hr id="hrline">
+
+<p>This Lab is divided into three sections. The purpose of Section A is to acquaint you with another set of useful commands in UNIX, including <code>scp</code>, <code>chmod</code>, <code>find</code>, <code>gzip</code>, <code>ps</code>, and <code>kill</code>. 
+Section B will re-introduce you to debugging, this time through the Eclipse IDE. With programs in C, C++, and Java as examples, we will walk you through the debugging flow when developing code on Eclipse. Finally, Section C will build upon what you will learn in Section B, and introduces you to the 'Scientific Method' of Debugging. All sections contain a number of questions and exercises which need to be answered in a README file. </p>
+
+<h1 id="sectionaunixcommands">Section A. Unix Commands</h1><hr id="hrline">
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/1.png" alt="Terminal"></p>
+
+<p>Log in to a computer in the lab, under Linux using your cs15xxx username. 
+If you do not know your login, it can be found with the ACS account lookup tool.
+Your password is the same as your personal ACS account password.</p>
+
+<p>Open a new terminal by right-clicking on the desktop and then choosing Open Terminal.</p>
+
+<h1 id="goalcopyfilesbetweendifferentcomputersusingscp">Goal: Copy files between different computers, using scp</h1><hr id="hrline">
+
+<p>The <code>scp</code> (<strong>se</strong>cure <strong>c</strong>opy) command <strong>copies files between different computers</strong>. For example, you can copy files from your cs15 account to your personal computer. <code>scp</code> is just like the <code>cp</code> command, except it’s over <code>ssh</code> (<strong>S</strong>ecure <strong>Sh</strong>ell). Let’s try this out by copying files from your partner's account to your account. If you do not have a partner, you can copy files from your own account to your own account, just pretend it’s another computer.</p>
+
+<p>The syntax to using <code>scp</code> is just like how you would use <code>cp</code>, except you can add additional information about which computer you are trying to copy from/to, and which account within those computers. </p>
+
+<p>The following is the syntax for how to copy a file from another computer to your local machine:</p>
+
+<pre><code>$ scp username@remotehost.edu:/some/remote/file.txt /some/local/directory
+</code></pre>
+
+<p>The following is the syntax for copying a file from the local machine to a remote computer:</p>
+
+<pre><code>$ scp /some/local/file.txt username@remotehost.edu:/some/remote/directory
+</code></pre>
+
+<p>Let’s get some practice of this command. First we need to set up the files to be copied. </p>
+
+<h2 id="settingupcreateafolderinpartnerasaccount">Setting Up: Create a folder in Partner A's account.</h2>
+
+<p>Create a folder in Partner A’s account in the home directory called lab3A. </p>
+
+<pre><code>$ mkdir ~/lab3A
+</code></pre>
+
+<p>Create a file “practice.txt”. Add your names in the file.</p>
+
+<pre><code>$ vim ~/lab3A/practice.txt
+</code></pre>
+
+<p>Create a folder “pokemon”.</p>
+
+<pre><code>$ mkdir ~/lab3A/pokemon
+</code></pre>
+
+<p>Add charmander to your pokemon, put anything in the file, such as stats and descriptions.</p>
+
+<pre><code>$ vim ~/lab3A/pokemon/charmander
+</code></pre>
+
+<h2 id="settingupcreateafolderinpartnerbsaccount">Setting Up: Create a folder in Partner B's account.</h2>
+
+<p>Now, let's <strong>log off Partner A's account</strong>, and log onto Partner B's account. Create a lab3B folder under Partner B’s home directory. If you are working alone, you can just stay in your current account.</p>
+
+<h2 id="logintopartnerbsaccountandcreatethefollowingdirectorylikeso">Log into PARTNER B's account, and create the following directory like so:</h2>
+
+<pre><code>$ mkdir ~/lab3B
+</code></pre>
+
+<h2 id="copyoverpartneraspracticetxtfiletopartnerbslab3bdirectory">Copy over Partner A's "practice.txt" file to Partner B's lab3B directory</h2>
+
+<p>Time to try out the <code>scp</code> command. Let's try to copy over Partner A's “practice.txt” file to the lab3 directory.</p>
+
+<pre><code>$ cd ~/lab3B
+$ scp PARTNER_A@ieng6-201.ucsd.edu:~/lab3A/practice.txt ~/lab3B
+</code></pre>
+
+<p><em>Note 1</em>: Make sure there is no space after the colon.
+<em>Note 2</em>: Make sure to replace "PARTNER_A" with partner A's username.</p>
+
+<p>You might see a message like the following, type yes. It's ok if it doesn't appear. </p>
+
+<pre><code>The authenticity of host 'ieng6-201.ucsd.edu (xxx.xxx.xxx.xxx)' can't be established.
+RSA key fingerprint is ea:85:9e:a6:07:e3:5f:58:68:a9:94:88:09:84:f8:0b.
+Are you sure you want to continue connecting (yes/no)?
+</code></pre>
+
+<p>Enter the password of Partner A. The password will not display as you type. This is expected. Check that the <em>practice.txt</em> file now exists in Partner B’s account under the lab3B directory. You can also copy the file to a new name. Try copying the practice.txt file to the lab3B directory under a new name, “makesperfect.txt”.</p>
+
+<pre><code>$ scp PARTNER_A@ieng6-201.ucsd.edu:~/lab3A/practice.txt ~/lab3B/makesperfect.txt
+</code></pre>
+
+<h2 id="copyoverpartneraspokemondirectory">Copy over Partner A's "pokemon" directory</h2>
+
+<p>With <code>scp</code>, you can also copy entire directories with the <code>-r</code> option. Let’s try it out. Copy the <em>pokemon</em> directory from Partner A’s account to <em>lab3B/pokemon</em>. <code>scp</code> will automatically create a new directory if it doesn’t already exist. </p>
+
+<pre><code>$ cd ~/lab3B
+$ scp -r PARTNER_A@ieng6-201.ucsd.edu:~/lab3A/pokemon .
+</code></pre>
+
+<p><em>Note</em>: We can specify relative paths such as “.” in addition to absolute paths. </p>
+
+<h2 id="copyingfilesfromlocalcomputertoremotecomputer">Copying files from local computer to remote computer.</h2>
+
+<p>You should now have the <em>pokemon</em> directory and all of Partner A’s pokemon. We should give Partner A a few <em>pokemon</em> in return. Create another two files in the pokemon directory named squirtle and bulbasaur. Add some stats and a description. Let’s try to send both files over.</p>
+
+<p>Create two more pokemon. Write something in each file, such stats and descriptions.</p>
+
+<pre><code>$ vim ~/lab3B/pokemon/squirtle
+$ vim ~/lab3B/pokemon/bulbasaur
+$ scp ~/lab3B/pokemon/* PARTNER_A@ieng6-201.ucsd.edu:~/lab3A/pokemon
+</code></pre>
+
+<p><em>Note</em>: you can also use the * to specify all the files in a directory just like any other command. </p>
+
+<h3 id="question1assumingyoucanrunscpcommandonyourpersonalcomputerwhatisthecommandyoucanusecopyallthefilesfromyourcs15homefoldertoafoldernamedcs15onyourpersonalcomputer">Question 1: Assuming you can run <code>scp</code> command on your personal computer, what is the command you can use copy all the files from your cs15 home folder to a folder named cs15 on your personal computer?</h3>
+
+<h1 id="goallearnaboutaccesspermissionstoafileandhowtomodifypermissions">Goal: Learn about access permissions to a file, and how to modify permissions.</h1><hr id="hrline">
+
+<p>The <code>chmod</code> command stands for <strong>ch</strong>ange <strong>mod</strong>e. It allows you to change the access permissions to a file, i.e. who gets to read, write, and execute certain files or directories.</p>
+
+<pre><code>$ chmod [options] mode[,mode] file1 [file2 ...]
+</code></pre>
+
+<p>Let’s start by understanding the <em>permissions</em> of files. List all the files in your home directory in <em>long format</em> to see their permissions by typing: </p>
+
+<pre><code>$ ls -l ~
+</code></pre>
+
+<p>For each file, you should see something like:</p>
+
+<pre><code>-rw-r----  11 cs15wxx cs15w  4096 Jan 01 00:00 filename
+</code></pre>
+
+<p>File permissions control how others on the system can interact with your files and directories. There are three basic permissions: <strong><em>read (r), write (w) and execute (x)</em></strong>. Users of the system are classified into one of three types: <strong>user</strong> (aka owner, the one who created the file), <strong>group</strong> (the group assigned to the file) and <strong>others</strong> (aka world, anyone on the system). There are permissions associated with each type. The permissions are displayed as a string where <em>each character in the string refers to a specific permission</em>. The first character is the file type, the next three characters are the read/write/execute permissions for the user (owner), the next three are the r/w/x for group and the final three are the r/w/x for others (aka world).</p>
+
+<p>The string <code>-rw-r-----</code> is the permissions on the file. The first character is <code>-</code> which means this is a regular file (you'll see "d" here for a directory for example). The user (owner) permissions are <code>rw-</code> which means there is read and write permissions but not execute. The group permissions are <code>r--</code> which means they only have read permissions. The other (world) permissions are <code>---</code> which means they can’t read, write, or execute. These are the default permissions for a file on ieng6. The owner of this file is <code>cs15wxx</code> and the group is <code>cs15w</code>.</p>
+
+<p>There are two ways to specify permissions to <code>chmod</code>: using <strong>octal numbers</strong> and using <strong>symbolic names</strong>. For <strong>octal numbers</strong>, view the set <code>rwx</code> as the 3 digit binary number 111. A 1 means the permission is set and a 0 means the permission is not set. So, binary 100 would be read only and it is equivalent to the octal number 4. So the number 754 would set owner permission to 7 (rwx), the group permission to 5 (r-x) and the world permission to 4 (r--). For more information, you can look at the wikipedia entry for examples: <a href="http://en.wikipedia.org/wiki/Chmod#Octal_modes">http://en.wikipedia.org/wiki/Chmod#Octal_modes</a>. </p>
+
+<h2 id="modifypermissionsonafileusingsymbolicnames">Modify permissions on a file using symbolic names</h2>
+
+<p>Let’s create a script and change permissions on it. In the lab3B directory, type the following to create a hello world shell script.</p>
+
+<pre><code>$ cd ~/lab3B
+$ echo “echo hello world” &gt; hello.sh
+$ ls -l hello.sh
+</code></pre>
+
+<h3 id="question2whatarethepermissionsforthishelloshfiletrytocathelloshwhyareyouabletocatthefile">Question 2: What are the permissions for this hello.sh file? Try to <code>cat</code> hello.sh. Why are you able to <code>cat</code> the file?</h3>
+
+<p>Now, edit the file with vi so that it says the following, and then save it. </p>
+
+<pre><code>#!/bin/bash
+echo hello world
+</code></pre>
+
+<p>Now try to run the script by typing <code>./hello.sh</code>, were you 
+able to run the file? </p>
+
+<h3 id="question3wereyouabletoeditthefilewereyouabletoexecutethefilewhy">Question 3: Were you able to edit the file? Were you able to execute the file? Why?</h3>
+
+<p>Use chmod to give yourself the permissions to execute the file by typing: </p>
+
+<pre><code>$ chmod u+x hello.sh
+</code></pre>
+
+<p>Note that <code>u+x</code> means <em>user plus execute</em>. </p>
+
+<p>Try to run the script now. Does it run with the execute permissions? Great, now let’s remove the write permission on this file for the user (owner) so that we won't accidentally modify it. Type the following: </p>
+
+<pre><code>$ chmod u-w hello.sh
+</code></pre>
+
+<p>Note that <code>u-w</code> means <em>user minus write</em>.</p>
+
+<h3 id="question4trytoeditthehelloshscriptinviandsavewhathappens">Question 4: Try to edit the hello.sh script in vi and save. What happens?</h3>
+
+<h3 id="question5trytocatthehelloshdoesitstillwork">Question 5: Try to <code>cat</code> the hello.sh. Does it still work?</h3>
+
+<h2 id="modifypermissionsonafileusingoctalnumbers">Modify permissions on a file using octal numbers</h2>
+
+<p>Looks like we can still read the contents of <em>hello.sh</em>. Let's change that! We don’t want anyone to be able to view our proprietary algorithms. Type the following to set the file to execute only: </p>
+
+<pre><code>$ chmod 110 hello.sh
+</code></pre>
+
+<p>Now the file can only be executed by <strong>users</strong> and <strong>groups</strong>, but cannot be <strong>read</strong> or <strong>written</strong>. However that’s not very useful if we needed to add more features. Often people will use <strong>755</strong> permissions on their script files. </p>
+
+<h3 id="question6whatpermissionsdoes755allowfor">Question 6: What permissions does <code>755</code> allow for?</h3>
+
+<h2 id="modifypermissionsonadirectoryrecursivelywithroption">Modify permissions on a directory recursively with -R option</h2>
+
+<p>The chmod command can also work on directories, and recursively set permissions with the <code>-R</code> option. Let’s try to set all the files in lab3B directory to readonly in one command. </p>
+
+<pre><code>$ chmod -R a-w ~/lab3B
+</code></pre>
+
+<p>Note that <code>a</code> means <em>all</em>, which includes user, group, and other permissions. </p>
+
+<h2 id="morewithchmod">More with chmod</h2>
+
+<p>Now that we are familiar with <code>chmod</code>, let's try to change things back to the way they were before. Run the chmod commands using <em>octal permissions</em> to do the following:</p>
+
+<h3 id="question7whatisthecommandtochangethepermissionsonlab3bdirectorytodrwxr">Question 7: What is the command to change the permissions on 'lab3B' directory to <code>drwxr-----</code>?</h3>
+
+<p>(if an “s” appears, ignore it). </p>
+
+<h3 id="question8whatisthecommandtochangethepermissionsonhelloshtorwxrx">Question 8: What is the command to change the permissions on 'hello.sh' to <code>-rwxr-x---</code>?</h3>
+
+<h3 id="question9whatisthecommandtochangethepermissionsonpracticetxtandmakesperfecttxttorwr">Question 9: What is the command to change the permissions on 'practice.txt' and 'makesperfect.txt' to <code>-rw-r-----</code>?</h3>
+
+<h3 id="question10whatisthecommandtochangethepermissionsonthepokemondirectorytodrwxr">Question 10: What is the command to change the permissions on the 'pokemon' directory to 'drwxr-----''?</h3>
+
+<p>(again, ignore the “s” that appears).</p>
+
+<h3 id="question11finallywhatisthecommandtochangethepermissionsonallofthefilesdirectlynotrecursivelyunderthepokemondirectorytorwr">Question 11: Finally, what is the command to change the permissions on all of the files directly (not recursively) under the <code>pokemon</code> directory to <code>-rw-r-----</code>?</h3>
+
+<h1 id="goalsearchforfilesfromthecommandline">Goal: Search for files from the command line</h1><hr id="hrline">
+
+<p>The <code>find</code> command searches by file names and path. The syntax is:</p>
+
+<pre><code>$ find [where-to-look] [criteria]
+</code></pre>
+
+<p>Let’s start by searching for the squirtle file.</p>
+
+<pre><code>$ cd
+$ find . -iname “squirtle”
+</code></pre>
+
+<p>The <em>[where to look]</em> in this case is <code>.</code> which specifies the <em>current directory</em>. The <em>[criteria]</em> is <code>-iname squirtle</code> which means searching by file name, <em>ignoring the case, that matches squirtle</em>. We can also use <em>wildcards</em> and search for files with a given extension.</p>
+
+<pre><code>$ find . -iname “*.txt”
+</code></pre>
+
+<h1 id="goalsavespaceondiskbycompressingfiles">Goal: Save space on disk by compressing files.</h1><hr id="hrline">
+
+<p>The <code>gzip</code> command compresses files to save space. It stands for <strong>G</strong>NU <strong>zip</strong>. Type the following to compress the practice.txt file. If you are running into any issues with </p>
+
+<pre><code>$ cd ~/lab3B
+$ gzip practice.txt
+$ ls
+</code></pre>
+
+<p>It will compress it and add a <em>gz</em> extension. To uncompress the file, use <strong>G</strong>NU <strong>unzip</strong>:</p>
+
+<pre><code>$ gunzip practice.txt.gz
+$ ls
+</code></pre>
+
+<p>Lets try to compress the entire pokemon folder using the <code>-r</code> recursive option.</p>
+
+<pre><code>$ gzip -r pokemon
+$ ls
+</code></pre>
+
+<h3 id="question12noticehowitdidntcreateapokemongzaswewouldhaveexpectedwhatisinsidethepokemondirectoryafterthatcommand">Question 12: Notice how it didn’t create a 'pokemon.gz' as we would have expected. What is inside the 'pokemon' directory after that command?</h3>
+
+<p>Let’s undo that by recursively unzipping them.</p>
+
+<pre><code>$ gunzip -r pokemon
+</code></pre>
+
+<p>This happens because <code>gzip</code> only compresses individual files, so you can’t zip up a folder like you can on Windows. Therefore the <code>gzip</code> command is often used along with the <code>tar</code> command. We have to first create a tarball of the directory, and then we can compress that tarball.</p>
+
+<pre><code>$ cd ~/lab3B
+$ tar cvf pokemon.tar pokemon
+$ gzip pokemon.tar
+$ ls
+</code></pre>
+
+<p>This will create a <em>pokemon.tar.gz</em> file. To extract the files:</p>
+
+<pre><code>$ gunzip pokemon.tar.gz
+$ tar xvf pokemon.tar
+</code></pre>
+
+<h1 id="goalexamineandanalyzetheexitcodesofunixprograms">Goal: Examine and analyze the Exit Codes of UNIX programs</h1><hr id="hrline">
+
+<p><em>Exit Codes</em> refer to the values unix programs return. These Exit Codes follow a similar structure and pattern. They can be useful for diagnostic output, as well as making dynamic decisions in a shell script. To get started lets write a quick shell script called <code>exitstatus.sh</code> inside of <code>~/lab3A</code>.</p>
+
+<pre><code>#!/bin/bash
+
+echo -e "Successful execution: echo \"hello world\""
+echo -e "===================="
+echo "hello world"
+#Exit status returns 0 because the above command was successful
+echo -e "Exit Status" $?
+
+echo -e "\nIncorrect usage: ls --option"
+echo -e "====================="
+ls --option
+#Incorrect usage, so exit status will be 2.
+echo "Exit status" $? 
+
+echo -e "\nCommand Not found: bashscript"
+echo -e "====================="
+bashscript
+#Exit status returns 127, because bashscript command not found
+echo "Exit status" $? 
+
+echo -e "\nCommand is not an executable: ./lab3_test.txt"
+echo -e "============================="
+touch lab3_test.txt
+./lab3_test.txt
+#Exit status returns 126, because its not an executable.
+echo "Exit status" $?
+</code></pre>
+
+<p>Before running the script, be sure to use chmod to make the script executable.</p>
+
+<p>The first thing to notice is the <strong>$?</strong> - this special variable holds on to the exit code from the previously executed function. By printing this after the comand, we can see the output of the command and then match it with the exit code returned. In general, there is a pattern to the exit codes. </p>
+
+<table>
+<thead>
+<tr>
+<th>Exit Value</th>
+<th style="text-align:center;">Exit Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Zero</td>
+<td style="text-align:center;">Success</td>
+</tr>
+
+<tr>
+<td>Non-Zero</td>
+<td style="text-align:center;">Failure</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td style="text-align:center;">Incorrect Usage</td>
+</tr>
+
+<tr>
+<td>127</td>
+<td style="text-align:center;">Command Not Found</td>
+</tr>
+
+</tbody>
+</table>
+
+<h2 id="exercise1writingasciptthatoutputsexitcodes">Exercise 1: Writing a scipt that outputs exit codes.</h2>
+
+<p>You'll be writing a script that outputs exit codes as we did in the previous section. We are going to use the ping command to test exit codes.</p>
+
+<p>To get started lets create a file called myexitcodes.sh and put this line in there. </p>
+
+<pre><code>#!/bin/bash
+
+ping facebook.com
+</code></pre>
+
+<p>This will ping facebook and if it is up, you will recieve a response. The output will look something like the following:</p>
+
+<pre><code>64 bytes from edge-star-shv-12-frc3.facebook.com (173.252.120.6): icmp_seq=1 ttl=78 time=81.8 ms
+</code></pre>
+
+<p>This indicates a successful run of the <em>ping</em> command. Based on what you saw in <code>exitstatus.sh</code>, find a way to print the exit code of the ping command. Remember, you can close your ping program with <em>Control+C</em>.</p>
+
+<p>If you got your script to print <code>Exit Code: 0</code> that is excellent. If not, go back and edit your script, read the prior page, and then ask a tutor for help.</p>
+
+<p>Next, generate two more exit codes by <em>forcing errors</em> with the ping command. To get started, note the ping command takes a destination (like a website or ip address) as its input. You can force errors by passing in erronous flags and/or passing bad destinations. Happy Breaking!</p>
+
+<p>Be sure this file is ready to go, this will be used in the check off evaluation. </p>
+
+<h1 id="goalusethelesscommandtomakelargeblocksoftextontheconsoleeasiertoread">Goal: Use the <code>less</code> command to make large blocks of text on the console easier to read.</h1><hr id="hrline">
+
+<p>As the goal says, the <code>less</code> command makes large blocks of text on the console easier to read. <code>less</code> is a better version
+of the <code>more</code> command, which does essentially the same thing, except <code>less</code> has more features. <em>less is more</em>, as one might say.
+Commands that break large bodies of text into smaller pages are called <em>pagers</em>. <em>Pagers</em> are often invoked by other external 
+commands to facilitate the paging of their output, a good example of this is the <code>man</code> command. When issuing the <code>man</code> command
+it filters its output through the <code>less</code> command by default. So everything that worked while using man will also work while using <code>less</code>.
+Remember <code>ps -ef</code> had output that was a lot of text? We can view it easier by using less. </p>
+
+<pre><code>$ ps -ef | less
+</code></pre>
+
+<p>While viewing in less, you can use the following commands: </p>
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th style="text-align:center;">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>/apple</code> or <code>?apple</code></td>
+<td style="text-align:center;">Forward and backwards searches just like in vim.</td>
+</tr>
+
+<tr>
+<td>b</td>
+<td style="text-align:center;">Goes up/back a page, in vim it’s <em>ctrl-b</em>. pgup does the same thing.</td>
+</tr>
+
+<tr>
+<td>f or space</td>
+<td style="text-align:center;">Goes forward/down a page. In vim it’s <em>ctrl-f</em>. pgdown does the same thing.</td>
+</tr>
+
+<tr>
+<td>q</td>
+<td style="text-align:center;">quit</td>
+</tr>
+
+</tbody>
+</table>
+
+<h1 id="checkpoint">Checkpoint!</h1><hr id="hrline">
+
+<p>This marks the end of Section A. Verify that you have completed the questions up to this point, and the Exercise on exit codes. If you have any questions, ask the tutors. </p>
+
+<h1 id="sectionbintroductiontoeclipseide">Section B: Introduction to Eclipse IDE</h1><hr id="hrline">
+
+<p><em>This section of the lab shall be referred to as the folder hw0 hereafter.</em> Open a new terminal by right-clicking on the desktop and then choosing Open Terminal. </p>
+
+<h2 id="setupacquirethelabfiles">Setup: Acquire The Lab Files</h2>
+
+<p>Acquire the assignment from the public area. To avoid clobbering your work when repeating installation steps for an assignment, assignments contain one or more .empty files that need to be renamed to remove the .empty file extension. Those will contain the code that you will write for an assignment.</p>
+
+<pre><code>$ cd ~/../public/hw0
+$ make directories
+$ make install
+$ cd ~/hw0/c
+$ mv hw0.c.empty hw0.c
+$ cd ../cpp
+$ mv hw0.cpp.empty hw0.cpp
+$ cd ../java
+$ mv hw0.java.empty hw0.java
+</code></pre>
+
+<p>If you're new to vim/gvim, it may be helpful to use a search engine, and search for "vim commands".</p>
+
+<h2 id="setupbuildallfiles">Setup: Build all Files</h2>
+
+<pre><code>$ cd ~/hw0
+$ make
+</code></pre>
+
+<p>If the make command failed, you may have made a mistake when renaming your files.
+Please review your directories to ensure the expected files are present.</p>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/2.png" alt="Make"></p>
+
+<h1 id="goaluseeclipsetoobservethevalueofvariablesinacprogramduringexecution">Goal: Use Eclipse to observe the value of variables in a C program during execution.</h1><hr id="hrline">
+
+<p>This section will step through Eclipse installation and introduce you to some of its features. Eclipse is an <strong>integrated development environment</strong> (<strong>IDE</strong>) which allows you to edit code and debug your program. </p>
+
+<h2 id="launcheclipse">Launch Eclipse</h2>
+
+<pre><code>$ eclipse &amp;
+</code></pre>
+
+<p>This command will launch Eclipse in the background, which will free up the terminal for use while Eclipse is running. <strong>(Please note that Eclipse may take some time to load and a few popups will come up)</strong>. In general, following a unix command with an ampersand (&amp;) will start it in the background. We want to do this for GUI applications like eclipse and gvim, but not for in-terminal programs like vim. </p>
+
+<p>When prompted for a workspace, specify your home directory. The default is <code>~/workspace</code>, so just delete "workspace." Check "Use this as the default and do not ask again" and click <strong>OK</strong>. 
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/3.png" alt="IMAGE"></p>
+
+<p>Go to <strong>File -&gt; Import</strong>.</p>
+
+<p>If you see the welcome screen and other popups, close the popups and exit welcome screen to go to the workbench. 
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/4.png" alt="IMAGE"></p>
+
+<p>Expand <strong>General</strong> and select <strong>Existing Projects into Workspace</strong> and click <strong>Next</strong>. 
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/5.png" alt="IMAGE"></p>
+
+<p>Click <strong>Browse</strong>.
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/6.png" alt="IMAGE"></p>
+
+<p>Select "~/hw0" and click <strong>Ok</strong>. 
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/7.png" alt="IMAGE"></p>
+
+<p>You should see "hw0c", "hw0cpp", and "hw0java" appear with checkmarks beside them. Click <strong>Finish</strong>.</p>
+
+<p>Switch to the <strong>C/C++ perspective</strong> by going to <strong>Window -&gt; Open Perspective -&gt; Other.</strong> Select <strong>C/C++</strong> and click <strong>OK</strong>. 
+<img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/8.png" alt="IMAGE"></p>
+
+<p>In the <strong>Project Explorer (Window -&gt; Show View -&gt; Project Explorer)</strong>, expand <code>hw0c</code> and double-click "hw0.c" to open it for editing. In the <strong>Make Targets</strong> view (to the right of the screen), expand "hw0c" and double-click <strong>clean</strong>, then <strong>all</strong> to make a fresh build of your project.</p>
+
+<p>If the Make Targets view is not visible, go to <strong>Window -&gt; Show View -&gt; Other -&gt; Make -&gt; Make Targets</strong>.</p>
+
+<h2 id="runninganddebugginghw0c">Running and Debugging hw0.c</h2>
+
+<p>Run the application by clicking the run icon: <img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/run_icon.png" alt="IMAGE"></p>
+
+<p><em>Note</em>: If you find that you are unable to click the run icon, try selecting the file "a.out" first, and then clicking the run icon.</p>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/9.png" alt="IMAGE"></p>
+
+<h3 id="question13theoutputoftheprogramwillshowupintheconsoleviewwhatwastheoutputofyourprogram">Question 13: The output of the program will show up in the Console view.What was the output of your program?</h3>
+
+<p>Debug your application by going to <strong>Run</strong> -&gt; <strong>Debug</strong>, or by clicking the debug icon: <img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/debug_icon.png" alt="IMAGE">.</p>
+
+<p>When you are prompted to switch to the Debug perspective, click <strong>Yes</strong>.</p>
+
+<p>Execution will automatically break on the first statement in <code>main()</code>. Set a breakpoint on the return statement in <code>doMath()</code> by double-clicking in the left margin. </p>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/10.png" alt="IMAGE"></p>
+
+<p>Click resume twice: <img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/continue_icon.png" alt="IMAGE">. Hover your mouse over arg3 in the code editor.</p>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/11.png" alt="IMAGE"></p>
+
+<h3 id="question14whatisthevalueofarg3">Question 14: What is the value of arg3?</h3>
+
+<h1 id="goaluseeclipsetoobservethevalueofvariablesinacprogramduringexecution-1">Goal: Use Eclipse to observe the value of variables in a C++ program during execution.</h1><hr id="hrline">
+
+<p>Eclipse should still be open and the project hw0cpp should have been imported from the earlier. Open "hw0.cpp" for editing. Compile and run it. </p>
+
+<h3 id="question15whatistheoutputofyourprogram">Question 15: What is the output of your program?</h3>
+
+<p>Launch in the Eclipse debugger. Execution will automatically break on the first line of main. </p>
+
+<h3 id="question16whatarethestringcontentsofargv0hintusethevariablesview">Question 16:  What are the string contents of "argv[0]"? (Hint: use the Variables view.)</h3>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/12.png" alt="IMAGE"></p>
+
+<h1 id="goaluseeclipsetoobservethevalueofvariablesinajavaprogramduringexecution">Goal: Use Eclipse to observe the value of variables in a Java program during execution.</h1><hr id="hrline">
+
+<p>Eclipse should already be open from the previous exercises, and the project "hw0java" should already be loaded.</p>
+
+<p>Open "hw0.java" in the text editor. Click on the arrow next to icon: click on <strong>Run As &gt; Java Application</strong>. This should run the program.</p>
+
+<h3 id="question17whatistheoutputoftheprogram">Question 17: What is the output of the program?</h3>
+
+<p>Click the Debug icon: <img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/debug_icon.png" alt="IMAGE">. Eclipse should switch to the Debug perspective, and execution should stop in main. </p>
+
+<p>Set a breakpoint on the second line of the <code>DataHolder</code> constructor (<code>id = ++count;</code>) and continue execution.</p>
+
+<h3 id="question18whenthebreakpointishitwhatisthevalueofcountthensteponcewhatisthevalueofcountnow">Question 18: When the breakpoint is hit, what is the value of count? Then Step once. What is the value of count now?</h3>
+
+<p>Set a breakpoint on the last line in "main()", (<code>System.out.println(myHolder);</code>) and continue execution. </p>
+
+<h3 id="question19usingthevariablesviewwhatarethevaluesofmyholderidandmyholderdata">Question 19: Using the Variables view, what are the values of <code>myHolder.id</code> and <code>myHolder.data</code>?</h3>
+
+<h1 id="checkpoint-1">Checkpoint!</h1><hr id="hrline">
+
+<p>This marks the end of Section B. Verify that you have completed the questions up to this point. If you are confused on any details, feel free to ask the tutors. </p>
+
+<h1 id="sectioncscientificmethodofdebugging">Section C: Scientific Method of Debugging</h1><hr id="hrline">
+
+<p>In this section, we will be introducing the Scientific Method of debugging. The Scientific Method involves the following steps:</p>
+
+<ol>
+<li>Identify the behavior you want to explain.</li>
+
+<li>Form a hypothesis that might explain that behavior.</li>
+
+<li>Conduct an experiment that tests the hypothesis.</li>
+
+<li>If the experiment contradicts the hypothesis, revise it or replace it with a new hypothesis and go back to step 3.</li>
+</ol>
+
+<p>When applied to the debugging process, it might be more along these lines:</p>
+
+<ol>
+<li>Identify the bug you want to fix.</li>
+
+<li>Make a guess as to what the program is doing to cause the bug.</li>
+
+<li>Conduct a test to see if the guess is correct.</li>
+
+<li>If the test contradicts the guess then revise it or replace it with a new guess and go back to step 3</li>
+</ol>
+
+<p>These steps can be formalized and broken down further into distinct parts that make the write up for debugging using this method. We usually like to think of these as the following:</p>
+
+<ul>
+<li><strong>Symptom</strong>* (a discrepancy between desired and actual behavior)</li>
+
+<li><strong>Hypothesis</strong> (a potential cause of the symptom)</li>
+
+<li><strong>Experiment</strong> (a manipulation of the artifact)</li>
+
+<li><strong>Prediction</strong> (the expected outcome of the experiment)</li>
+
+<li><strong>Observation</strong> (the actual outcome)</li>
+
+<li><strong>Conclusion</strong> (the hypothesis is falsified, or supported)</li>
+</ul>
+
+<p>We will continue to use the Eclipse IDE for Java programming, and explore more features that aid debugging. We have provided you with an updated version of the LinkedList implementation. Your tasks for this lab will be to implement an Insertion Sort method and to debug a faulty method. Please launch a new Eclipse window as follows:</p>
+
+<h2 id="startingeclipse">Starting Eclipse</h2>
+
+<ol>
+<li>Open a terminal window and type <code>eclipse &amp;</code> at the command prompt.</li>
+
+<li>The workspace launcher window will appear. Click the ok button, unless you want to change the location of the workspace directory.</li>
+
+<li>Now you should see the Eclipse welcome screen.</li>
+
+<li>Close the tab in the upper left corner to close the welcome screen.</li>
+</ol>
+
+<h2 id="creatinganewproject">Creating a new project</h2>
+
+<ol>
+<li>Make sure you are currently in the Java perspective: <strong>Windows=&gt;Open Perspective=&gt;Other=&gt;Java</strong>.</li>
+
+<li>Click on <strong>File -&gt; New -&gt; Other</strong>, Click on the <strong>Java</strong> folder, select <strong>Java Project</strong>.</li>
+
+<li>A window will appear where you can enter the name of your project. Enter a name of your choice.</li>
+
+<li>Click on <strong>Finish</strong> to create the project.</li>
+</ol>
+
+<h2 id="importingthecodeintotheproject">Importing the code in to the project</h2>
+
+<ol>
+<li><p>Copy the contents recursively from "~/../public/Lab3/src" to "your<em>project</em>name/src" (default workspace location is "~/workspace/src") in to the Eclipse workspace directory. These files should now be available in Eclipse project explorer (the project hierarchy on the left) (use cp command or you can drag-and-drop directly to Eclipse window)</p></li>
+
+<li><p>Create a new folder in the project, named <strong>TesterClass</strong> (right click on project name. Select <strong>New -&gt; Folder</strong>. Select <strong>Finish</strong>).</p></li>
+
+<li><p>Copy the class file "~/../public/Lab3/test/ListTesterComplete.class" into this folder. You can use drag and drop (or use the terminal to copy the file).</p></li>
+
+<li><p>Hit F5 to refesh. Right click on the project folder, navigate to <strong>Build Path -&gt; Configure Build Path</strong>. Select Libraries Tab and select Add class folder. Select the <strong>TesterClass</strong> folder and click on <strong>OK</strong>.</p></li>
+
+<li><p>Then, still under the libraries tab select <strong>Add Library</strong>. Select <strong>JUnit</strong>, and click on <strong>Next</strong>.</p></li>
+
+<li><p>Make sure <strong>JUnit 3</strong> is selected in the library version. Click on <strong>Finish</strong> and then click <strong>OK</strong>.</p></li>
+
+<li><p>Finally, copy the file "~/../public/Lab3/testInput.txt" into your project folder. Place on the same level as the "your<em>project</em>name/src" directory.</p></li>
+</ol>
+
+<h2 id="tipsbeforewegettofixingcompilererrors">Tips, before we get to fixing compiler errors...</h2>
+
+<p><em>This portion will provide some notes on Eclipse debugging features that will be useful for the upcoming Exercises, as well as the labs in the following weeks. If you are already familiar with Eclipse, feel free to jump Exercise 2 and 3 below, but you can always come back here for reference.</em> </p>
+
+<p>We have provided you with a skeleton <em>JUnit</em> class, <em>ListTester.java</em>, that you should use to implement tests for the <em>LinkedList</em> class. When you open this class in the project explorer you will notice that <strong>there are some errors and warnings that Eclipse has highlighted</strong>. Read the following notes and work around the errors so that the <em>ListTester</em> class compiles and the tests either fail or error.</p>
+
+<ol>
+<li><p>You should see many things underlined in red in the source code. These are all compiler errors. Many of the problems can be solved by importing the proper classes. To have Eclipse automatically find all the import statements, click <strong>Source -&gt; Organize Imports</strong> or type <strong>ctrl+shift+o</strong>.</p></li>
+
+<li><p>If you <strong>mouse over an error</strong>, Eclipse shows you some suggestions (quick fixes) for how to fix the error. You can click on one of these options to have Eclipse fix the error for you. Sometimes Eclipse will not have any quick fixes, so you will need to fix the error yourself.</p></li>
+
+<li><p>To go to the next error in the file, type <strong>ctrl+.</strong> (period key).</p></li>
+
+<li><p>To bring up the quick fixes, <strong>type ctrl+1</strong>. Then click on one of the quick fixes. It must be point out that sometimes there are no suggested fixes and other time the suggestions may introduce unintended errors e.g. including a wrong class with the same name but different semantics.</p></li>
+
+<li><p><strong>Breakpoints</strong> allow you to stop the execution of your program on any line. This is important because most of the debugging features require that your program has stopped executing. To set a breakpoint, double click in the left margin next to the line where you want to set a breakpoint. A little circle should appear on that line. Now when you run the program in debug mode, whenever execution reaches this line, the program will stop just before executing the line. The next line to be executed will be highlighted in green.</p></li>
+</ol>
+
+<p>As soon as your program stops execution, you can observe a couple of useful things. In the top left pane, the debugger will show you the current running programs and their <strong>stack traces</strong>. It shows you that the bottom method in the stack trace called the one above it, and so on. The top method is the currently executing method.</p>
+
+<p><em>Note</em>: If you have multiple programs running you should stop each instance by clicking Terminate on the Console and Debug perspectives. Additionaly, you should remove all terminated instances by using the icon with two overlayed Xs. Debugging multiple instances of your program at once is difficult and not necessary. </p>
+
+<ol>
+<li><strong>Step Execution</strong>: Do not guess how your program is executing. Instead, watch the debugger execute your program. </li>
+</ol>
+
+<ul>
+<li><p><strong>Step into</strong> executes the next line in your program. If the current line contains a method, it will stop on the first line of the called method.</p></li>
+
+<li><p><strong>Step over</strong> executes the next line of your program while skipping over any method calls. This is equivalent to continuing execution to the next line in the current file.</p></li>
+
+<li><p><strong>Step return</strong> continues execution until the program finishes the current method.</p></li>
+
+<li><p><strong>Resume</strong> continues execution as normal.</p>
+
+<p>The debugger shows the values of the local variables in their current state, in the top right pane. The values get updated as you step through the program. The top right pane also lists all active breakpoints. </p></li>
+</ul>
+
+<ol>
+<li><strong>Watch expressions</strong> allows you to see the results of evaluating expressions whenever the program is paused. After stopping the execution of your program, highlight an expression, right click and select watch. The expression should now be in the top right pane. Eclipse will show you the evaluated value. Be careful with expressions that create side effects, because Eclipse actually executes the highlighted code each time, to show its result.</li>
+</ol>
+
+<p>Example: Suppose that you are curious about the logic in an if condition, or any other expression like this.</p>
+
+<pre><code>if(!isCondition1True() &amp;&amp; isCondition2True())
+</code></pre>
+
+<p>You can watch <code>!isCondition1True() &amp;&amp; isCondition2True()</code>. Eclipse will tell you its value. If it happens to be false, you can watch <code>!isCondition1True()</code> and <code>isCondition2True()</code> to find out why the whole if condition is false.</p>
+
+<h1 id="goalutilizedebuggingtoolstocorrectlyimplementasortingalgorithm">Goal: Utilize debugging tools to correctly implement a sorting algorithm.</h1><hr id="hrline">
+
+<p>In this part of the lab, you will implement a Insertion Sort method for the LinkedList class. The algorithm consists of inserting one element at a time into the previously sorted part of the array, moving higher ranked elements up as necessary. To start off, the first (or smallest, or any arbitrary) element of the unsorted array is considered to be the sorted part. The algorithm is illustrated below: </p>
+
+<p><img src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/13.png" alt="IMAGE"></p>
+
+<p>The following website provides an animation that demonstrates the steps of Insertion sort and also contains the pseudo code: <a href="http://www.ee.ryerson.ca/~courses/coe428/sorting/insertionsort.html">http://www.ee.ryerson.ca/~courses/coe428/sorting/insertionsort.html</a></p>
+
+<p>Pseudo Code for Insertion Sort:</p>
+
+<p><em>From Wikipedia</em>: Pseudocode is an informal high-level description of the operating principle of a computer program or other algorithm. It uses the structural conventions of a programming language, but is intended for human reading rather than machine reading.</p>
+
+<p><strong>Note: This is pseudo code, not working code!</strong></p>
+
+<pre><code>for j &lt;- A[1] to length[A] do
+
+    //Insert A[j] into the sorted sequence A[1 . . j - 1].
+    key &lt;- A[j]
+    i &lt;- j - 1
+
+    while i &gt; 0 and A[i] &gt; key do
+
+        A[i + 1] &lt;- A[i]
+        i &lt;- i - 1
+
+    A[i + 1] &lt;- key
+</code></pre>
+
+<p><code>&lt;-</code> is an assignment operator, equivalent to <code>=</code></p>
+
+<p><code>do</code> represents the block of code to be done after the previous statement. Pay attention to the indentation! </p>
+
+<h2 id="exercise2implementinginsertionsortalgorithm">Exercise 2: Implementing Insertion Sort Algorithm</h2>
+
+<p>Your task is to implement the Insertion Sort algorithm as described above.</p>
+
+<p>Open the LinkedList class, and scroll down to the method stub: </p>
+
+<pre><code>public static &lt;T extends Comparable&gt;? super T&gt;&gt; void insertionSort(LinkedList&lt;T&gt; list) {
+
+return;
+
+}
+</code></pre>
+
+<p>Use this method stub for your implementation. Use <code>compareTo()</code> for comparison. Other methods that will be useful are the <code>set(int index, T element)</code> and <code>get(int index)</code> methods. </p>
+
+<pre><code>compareTo(T object)
+
+Returns:
+  a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object
+</code></pre>
+
+<p>You can take <code>public static &lt;T extends Comparable&lt;? super T&gt;&gt; void bubbleSort(LinkedList&lt;T&gt; list)</code> as an example.</p>
+
+<p>Also spend some time to study the following method:</p>
+
+<pre><code>public static &lt;T extends Comparable&lt;? super T&gt;&gt; boolean equals(LinkedList&lt;T&gt; mylist, LinkedList&lt;T&gt; other){
+
+...
+
+}
+</code></pre>
+
+<p>In order to compare generic types, <code>T</code> has to <code>extend Comparable</code>, this has been taken care of for you. </p>
+
+<ul>
+<li>Make sure that your implementation is correct.</li>
+
+<li>This will be shown as a pass (in green) for the JUnit test testInsertionSort() of the ListTesterComplete (this is the class that you added to the TesterClass folder earlier on), assuming the test has been implemented correctly.</li>
+
+<li>Right click on the ListTesterComplete.class, select Run As or Debug As, then  JUnit Test.</li>
+
+<li>During your testing, use breakpoints as described above to step through your code and help you fix your implementation. By placing a breakpoint inside the call to insertionSort(..) method you can step through your implementation to identify and fix bugs.</li>
+
+<li>We have provided you with an unsorted input file that you can use to test/debug your program. If interested, you also can create a smaller version of this file to facilitate the debugging process after lab, e.g. with only 5 unsorted entries. (Restore the original version when you're done with your implementation).</li>
+
+<li>Walk through your implementation with a TA/Tutor, ask for help when you need it.</li>
+</ul>
+
+<h1 id="goaldebugcodeusingthescientificmethod">Goal: Debug code using the Scientific Method</h1><hr id="hrline">
+
+<p>In this part of the lab, you will fix the defective isSorted(..) method of the LinkedList class. The isSorted checks whether a linked list is sorted in non-decreasing order. It returns true if the array is sorted in non-decreasing order, and false otherwise.</p>
+
+<p>You have tested the isSorted method on the following lists and it returns true:</p>
+
+<p>A-&gt;B-&gt;C-&gt;D</p>
+
+<p>And you have tested it on the following linked list and it returns false:</p>
+
+<p>D-&gt;C-&gt;B-&gt;A</p>
+
+<p>However, testing on the following lists, it returns true, and so your test fails:</p>
+
+<p>A-&gt;C-&gt;B-&gt;D</p>
+
+<p>A-&gt;D-&gt;C-&gt;B</p>
+
+<p>You will find these tests in the ListTester.java class file.</p>
+
+<h2 id="exercise3debuggingtheissortedmethodthisshouldgoinyourreadmefile">Exercise 3: Debugging the isSorted method (This should go in your README file)</h2>
+
+<ol>
+<li><p>Write a brief succinct hypothesis of what might be causing this behavior. </p></li>
+
+<li><p>Based on your hypothesis, you do an experiment, testing on the list A-&gt;F-&gt;B. What return value from the isSorted(..) method would confirm your hypothesis?</p></li>
+
+<li><p>Based on you deductions above, make an attempt to fix the <code>isSorted(..)</code> method. You can test the method with new inputs if you come up with a different hypothesis. As before, make a note of your hypothesis and expected return value. Try to make use of the Eclipse debug features to pin point the bug in the code, and make a fix. <em>A good rule of thumb is to make minimal changes to the code in order to fix a bug</em>.</p></li>
+
+<li><p>If you have passed the tests, briefly describe the cause of the bug and what you have done to fix it.</p></li>
+</ol>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ul>
+<li>Show that you have completed all Exercises, including "myexitcodes.sh"</li>
+
+<li>Correct implementation of insertionSort(...).</li>
+
+<li>Pass testInsertionSort() in ListTesterComplete.</li>
+
+<li>Correctly fixed the bug in the isSorted method.</li>
+
+<li>Pass all tests in ListTester.</li>
+
+<li>Lab 3 README file with the Questions answered.</li>
+</ul></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 3_ Unix Commands and Intro to Eclipse Debugging_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

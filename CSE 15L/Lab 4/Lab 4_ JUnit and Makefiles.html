@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 4_ JUnit and Makefiles_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 4_ JUnit and Makefiles_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 4_ JUnit and Makefiles_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 4_ JUnit and Makefiles_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 4: JUnit and Makefiles</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#lab4junitandmakefiles">Lab 4: JUnit and Makefiles</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#welcome">Welcome!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#whydothislab">Why Do This Lab?</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#sectionajunit">Section A. JUnit</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goaltestyourjavafunctionsusingjunit">Goal: Test your Java Functions using JUnit.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalcreategoodunittestsbytestingagainstincorrectimplementationsofanum">Goal: Create good unit tests by testing against incorrect implementations of ANum</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalwritejunittestsforhandlingexceptions">Goal: Write JUnit tests for handling exceptions.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#sectionbmakefiles">Section B: Makefiles</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalunderstandinghowtousemakefiles">Goal: Understanding how to use Makefiles.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goaladdarulefortestingpartialimplementation">Goal: Add a rule for testing 'partial' Implementation</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalfixisempty">Goal: Fix isEmpty()</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalfixremoverange">Goal: Fix removeRange()</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#goalrunpartialintegertester">Goal: Run PartialIntegerTester</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab4_oasdfw/index.html#checkoff">Checkoff!</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab4junitandmakefiles">Lab 4: JUnit and Makefiles</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has only one component: a lab exercise.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+      For the lab homework, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="welcome">Welcome!</h1><hr id="hrline">
+
+<p>Welcome to Lab 4. Before we begin this lab, please make sure you have read through the "Lab 0: General Lab Guide" found <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab0_general">here</a>. This is your guide to navigating all labs and making sure you get the most out of every lab we provide (and all the credit you deserve as well!).</p>
+
+<h1 id="whydothislab">Why Do This Lab?</h1><hr id="hrline">
+
+<p>This Lab is divided into two sections. Section A will introduce you to Test-Driven Development through JUnit, a widely used framework for unit testing of Java Software. 
+Section B will acquaint you with the <code>make</code> utility, a powerful tool for automation of repetitive tasks such as compilation of programs. 
+For this lab, please record the answers to all questions in a README file (see next section), which will be used for the checkoff at the end of this lab.</p>
+
+<h1 id="sectionajunit">Section A. JUnit</h1><hr id="hrline">
+
+<h3 id="gettingstarted">Getting Started</h3>
+
+<p>After logging in, open a terminal window. In your home directory, create a directory named <strong>Lab4</strong>, and <code>cd</code> into it. You will work within that directory when doing this lab.</p>
+
+<pre><code>$ mkdir Lab4
+$ cd Lab4
+</code></pre>
+
+<p>Copy all the contents of the public Lab4 directory into what is now your current working directory, Lab4. (Be sure to note the period as the last argument to the <code>cp</code> command here; it is specifying the current working directory as the destination of the copy operation. The <code>–r</code> flag means to recursively copy subdirectories; the <code>*</code> wildcard matches all contents of the public Lab4 directory.) TYPE the following command. Do not copy paste.</p>
+
+<pre><code>$ cp –r ~/../public/Lab4/* .
+</code></pre>
+
+<p>Do a <code>ls</code> to see the contents of your current working directory.  You should see, among other things, a file <strong>OneNum.java</strong>. Open this file in an editor, or just cat it to your terminal screen. You will see the definition of a simple ADT as a Java interface. Read the comments and the code to understand what is required of any class that implements this interface.</p>
+
+<h3 id="question1whendoingunittestingonaclassthatimplementsonenumhowmanydifferentmethodsshouldbetested">Question 1: When doing unit testing on a class that implements OneNum, how many different methods should be tested?</h3>
+
+<p>If you answered some number other than 3, go back and read the interface definition again! 
+(Hint: A constructor counts as a method.)</p>
+
+<h3 id="question2immediatelyafteraonenumobjectiscreatedwhatisthevaluethatshouldbereturnedbyacalltothatobjectsgetnummethod">Question 2: Immediately after a OneNum object is created, what is the value that should be returned by a call to that object’s getNum() method?</h3>
+
+<h3 id="question3immediatelyafteracalltoaonenumobjectssetnummethodpassingavaluexwhatisthevaluethatshouldbereturnedbyacalltothatobjectsgetnummethod">Question 3: Immediately after a call to a OneNum object’s setNum() method, passing a value X, what is the value that should be returned by a call to that object’s getNum() method?</h3>
+
+<h3 id="question4butwhatifthatvaluexisnegativewhatshouldhappenthen">Question 4: But what if that value X is negative... what should happen then?</h3>
+
+<h3 id="question5byaskingandansweringquestionssuchasthesebasedontheadtspecificationyoucanformatestplanforeachunityouwanttotesthowcanitaffectthestateoftheobjectandhowcanyoucheckthattheresultingstateoftheobjectiscorrect">Question 5.  By asking and answering questions such as these based on the ADT specification, you can form a test plan! For each unit you want to test, how can it affect the state of the object?  And how can you check that the resulting state of the object is correct?</h3>
+
+<p>&nbsp;
+&nbsp;</p>
+
+<p>If you have answered these questions, you are now ready to go on and create a tester.</p>
+
+<p>We will be Using JUnit version 3.8.1. A JUnit test program is written as a class that extends the <strong>junit.framework.TestCase class</strong>. To be run as a program, this class – like any Java class -- must of course have a <code>public static void main</code> method.  It is also supposed to have a <strong>constructor</strong> that takes a String as an argument, and passes the String to the superclass constructor. The particular class we’ll be testing that implements the OneNum interface will be named ANum; so let’s name our JUnit class <strong>ANumTester</strong>.  Here’s a start on it:</p>
+
+<pre><code>public class ANumTester extends junit.framework.TestCase {
+
+  public ANumTester(String name) {
+
+      super(name);
+
+  }
+
+  public static void main(String args[]){
+
+  junit.textui.TestRunner.main(new String[] {"ANumTester"});
+
+  }
+}
+</code></pre>
+
+<p>Open an editor, and enter that code into a file, <strong>ANumTester.java</strong>. Compile it:</p>
+
+<pre><code>$ javac ANumTester.java
+</code></pre>
+
+<p>Are there any errors? Let's fix any compiler errors before continuing.</p>
+
+<p>Run it:</p>
+
+<pre><code>$ java ANumTester
+</code></pre>
+
+<p>Note the message printed: <code>no tests found</code>. OK, let's now make these missing tests.</p>
+
+<h1 id="goaltestyourjavafunctionsusingjunit">Goal: Test your Java Functions using JUnit.</h1><hr id="hrline">
+
+<p><em>This would be a good point to switch the Driver and Navigator</em></p>
+
+<p>In the JUnit 3.8.1 framework, a test is written as a <code>public void</code> no-argument instance method whose name begins with lower-case “test”.  Since in this case we have 3 units – 3 methods – that we want to test, it makes sense to have at least 3 “test” methods. They need to start with lower-case “test”, but for human readability their names should reflect what they are testing. So for example, you could have these methods in your ANumTester class:</p>
+
+<pre><code>public void testCtor() {
+
+}
+
+public void testSetNum() {
+
+}
+
+public void testGetNum() {
+
+}
+</code></pre>
+
+<p>Edit those (or pick your own names) into your ANumTester class, compile, and run.</p>
+
+<h3 id="question6didallthetestpasswhyhasanythingbeentested">Question 6: Did all the test pass? Why? Has anything been tested?</h3>
+
+<p>Note that all tests pass even though nothing has really been tested! This is because in the JUnit framework, a test method that returns without failing or throwing an exception is considered to pass.  </p>
+
+<p><strong>Note:</strong> If it throws an exception instead of failing or returning, it is considered an error. Errors are different from failures in the JUnit framework. A failure happens when a JUnit framework assertion fails. More about that below.</p>
+
+<p>You can think of what we need to do now as writing code that will try, as hard as we can, to make an instance of the target class fail! (Note: The target class is sometimes called the “test fixture” for the tester). We want to stress it as much as we can, so that if it fails to meet the interface specification in any way, we will be able to tell. Then if there are no failures or errors, all the tests pass, and we can have some confidence that the target object correctly implements the ADT.</p>
+
+<p>The way to do within a JUnit test method is to create one or more instances of the target class, call methods on those instances, and then call a JUnit framework assertion method that will cause a JUnit failure if the results are not what they should be.</p>
+
+<p>There are many static methods in JUnit’s Assert class that can serve this purpose.  See the documentation at <a href="http://junit.sourceforge.net/javadoc">http://junit.sourceforge.net/javadoc/</a> for more information.  In this lab we will only need two of these methods:  the 2-argument <strong>assertEquals()</strong> method, and the zero-argument <strong>fail()</strong> method.</p>
+
+<p>Consider our <strong>testCtor()</strong> method.  This is supposed to test the default constructor of the ANum class.  The specification says that it is supposed to initialize the object with an internal value of 0, and that the getNum() method should tell us what the value really is.  Then we just need to fail the test if the value is not 0.  This code will do that:</p>
+
+<pre><code>public void testCtor() {
+
+  OneNum obj = new ANum(); // create test fixture
+
+  int val = obj.getNum();  // check state
+
+  assertEquals(0,val);     // fail if not correct
+}
+</code></pre>
+
+<p>Edit that into your ANumTester.java file, and save it.</p>
+
+<p>To successfully compile it, you will need a definition of the ANum class in the current working directory.  There is a correct version in the GoodANum directory that you copied over from the public/Lab4 directory.</p>
+
+<p>Copy, compile, and run:</p>
+
+<pre><code>$ cp GoodANum/ANum.class .
+$ javac ANumTester.java
+$ java ANumTester
+</code></pre>
+
+<p>All tests should pass, because this ANum.class is a correct implementation.  Stop and fix any problems at this point before proceeding.</p>
+
+<h2 id="exercise1followingtheseideaswritedefinitionsforthetestsetnumandtestgetnummethods">Exercise 1: Following these ideas, write definitions for the testSetNum() and testGetNum() methods.</h2>
+
+<p>Create an object to test, call its mutator method with several different values for its argument (you can even write a loop to use many values), and in each case check that the resulting state of the object is correct, according to the accessor method, calling a JUnit framework method that will fail the test if it is not correct.</p>
+
+<p>What are accessor and mutator methods? An accessor method accesses the contents of an object without modifying the object itself. It just returns the specified field. A mutator method on the other hand modifies the content of an object.</p>
+
+<p>When you make a change to your tester, save, compile, and run it. All tests should pass, because the ANum.class file in the cwd contains a correct implementation.</p>
+
+<p>&nbsp;
+&nbsp;
+Now would be another good time to switch Driver and Navigator. (If you’ve been controlling the mouse and keyboard, it’s time for your partner to do so.)</p>
+
+<h1 id="goalcreategoodunittestsbytestingagainstincorrectimplementationsofanum">Goal: Create good unit tests by testing against incorrect implementations of ANum</h1><hr id="hrline">
+
+<p>The next thing to test about your tester is to make sure some (at least one) tests fail when run against any incorrect, buggy implementation of the ADT. We have provided several of these for you, the ANum.class files in directories <strong>BadANum1, BadANum2, BadANum3, BadANum4</strong>.</p>
+
+<p>For each of these, copy the ANum.class file from the “Bad” directory into your working directory, and run your tester: for example:</p>
+
+<pre><code>$ cp BadANum1/ANum.class .
+$ java ANumTester
+</code></pre>
+
+<p>For 3 of the 4 “Bad” ANum classes, your tester should fail at least one test. If not, <strong>you need write more complete tests</strong>! For one of the “Bad” classes, though, we need another technique, which we’ll show below. Let's think about the following question:  </p>
+
+<h3 id="question7whenthereisafailurecanyoutellifitisaproblemwiththeaccessormethodorwiththemutatormethod">Question 7: When there is a failure, can you tell if it is a problem with the accessor method or with the mutator method?</h3>
+
+<p>In general, this is not possible to do, because the only way to check on the operation of an accessor is by using a mutator, and vice-versa; they can’t really be tested independently.  A consequence of this is that one single bug in a class will often result in more than one unit test failing. <br>
+<strong>But this is OK:  the goal is for a perfect implementation to pass all your tests, and for any imperfect implementation to fail at least one test.</strong></p>
+
+<h1 id="goalwritejunittestsforhandlingexceptions">Goal: Write JUnit tests for handling exceptions.</h1><hr id="hrline">
+
+<p>Recall that the documentation for the <strong>setNum()</strong> mutator method says that an exception should be thrown if the argument is negative.  An exception is not a return value; and in fact the documentation doesn’t say anything about how the state of the object should change when the precondition for the mutator method is not met.  So, how can we test that the target object satisfies this specification?</p>
+
+<p>The basic idea is to wrap the statement that should throw an exception in a try-block, and fail if the exception is not thrown.  The catch-block can be empty; if the exception is thrown and caught, the method just returns after the catch block, which  means the test passes.  Something like this:</p>
+
+<pre><code>OneNum newTestNumber = new ANum();
+
+try{
+
+  newTestNumber.setNum(-1);  // should throw
+
+  fail();        // if not, fail the test!
+
+} catch (IllegalArgumentException e) {
+
+  // if throws, catch the exception and pass the test
+
+}
+</code></pre>
+
+<p>That code, or something like it, could be put in your existing testSetNum() method; but it is perhaps better style to put it in its own method, named something like testSetNumException().  Do so, recompile, and make sure now all “Bad” ANum’s fail!</p>
+
+<p>At this point, the 4 “Bad” ANum’s provided should fail.  But you should be able to look at your ANumTester methods and see that it would be possible to write an ANum class that passes all your tests, but does not correctly implement the ADT.  This is because you certainly did not test on every possible input to the mutator method; there are more than 4 billion different values of a 32-bit int, and it is not feasible to test them all.  The implementation might have some convoluted logic that is buggy only for a few values out of those 4 billion+.  The situation is even worse for 64-bit doubles, and worse than that for Strings!  Complete test coverage is just not feasible.  Even with very extensive testing, bugs can get through.  But we try to do the best we can.  We will have more to say about how to construct good tests in future labs.</p>
+
+<h2 id="checkpoint">Checkpoint!</h2>
+
+<p>This marks the end of Section A! Verify that you have completed the questions and exercises up to this point, and that your tester does the following:</p>
+
+<ul>
+<li>ANumTester passes GoodANum/ANum.class</li>
+
+<li>ANumTester fails BadANum1/ANum.class</li>
+
+<li>ANumTester fails BadANum2/ANum.class</li>
+
+<li>ANumTester fails BadANum3/ANum.class</li>
+
+<li>ANumTester fails BadANum4/ANum.class</li>
+</ul>
+
+<p>If you have any questions, ask the tutors. </p>
+
+<h1 id="sectionbmakefiles">Section B: Makefiles</h1><hr id="hrline">
+
+<p>In this section, you will be working on the make utility. When you write software that requires compiling a lot of interdependent files, it can be tedious to do so every time you fix a bug. Makefiles will help you to automate compilation and other repetitive set of tasks.</p>
+
+<h3 id="gettingstarted-1">Getting Started</h3>
+
+<pre><code>$ cd ~/Lab4/Partial
+</code></pre>
+
+<p>Do a <code>ls</code> to see the contents of your cwd (current working directory). You should see among other things, a <strong>IntegerListInterface.java</strong> and <strong>IntegerList.java</strong>. Open these two files in an editor, or just <code>cat</code> them to your terminal screen. You will see the definition of a simple ADT as a Java interface and its corresponding implementation. Read the comments and the code.</p>
+
+<h3 id="question8whatdoyouthinkisthepurposeforhavingintegerlistinterfacewhenitclearlyhasemptymethods">Question 8: What do you think is the purpose for having IntegerListInterface when it clearly has empty methods?</h3>
+
+<h3 id="question9howdoyougettheobjectstoredatindex10inanintegerlist">Question 9: How do you get the object stored at index 10 in an IntegerList?</h3>
+
+<h3 id="question10whatisthepurposeoftheremoverangemethod">Question 10: What is the purpose of the removeRange method?</h3>
+
+<h3 id="question11howdoestheremoveindexmethoddifferfromgetindex">Question 11: How does the remove(index) method differ from get(index)?</h3>
+
+<h3 id="previewlocationoffiles">Preview location of files</h3>
+
+<p>IntegerList is a fixed-size list implementation. It has a constructor which takes an integer as an argument which specifies the maximum capacity of the list. Once the object is created the capacity cannot be changed (and it should throw an exception)</p>
+
+<p>There are three subdirectories in Lab4</p>
+
+<ol>
+<li><p>Good</p></li>
+
+<li><p>Partial</p></li>
+
+<li><p>Bad</p></li>
+</ol>
+
+<p>Good contains two class files - <strong>IntegerList.class</strong> and <strong>IntegerListTester.class</strong>. Both are complete good working implementation and tester for IntegerList.</p>
+
+<p>Partial contains three java source files - <strong>IntegerList.java</strong> and <strong>PartialIntegerListTester.java</strong> Both are incomplete versions of the implementation of IntegerList and its tester.</p>
+
+<p>Bad contains a class file <strong>IntegerList.class</strong> which contains buggy implementation of set and get methods.</p>
+
+<h1 id="goalunderstandinghowtousemakefiles">Goal: Understanding how to use Makefiles.</h1><hr id="hrline">
+
+<p>Go to folder Lab4 and type the following:</p>
+
+<pre><code>$ make prep_good
+</code></pre>
+
+<p>This will copy the files into the current folder. Now run the following:</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<p>This will run the tester using the Good/IntegerList.class and Good/IntegerListTester.class. <strong>All tests should pass.</strong></p>
+
+<h3 id="okwhatsinsidethemakefile">OK, what's inside the Makefile?</h3>
+
+<pre><code>.SUFFIXES: .java .class
+
+.java.class:
+
+        javac $&lt;
+
+IntegerList.class: IntegerListInterface.class
+
+IntegerListTester.class: IntegerList.class
+
+CLASSES = IntegerListInterface.class IntegerListTester.class IntegerList.class
+
+prep_good:
+
+        cp Good/IntegerListInterface.class .
+
+        cp Good/IntegerList.class .
+
+        cp Good/IntegerListTester.class .
+
+
+test: $(CLASSES)
+
+        java IntegerListTester
+</code></pre>
+
+<ul>
+<li><p>The first two lines are telling make about the relation between .java and .class files: namely, to make a .class file, run javac on the corresponding .java file. (make already knows about compiling C and C++ files, but needs to be told about Java!)</p></li>
+
+<li><p>Notice that <code>javac</code> occurs after a tab. This is very important. In makefiles, <strong>commands are always preceded by a tab, not spaces!</strong> The <code>$&lt;</code> symbol simply means the first prerequisite, in this case, it is <code>.java</code> as defined in <code>.SUFFIXES</code>.</p></li>
+
+<li><p>We specify a <strong>dependency</strong> in a makefile by writing the name of a <strong>target</strong>, followed by a colon ‘:’, followed by a whitespace delimited list of sources that the target depends on. For example:</p></li>
+</ul>
+
+<pre><code>IntegerList.class: IntegerListInterface.class
+</code></pre>
+
+<p>This dependency line says that the file <strong>IntegerList.class</strong> depends on the file <strong>IntegerListInterface.class</strong>. This implies that if the file <strong>IntegerList.class</strong> is older than the file <strong>IntegerListInterface.class</strong>, make needs to do something to make <strong>IntegerList.class</strong> up to date. And make knows how to create an up-to-date .class file, because we already told it how; it will run <strong>javac IntegerList.java</strong> to it in this case. Given dependencies like this in a Makefile, make is smart enough to recompile only when necessary.
+Now see the next line:</p>
+
+<pre><code>IntegerListTester.class:IntegerList.class
+</code></pre>
+
+<p>This is another dependency line, specifying that IntegerListTester.class depends on IntegerListTester.class</p>
+
+<ul>
+<li><p>The next line defines a variable <em>CLASSES</em> to be the list of IntegerListInterface.class, IntegerListTester.class, and IntegerList.class. With that variable defined, we can use $(CLASSES) in the Makefile whenever we want to refer to those 3 files.</p></li>
+
+<li><p>Next look at the <code>prep_good</code> target. It has no dependencies but it does have commands. <strong>Each command line needs to start with a tab</strong> It's commands will always run by typing <strong>make prep_good</strong></p></li>
+
+<li><p>Finally there is a target <strong>test</strong> This target depends on $(CLASSES), so whenever <strong>make test</strong> is called all the files in the definition of that variable will be updated as necessary. Then the commands are written below the target.</p></li>
+</ul>
+
+<h3 id="question12whatisthedifferencebetweenline1andline2">Question 12: What is the difference between Line 1 and Line 2?</h3>
+
+<p>Line 1: MYFILE = myfile.java</p>
+
+<p>Line 2: myfile.class: depfile.class</p>
+
+<h3 id="question13howwouldyouchangetheruleprep_goodtojustcopybadintegerlistclass">Question 13: How would you change the rule prep_good to just copy Bad/IntegerList.class?</h3>
+
+<h3 id="tasksforremainderoflab">Tasks for remainder of lab</h3>
+
+<p>Task 1:</p>
+
+<p>Here you will be completing the implementation of <strong>IntegerList.java</strong> (as per instructions below) in the folder Partial. You will then use the good IntegerListTester to verify your implementation. As you read the lab below, you will be given specific function names that you need to implement.</p>
+
+<p>Task 2:</p>
+
+<p>After you complete Task 1, you are required to complete the <strong>PartialIntegerListTester.java</strong> and verify it using your completed <strong>Partial/IntegerList.java</strong>, <strong>Bad/IntegerList.class</strong>, and <strong>Good/IntegerList.class</strong>. Below you will find more specific directions to complete the aforementioned tasks.</p>
+
+<h1 id="goaladdarulefortestingpartialimplementation">Goal: Add a rule for testing 'partial' Implementation</h1><hr id="hrline">
+
+<p>We will now add a rule in the Makefile <em>to automate testing for the "partial" implementation</em> of IntegerList that you will be working on. We only need to add a rule to copy the necessary files into the current working directory. Take care of starting each command (after the line with the target prep<em>partial</em>list:) with a tab.</p>
+
+<pre><code>prep_partial_list:
+  cp Good/IntegerListInterface.class .
+  cp Good/IntegerListTester.class .
+  cp Partial/IntegerList.java .
+</code></pre>
+
+<p>Now, use make to set the environment for testing partial implementation of IntegerList</p>
+
+<pre><code>$ make prep_partial_list
+</code></pre>
+
+<p>And run the Tester:</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<p>This will compile IntegerList.java and run IntegerListester.</p>
+
+<p>Makefiles contain dependency information, and make will run commands for a target only if its dependencies are newer, or if the target doesn’t exist. Thus if you do not change IntegerList.java and run make test a recompilation of IntegerList.java is not needed and will not be done. Try it!</p>
+
+<p>Make note of the errors and let's resolve them.</p>
+
+<h1 id="goalfixisempty">Goal: Fix isEmpty()</h1><hr id="hrline">
+
+<p>Open IntegerList.java and look for the isEmpty function. isEmpty should return true if the size of the list is zero. Your task is to fix the current implementation. To determine that you have fixed it, you should only get two test cases that fail. Hint: Use the size() method. When you fix the method run this in terminal:</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<p><em>Two of the test cases should still be failing</em>. If you have any more than that, please go back and fix any issues.</p>
+
+<h1 id="goalfixremoverange">Goal: Fix removeRange()</h1><hr id="hrline">
+
+<p>The function removeRange(...) in IntegerList.java has these requirements</p>
+
+<p>a. removeRange takes two arguments and removes elements whose index is between fromIndex (inclusive) and toIndex (exclusive). (Hint: you can use throw new IllegalArgumentException() ).</p>
+
+<p>b. if fromIndex &gt; toIndex then the method should throw IllegalArgumentException</p>
+
+<p>c. If either index is out of bounds, throw an IndexOutOfBoundsException</p>
+
+<p>d. if fromIndex is equal to toIndex, nothing should happen</p>
+
+<p><em>Hint: you can use remove() to make this happen</em></p>
+
+<p>Once you are confident you have made the necessary changes go the command line and call <code>make test</code> again.</p>
+
+<p>If there are no errors then you have completed IntegerList.java. Now copy the IntegerList.class and IntegerList.java files back into the folder Partial</p>
+
+<h3 id="question14canyouaddruletoyourmakefiletodothisforyou">Question 14: Can you add rule to your Makefile to do this for you?</h3>
+
+<h1 id="goalrunpartialintegertester">Goal: Run PartialIntegerTester</h1><hr id="hrline">
+
+<p>To run PartialIntegerListTester with your implementation of IntegerList you will have to update the Makefile by adding rules to automate the build. In the Makefile add a variable and two new rules, with appropriate dependencies and commands:</p>
+
+<ol>
+<li><p>New Variable: PARTIAL_CLASSES</p></li>
+
+<li><p>New Rule: prep<em>partial</em>tester</p></li>
+
+<li><p>New Rule: partial_test</p></li>
+</ol>
+
+<p>In your Makefile, write down the rule <strong>prep<em>partial</em>tester</strong> so it copies the following files into the current working directory:</p>
+
+<ul>
+<li><p>Partial/PartialIntegerListTester.java</p></li>
+
+<li><p>Good/IntegerListInterface.class</p></li>
+
+<li><p>Partial/IntegerList.java</p></li>
+</ul>
+
+<p>Also, complete the <em>partial_test</em> rule and <em>PARTIAL_CLASSES</em> variable. The rule <strong>partial<em>test</em></strong><em> should have <strong>PARTIAL CLASSES</strong> for its dependency and it should run the PartialIntegerListTester, similar to how the rule <strong>test</strong> runs IntegerListTester. The variable <strong>PARTIAL</strong></em><strong>CLASSES</strong> should be similar to the variable <strong>CLASSES</strong>, containing the .class files that are required to run your PartialIntegerListTester rather than for the IntegerListTester.</p>
+
+<p>After completing these changes, run the following:</p>
+
+<pre><code>$ make prep_partial_tester
+$ make partial_test
+</code></pre>
+
+<p>As you've noticed, we failed test cases :(</p>
+
+<p>Go ahead and open <strong>Partial/PartialIntegerListTester.java</strong> and write the two unit tests <strong>testSet()</strong> and <strong>testGet()</strong>. You should handle cases such as exceptions and corner cases. With each update to the tester, you can use the make commands to quickly run your tests.</p>
+
+<p><strong>Make sure all tests pass before moving on.</strong></p>
+
+<p>&nbsp;
+Now, add a new rule to your Makefile: <strong>prep<em>bad</em>partial_tester:</strong></p>
+
+<p>The rule <strong>prep<em>bad</em>partial_tester</strong> should copy the following files in the current working directory</p>
+
+<ul>
+<li><p>Partial/PartialIntegerListTester.java</p></li>
+
+<li><p>Bad/IntegerList.class</p></li>
+
+<li><p>Good/IntegerListInterface.class</p></li>
+</ul>
+
+<p>Now run the following:</p>
+
+<pre><code>$ make prep_bad_partial_tester
+$ make partial_test
+</code></pre>
+
+<p>Is your PartialIntegerListTester good enough? If it failed the Bad implementation of IntegerList, that is good. 
+If it did not, then you might want to make sure that your PartialIntegerListTester tests more cases.</p>
+
+<p>Now, Use <strong>PartialIntegerListTester</strong> on the <strong>good</strong> implementation of <strong>IntegerList</strong>.</p>
+
+<p>The rule <strong>prep<em>good</em>partial_tester</strong> should copy the following files into the current working directory:</p>
+
+<ul>
+<li><p>Partial/PartialIntegerListTester.java</p></li>
+
+<li><p>Good/IntegerList.class</p></li>
+
+<li><p>Good/IntegerListInterface.class</p></li>
+</ul>
+
+<p>Now use make to run your new rule, and verify partial_test works. All tests should pass!</p>
+
+<h1 id="checkoff">Checkoff!</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ul>
+<li>Show that "ANumTester" does the following:
+
+
+<ul>
+<li>ANumTester passes GoodANum/ANum.class</li>
+
+<li>ANumTester fails BadANum1/ANum.class</li>
+
+<li>ANumTester fails BadANum2/ANum.class</li>
+
+<li>ANumTester fails BadANum3/ANum.class</li>
+
+<li>ANumTester fails BadANum4/ANum.class</li></ul>
+</li>
+
+<li>Correct implementation of isEmpty() and removeRange() in IntegerList.java</li>
+
+<li>Working implementation of testSet() and testGet() in PartialIntegerListTester.java </li>
+
+<li>Updated Makefile with the new rules added </li>
+
+<li>Lab 4 README file with all 14 questions answered</li>
+</ul></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 4_ JUnit and Makefiles_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 4_ JUnit and Makefiles_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 4_ JUnit and Makefiles_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 4_ JUnit and Makefiles_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 4_ JUnit and Makefiles_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

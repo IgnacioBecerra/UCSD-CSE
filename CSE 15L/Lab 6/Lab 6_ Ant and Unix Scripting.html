@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 6_ Ant and Unix Scripting_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 6_ Ant and Unix Scripting_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 6_ Ant and Unix Scripting_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 6_ Ant and Unix Scripting_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 6: Ant and Unix Scripting</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#lab6antandunixscripting">Lab 6: Ant and Unix Scripting</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#sectionaantbuildtool">Section A: Ant Build Tool</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#workingwithbuildxml">Working with build.xml</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#sectionbunixscripting">Section B: Unix Scripting</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#goallearnaboutunixfunctions">Goal: Learn about Unix Functions</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#goalpracticeunixscripting">Goal: Practice Unix Scripting</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#goalunixcommandstoppingtracerouteuptimesleep">Goal: Unix Commands top, ping, traceroute, uptime, sleep</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#goallearnevenmoreunixcommands">Goal: Learn even more Unix Commands</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab6_sbfgkf/index.html#checkoffcriteria">Checkoff Criteria</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab6antandunixscripting">Lab 6: Ant and Unix Scripting</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has only one component: the lab exercise.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+      For the lab quiz next week that will test the material you learn today, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="sectionaantbuildtool">Section A: Ant Build Tool</h1><hr id="hrline">
+
+<p>Section A of this lab will give you a hands on training on Ant Build Tool. Apache Ant is a Java library and command-line tool whose mission is to drive processes described in build files as targets and extension points dependent upon each other. The main known usage of Ant is the build of Java applications. Ant supplies a number of built-in tasks allowing to compile, assemble, test and run Java applications. Ant can also be used effectively to build non Java applications, for instance C or C++ applications. More generally, Ant can be used to pilot any type of process which can be described in terms of targets and tasks. Ant is written in Java.</p>
+
+<p>Apache Ant is a software tool for <a href="http://en.wikipedia.org/wiki/Build_automation">automating software build</a> processes. It is similar to <a href="http://en.wikipedia.org/wiki/Make_(software)">Make</a> but is implemented using the <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java</a> language, requires the Java platform, and is best suited to building Java projects. The most immediately noticeable difference between Ant and Make is that Ant uses <a href="http://en.wikipedia.org/wiki/XML">XML</a> to describe the build process and its dependencies, whereas Make uses <a href="http://en.wikipedia.org/wiki/Makefile#Makefiles">Makefile format</a>. By default the XML file is named build.xml</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Apache_Ant">http://en.wikipedia.org/wiki/Apache_Ant</a></p>
+
+<h2 id="setup">Setup:</h2>
+
+<p>For section A, we will use the java files of Tetris Project:</p>
+
+<pre><code>$ mkdir Lab6
+$ cd Lab6
+$ mkdir sectionA
+$ cd sectionA
+$ cp -r ~/../public/Lab6/Tetris ./Tetris
+</code></pre>
+
+<ol>
+<li><p>Now open, Eclipse from the terminal (<code>eclipse &amp;</code>). It may take some time to open. When it does open, you might see a gray window. Eclipse is setting up and loading, so please be patient. Once it opens, make sure you are currently in the Java perspective: (Windows =&gt; Open Perspective =&gt; Other =&gt; Java) </p></li>
+
+<li><p>File =&gt; New =&gt; Project =&gt; Java Project </p></li>
+
+<li><p>Define the project name "Lab6AntProject" </p></li>
+
+<li><p>Click "Yes" if you are asked to open Java Perspective </p></li>
+
+<li><p>Drag all Java files from ~/Lab6/sectionA/Tetris/src folder to src folder under Project "Lab6AntProject" </p></li>
+
+<li><p>Select "Copy files" when prompted </p></li>
+
+<li><p>Right click on <strong>Main.java</strong> =&gt; Run as =&gt; Java Application; ensure that the game opens without errors </p></li>
+
+<li><p>Right click on project name “Lab6AntProject” =&gt; New =&gt; Other =&gt; Type ‘xml’ =&gt;Select “XML File” 
+File Name: build.xml</p></li>
+</ol>
+
+<p>In build.xml file, you can define 'tasks' that you want to automate. One task could depend on another task. A short tutorial on Ant is available at <a href="http://ant.apache.org/manual/index.html">http://ant.apache.org/manual/index.html</a></p>
+
+<p>Take a look at the sample build.xml on <a href="http://en.wikipedia.org/wiki/Apache_Ant">http://en.wikipedia.org/wiki/Apache_Ant</a>. You will write a similar build.xml file. Note how first the project name is defined, followed by several Ant tasks that start with keyword <strong>target</strong></p>
+
+<h1 id="workingwithbuildxml">Working with build.xml</h1><hr id="hrline">
+
+<p><strong>Step 0</strong>: Notice that Eclipse provides an XML declaration line for you. The XML declaration is a processing instruction that identifies the document as being XML. All XML documents should begin with an <a href="http://xmlwriter.net/xml_guide/xml_declaration.shtml">XML declaration</a>. <strong>Note</strong>: You may need to change to the Source tab (from Design) on the bottom of your build.xml window in Eclipse.</p>
+
+<p><strong>Step 1</strong>: Define your project name in build.xml</p>
+
+<p>The second line in this xml file defines the project name and default task to be executed if no task is defined (in this case "compile"). In your build.xml, define your project using:</p>
+
+<pre><code>&lt;project name="Lab6AntProject" default="jar" basedir="."&gt;
+</code></pre>
+
+<p>Default task is 'jar' which you will define later. The base directory is defined as the current directory where build.xml resides.</p>
+
+<p><strong>Step 2</strong>: Define variables for directory names, and project names:</p>
+
+<pre><code>&lt;property name="src.dir" location="src" /&gt;
+&lt;property name="build.dir" location="build" /&gt;
+&lt;property name="project.name" value="Lab6AntProject" /&gt;
+</code></pre>
+
+<h2 id="question1howwouldyoudefineanewvariableforthedirectorypublic">Question 1: How would you define a new variable for the directory, public?</h2>
+
+<p>You can obtain the value of a variable by using <code>$</code> sign. For example: <code>${build.dir}</code> gives the build directory. You will be using these variable names instead of using directory names directly.</p>
+
+<p><strong>Step 3</strong>: Define "clean" task: This task deletes the build directory. Fill in the blank and use the code below for your build.xml clean task.</p>
+
+<pre><code>&lt;target name="clean"&gt;
+  &lt;delete dir="______________" /&gt;
+&lt;/target&gt;
+</code></pre>
+
+<p><strong><em>Step 4</em></strong>: Define "makedir" task: This task creates three directories: build, build/jars and build/classes under the current directory defined by basedir variable (when you defined the project name). Fill in the blank and use the code below:</p>
+
+<pre><code>&lt;target name="makedir"&gt;
+       &lt;mkdir dir="______________" /&gt;
+       &lt;mkdir dir="______________" /&gt;
+       &lt;mkdir dir="______________" /&gt;
+ &lt;/target&gt;
+</code></pre>
+
+<p><strong>Step 5</strong>: Define "compile" task: This task depends on clean and makedir tasks. This task compiles all the java files in source folder and copies the .class files into 'classes' directory that was made during the 'makedir' task. Fill in the blank and use the code below:</p>
+
+<pre><code>&lt;target name="compile" depends="______________,______________"&gt;
+       &lt;javac srcdir="______________" destdir="______________" compiler="javac1.7"/&gt;
+&lt;/target&gt;
+</code></pre>
+
+<h2 id="question2whatdoessrcdirstandforhowaboutdestdir">Question 2: What does srcdir stand for? How about destdir?</h2>
+
+<p><strong>Step 6</strong>: Define the "jar" task. The Java™ Archive (JAR) file format enables you to bundle multiple files into a single archive file. Typically a JAR file contains the class files and auxiliary resources associated with applets and applications (<a href="http://docs.oracle.com/javase/tutorial/deployment/jar/">http://docs.oracle.com/javase/tutorial/deployment/jar/</a>).</p>
+
+<p>This task depends on 'compile' task. The destination jar files should be stored in folder 'jars' under build directory. The filename should be <strong>yourPojectName.jar</strong>. In this task, you will bundle all class files into a single jar file (named after your project). Fill in the blank and use the code below:</p>
+
+<pre><code>&lt;target name="jar" depends="______________"&gt;
+       &lt;jar destfile="______________" basedir="______________" /&gt;
+&lt;/target&gt;
+</code></pre>
+
+<p>The last line of your build.xml in this case should mark end of current project:</p>
+
+<pre><code>&lt;/project&gt;
+</code></pre>
+
+<p><strong>Step 7</strong>: Once your build.xml is ready. Right click on it in the Project Explorer and click <strong>Run As-&gt;Ant Build</strong>. <strong>make sure you saved your changes first</strong>. The default task "jar" will run due to the default field in the project definition. It will trigger the tasks that it depends on, since this is the first run. You should get a message "Build Successful". Checkout the 'classes' folder and the jar file to ensure that all tasks were completed. Note: You may not see these folders in Eclipse. You can see the full path in the console output of Eclipse. Follow this path in the terminal to verify the build worked correctly. Find out how you can run individual tasks: clean, makedir, compile?</p>
+
+<h2 id="question3howwouldyoudeleteadirectorywiththepropertynameextras">Question 3: How would you delete a directory with the property name "extras"?</h2>
+
+<h1 id="sectionbunixscripting">Section B: Unix Scripting</h1><hr id="hrline">
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p>Unix scripts give us an easy way to automate writing a lot of commands into the terminal. Today we will learn the building blocks of Unix scripts. Scripts are very useful and are paramount to being efficient on the command line. Let's see how we can make a shell script by opening the command line and typing:</p>
+
+<pre><code>vim hello.sh
+</code></pre>
+
+<p>Go ahead and type this into <strong>hello.sh</strong></p>
+
+<pre><code>1 #!/bin/bash
+2 str="Hello World!"
+3 echo $str
+</code></pre>
+
+<p>While simple, this script introduces variables. Line 2 creates the variable str and assigns it the value "Hello World!". To grab the value of a unix variable we must use a "$". Without this, we cannot grab the value of the variable. You can save and exit your script. To run it we must change permissions to see that we do not have execute permissions. To fix this type the commands below. The second line is how we can run our shell scripts.</p>
+
+<pre><code>chmod u+x hello.sh
+./hello.sh
+</code></pre>
+
+<p>You should see the contents of <strong>str</strong> printed to the terminal. If you do not see this, go ahead and read the steps above again to make sure you followed all the directions. Next we'll move on to loops!</p>
+
+<h2 id="loops">Loops</h2>
+
+<p>Loops are essential for scaling our scripts to work on a large set of numbers, files, or to repeat a task many times. Type the following in a new shell script called <strong>loops.sh</strong>. It is important to note that you should only use ".." (2 periods only).</p>
+
+<pre><code>1 #!/bin/bash
+2 for i in {1..100}; do
+3       echo $i;
+4 done
+</code></pre>
+
+<p>Again, save and quit out of this script and write the following into the command line.</p>
+
+<pre><code>chmod u+x loops.sh
+./loops.sh
+</code></pre>
+
+<p>As expected, we see the numbers 1 through 100 printed. Change the script with the code below to see how while loops are used.</p>
+
+<pre><code>1 #!/bin/bash
+2 i=0
+3 while [ $i -lt 10 ]
+4 do
+5       echo $i;
+6       i=$((i+1))
+7 done
+</code></pre>
+
+<p>Before we break down the loop, let's take a look at lines 1 and 2. Scripts in bash must start with what we have at line 1. It indicates which interpeter is required to run what we have written below. The second line is how we can assign a value to a variable. notice, there is <strong>no space</strong> between 'i' and '0'. There are a couple things to notice about the loop syntax.</p>
+
+<ol>
+<li><p>"-lt" is a binary operator that evaluates to true if the left hand argument is less than the right side. Comparison operators are used in boolean expressions. The following table is a short explanation of some more expressions:</p>
+
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>expr1 -eq expr2</td>
+<td>Returns true if the expressions are equal</td>
+</tr>
+
+<tr>
+<td>expr1 -ne expr2</td>
+<td>Returns true if the expressions are not equal</td>
+</tr>
+
+<tr>
+<td>expr1 -gt expr2</td>
+<td>Returns true if expr1 is greater than expr2</td>
+</tr>
+
+<tr>
+<td>expr1 -ge expr2</td>
+<td>Returns true if expr1 is greater than or equal to</td>
+</tr>
+
+<tr>
+<td>expr1 -lt expr2</td>
+<td>Returns true if expr1 is less than expr2</td>
+</tr>
+
+<tr>
+<td>expr1 -le expr2</td>
+<td>Returns true if expr1 is less than or equal to expr2</td>
+</tr>
+
+<tr>
+<td>! expr1</td>
+<td>Negates the result of the expression</td>
+</tr>
+
+</tbody>
+</table></li>
+
+<li><p>Each bracket must have a space to the left and right of it.</p></li>
+
+<li><p>Line 6 is a one of many ways to increment a variable in bash.</p></li>
+</ol>
+
+<h2 id="ifelse">If/Else</h2>
+
+<p>Let's see how we can use If/Else statements to make our scripts even more powerful. Below we have the skeleton for an if/else and it is your job to add it to your loops.sh file. Modify the if/else to print <strong>foo</strong> if the number is less than 5, and <strong>bar</strong> if the number is greater than or equal to 5. There are easier ways to do this without an if/else, but a simple example is easy to learn from. <strong>Note: Make sure when you are copying this script, you use a tab to indent instead of spaces.</strong></p>
+
+<pre><code>if [ condition ]; then
+    whatever you want
+else
+    whatever you want    
+fi
+</code></pre>
+
+<p>Here are some things to note:</p>
+
+<ol>
+<li><p>The condition follows a similar format to that of the while loop</p></li>
+
+<li><p>Inside each conditon use echo to print foo or bar</p></li>
+
+<li><p>fi is used to indicate the end of a block</p></li>
+</ol>
+
+<p>Go ahead and add modify <code>loops.sh</code> to print foo for all even numbers, and bar for all odd numbers in the loop</p>
+
+<p><strong>Hint</strong>: $(( $i % 2 )) -eq 0 will be helpful for the condition</p>
+
+<h2 id="switchcasestatements">Switch/Case Statements</h2>
+
+<p>The switch statement is another powerful programming construct that can be used as a tool in bash. These work by looking through some number of different values a variable can hold and responding to these cases. Create a new script called <strong>farm.sh</strong> and enter the following into this file:</p>
+
+<pre><code>1 #!/bin/bash
+2 
+3 echo -n "Enter an animal: "
+4 read animal
+5
+6 case $animal in 
+7    "dog") echo "woof";;
+8    "cat") echo "meow";;
+9    *) echo $animal " is not on the farm";;
+10 esac
+</code></pre>
+
+<p>Here are some things to note:</p>
+
+<ol>
+<li>Lines 2 and 3 are prompting the user for input and reading the input.</li>
+
+<li>Line 6 is where our switch starts. Line 7 and 8 are possible values for the variable animal.</li>
+
+<li>Line 9 is a default, and will catch anything that does not match the cases above it.</li>
+
+<li>Line 10 ends the case statement we started on line 6.</li>
+
+<li>Take note of the ";;" (double semicolons) after each case statement.</li>
+</ol>
+
+<p>Your task is to add three more animals to the case statement. Once you complete this task, put the switch statement in a loop so it runs forever. This means you can input an animal and your program will output the appropriate response, and prompt the user for another input. Once this is complete move on to the next section.</p>
+
+<h1 id="goallearnaboutunixfunctions">Goal: Learn about Unix Functions</h1><hr id="hrline">
+
+<h2 id="bashfunctions">Bash Functions</h2>
+
+<p>As in almost any programming language, you can use functions to group pieces of code in a more logical way or practice the divine art of recursion.</p>
+
+<p>Declaring a function is just a matter of writing function <code>my_func { my_code }</code>.</p>
+
+<p>Calling a function is just like calling another program, you just write its name.</p>
+
+<p>Let's create a new bash file called <code>hello.sh</code></p>
+
+<h2 id="functions">Functions</h2>
+
+<pre><code>1 #!/bin/bash
+2 function hello {
+3   echo Hello
+4 }
+5 hello
+</code></pre>
+
+<p>On line 5, the function hello is run. You can verify this by running the script.</p>
+
+<h2 id="functionswithparameters">Functions with Parameters</h2>
+
+<pre><code>1  #!/bin/bash
+2  function hello {
+3    echo Hello!
+4  }
+5
+6  function helloWithParam {
+7    echo "Hello" $1
+8  }  
+9
+10 hello
+11 helloWithParam student
+</code></pre>
+
+<p>This script is almost identically to the previous one. The main difference is the Arguments, within functions, are treated in the same manner as arguments given to the script.</p>
+
+<h1 id="goalpracticeunixscripting">Goal: Practice Unix Scripting</h1><hr id="hrline">
+
+<h2 id="challenge1">Challenge 1</h2>
+
+<p>Using what you learned about Unix scripting, you will write your own bash script</p>
+
+<p>The program you will write will read in a person's age and name and then print out if the person can vote.</p>
+
+<p>Use the following as an example. Hint: you can use $1 for the first argument passed in by the user.</p>
+
+<pre><code>$ ./canVote Lubomir 21
+Hello Lubomir, you can vote!
+
+$ ./canVote Jim 7
+Hello Jim, you cannot vote yet.
+</code></pre>
+
+<h2 id="challenge2">Challenge 2</h2>
+
+<p>Now update the program to use read. Use the following as an example</p>
+
+<pre><code>$ ./canVote
+Name: Lubomir
+Age: 21
+Hello Lubomir, you can vote!
+
+$ ./canVote
+Name: Jim
+Age: 7
+Hello Jim, you cannot vote yet.
+</code></pre>
+
+<h2 id="challenge3">Challenge 3</h2>
+
+<p>Create a new bash script called <code>funWithLoops.sh</code> This program will read in 2 positive numbers and print out all the numbers between them. You need to handle a few errors. Keep in mind:</p>
+
+<ol>
+<li>Both numbers are positive </li>
+
+<li>The numbers are unique </li>
+
+<li>The first number is less than the second</li>
+
+<li>The loop is inclusive</li>
+</ol>
+
+<pre><code>$ ./funWithLoops 1 5
+1
+2
+3
+4
+5
+
+$ ./funWithLoops 5 3
+Error: please make sure the first number is smaller than the second
+</code></pre>
+
+<p>Please complete all three challenges before moving on.</p>
+
+<h1 id="goalunixcommandstoppingtracerouteuptimesleep">Goal: Unix Commands top, ping, traceroute, uptime, sleep</h1><hr id="hrline">
+
+<p>In this section we will be learning the unix commands <code>top, ping, traceroute, uptime, sleep</code></p>
+
+<h2 id="top">top</h2>
+
+<p>The top command is used to see what processes are running on a server or machine. It can be run from the terminal by typing:</p>
+
+<pre><code>$ top
+</code></pre>
+
+<p>You will see various system usage information. You will also see who is running what tasks and how many resources they are using. Additionally, at the top you will see total system usage. Top is invaluable for system management and has many options to let you access a lot of data quickly. You can type <strong>man top</strong> to see how you can sort by memory, cpu, time, and many other fields.</p>
+
+<h2 id="ping">ping</h2>
+
+<p>The ping command is used to check if a host (or website) is up.</p>
+
+<pre><code>$ ping facebook.com
+</code></pre>
+
+<p>You are now pinging facebook and it up (hopefully). You should see "64 bytes from...." meaning that facebook is sending back data. Go ahead and try this on different websites, and try one that is not a website to see what the error message is. You can stop pinging a server with control + C</p>
+
+<p>As usual, <strong>man ping</strong> will give you more information about this command.</p>
+
+<h2 id="traceroute">traceroute</h2>
+
+<p>traceroute is used to see what each packet passes through on its final destination. It will trace the route for you (get it).</p>
+
+<pre><code>$ traceroute yahoo.com
+</code></pre>
+
+<p>This is useful to see where your packets are going and for potential debugging of networked systems. Additionally, it gives you information about each step of the way including that gateway's ip address, and the time spent at that gateway. As usual, more information about traceroute can be found by typing <strong>man traceroute</strong>.</p>
+
+<h2 id="uptime">uptime</h2>
+
+<p>The uptime command is used to give you various usage statistics. This can be useful in cases where ieng6 is very slow and you now have a tool to pinpoint the problem. Ideally, uptime should report numbers that are relatively low, (normally less than 3).</p>
+
+<pre><code>$ uptime
+</code></pre>
+
+<p>You should see the current time, how long the system has been up, the number of users, and the load average of the system over the last 1, 5, and 15 minutes. You may notice that this information is available through top as well.</p>
+
+<h2 id="sleep">sleep</h2>
+
+<p>sleep is a very simply command, but very useful for shell scripts. The purpose of the sleep command is to do nothing! You can call using the line below, replacing seconds with some number. Use a small number so you don't waste too much time.</p>
+
+<pre><code>$ sleep [seconds]
+</code></pre>
+
+<p>Often times your shell script will need some delay or you may need to wait for some task to happen. Another use case is perhaps you perform some task, like mail, in a loop, but sending a few hundred emails simultaneously will overwhelm your system. You could sleep for 1 second after every 50 iterations and ensure your system does not have to send too many emails at any given time.</p>
+
+<h1 id="goallearnevenmoreunixcommands">Goal: Learn even more Unix Commands</h1><hr id="hrline">
+
+<p>If you are finished with the lab, please follow this <a href="http://www.tutorialspoint.com/unix/unix-regular-expressions.htm">link</a>. Do as much of it as you can in the remaining lab time.</p>
+
+<h2 id="question4whatistheuseofthesespecialsymbolsinregularexpressiondand">Question 4: What is the use of these special symbols in regular expression: <code>^</code>, <code>$</code>, <code>.</code> and <code>*</code>?</h2>
+
+<h2 id="question5howdoyoumakeseddeletethefirstlineofafileandprinttherestofthefile">Question 5: How do you make <code>sed</code> delete the first line of a file and print the rest of the file?</h2>
+
+<h2 id="question6writeaunixcommandusingcatandsedthatfindsallthelinesstartingwithalphaandthendeletesthem">Question 6: Write a UNIX command using <code>cat</code> and <code>sed</code> that finds all the lines starting with "alpha" and then deletes them.</h2>
+
+<h2 id="question7writewhatthisregularexpressionmatchestthe">Question 7: Write what this regular expression matches: <code>/[tT]he/</code></h2>
+
+<h2 id="question8writewhatthisregularexpressionmatchesd">Question 8: Write what this regular expression matches: <code>/^$/</code></h2>
+
+<p>You are now done with this lab!</p>
+
+<h1 id="checkoffcriteria">Checkoff Criteria</h1><hr id="hrline">
+
+<ul>
+<li>Show your completed challenges</li>
+
+<li>Show your README with the completed 8 questions</li>
+</ul></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 6_ Ant and Unix Scripting_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 6_ Ant and Unix Scripting_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 6_ Ant and Unix Scripting_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 6_ Ant and Unix Scripting_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 6_ Ant and Unix Scripting_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

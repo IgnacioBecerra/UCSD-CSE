@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 1_ Unix and Vim_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 1_ Unix and Vim_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 1_ Unix and Vim_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 1_ Unix and Vim_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 1: Unix and Vim</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#lab1unixandvim">Lab 1: Unix and Vim</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#welcome">Welcome!!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#anintroductiontounix">An Introduction to Unix</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#usingtheshell">Using the shell</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalgetinformationaboutthecurrentuser">Goal: Get information about the current user</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalgetthefullpathofthecurrentdirectory">Goal: Get the full path of the current directory</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalviewthecontentsofadirectory">Goal: View the contents of a directory</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalviewthecontentsofaspecifieddirectory">Goal: View the contents of a specified directory</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalviewthecontentsofaspecifieddirectoryinmoredetail">Goal: View the contents of a specified directory in more detail</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalgetmoreinformationonhowtouseacommand">Goal: Get more information on how to use a command</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalcreatemoveandcopyfiles">Goal: Create, move, and copy files</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#anintroductiontovim">An Introduction to Vim</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalopeningandclosingvim">Goal: Opening and Closing Vim</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goaladdingtexttoafileusingvim">Goal: Adding text to a file using Vim</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalnavigationandmovementcommands">Goal: Navigation and movement commands</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#goalmanipulatingtextwhilein__normalmode__withactioncommands">Goal: Manipulating text while in <strong>normal mode</strong> with action commands</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab1_asfkdj/index.html#checkoff">Checkoff</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab1unixandvim">Lab 1: Unix and Vim</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has only one component: the lab exercise.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+      Homework due next week is the material you learn today, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="welcome">Welcome!!</h1><hr id="hrline">
+
+<p>Before we begin this lab, please thoroughly read through the "Lab 0: General Lab Guide!" found <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab0_general">here</a>. This is your guide to navigating all labs and making sure you get the most out of every lab we provide (and all the credit you deserve as well!).</p>
+
+<p>For this lab, please record the answers to all questions on the same paper you have used to record your answers from Lab 0. This paper will be used for the checkoff at the end of this lab.</p>
+
+<h1 id="anintroductiontounix">An Introduction to Unix</h1><hr id="hrline">
+
+<p>Unix is a family of operating systems that share a common philosophy and follow
+a set of standards. The operating system with the largest install base that
+meets these standards (the Single UNIX Specifications) is Apple's OS X. Linux is
+a popular clone of Unix that is largely compliant with these standards and follows
+the same philosophies as Unix.</p>
+
+<p>Nearly all of what will be learned in this course will be applicable to both OS X
+and all types of Linux systems although the lab computers are running CentOS a
+distribution of Linux. One characteristic of the Unix philosophy is the idea that
+programs should be small and focused, accomplishing a single task well, then
+through a command-line interpreter (a shell) we can weave these programs together
+to accomplish more complex tasks.</p>
+
+<blockquote>
+  <p>"...the idea that the power of a system comes more from the relationships among
+  programs than from the programs themselves". - The Unix Programming
+  Environment</p>
+</blockquote>
+
+<p>These philosophies make the system robust, flexible and extensible while
+reducing complexity of any single program. To begin we'll familiarize ourselves
+with a command prompt, and learn some basic commands to help give us the context of
+our shell and the ability to perform basic file operations that most of us are
+probably used to doing in a graphical program such as Finder or Windows Explorer.</p>
+
+<hr>
+
+<h1 id="usingtheshell">Using the shell</h1><hr id="hrline">
+
+<p>The shell is a command line interpreter that provides the user interface to the
+operating system.
+The shell we will be using in these labs is <strong>bash</strong> (<strong>B</strong>ourne-<strong>a</strong>gain <strong>sh</strong>ell), however
+other variations do exist. Login to a workstation using your CSE 15L course
+account, named "cs15xyz" where yz are specific to each student. Afterwards, right
+click on the desktop and click 'Open in terminal'.
+The bash shell will prompt you for input with
+the aptly named <strong>command prompt</strong>, or just <strong>prompt</strong>. The <strong>prompt</strong> is
+displayed when the shell is ready for the user to input another command. A
+prompt typically contains information of the current context
+and can look something like this:</p>
+
+<pre><code>[cs15x@ieng6-247]:~:512$
+</code></pre>
+
+<p>Make sure your terminal looks like the one below. If not, go ahead and type in 
+<code>cd Desktop</code> and hit enter.</p>
+
+<pre><code>[cs15x@ieng6-247]:Desktop:512$
+</code></pre>
+
+<p>So what does this prompt mean? The first portion, <em>cs15x</em>, is the name of the user
+account we are currently using. The next portion, <em>@ieng6-247</em>, is the @ symbol
+followed by name of the computer or server where you are logged in.
+The next portion, <em>Desktop</em>, is the name of the current working
+directory or folder.  The next portion, <em>512</em>, is the count of how many commands
+have been entered so far.  Finally, the <em>$</em> is the prompt symbol indicating the
+user may enter a command.  Please note that the prompt is customizable and all
+information present in this prompt may not be in everyone's customizations. This
+brings us to our first task: what is the name of account are we using?</p>
+
+<h1 id="goalgetinformationaboutthecurrentuser">Goal: Get information about the current user</h1><hr id="hrline">
+
+<p>To achieve this goal we will type a command into the shell. This is the way a
+user asks the computer to run a program.  Each command is a single word, the
+name of the program that runs to execute that command.
+The specific command to determine what user we are is <code>whoami</code>.
+Type <code>whoami</code> into the prompt so it looks like this:</p>
+
+<pre><code>[cs15x@ieng6-247]:Desktop:514$ whoami
+</code></pre>
+
+<p>With the command entered into the prompt you need to press the Enter/Return key to
+execute the command, resulting in the desired output.</p>
+
+<h3 id="question1whatisthenameoftheaccountdisplayed">Question 1: What is the name of the account displayed?</h3>
+
+<p>Excellent! You were able to print out the user's account name just like we wanted.</p>
+
+<p>Using Linux many ways often exist to produce similar information.  A similar
+command to whoami is the who command used to give information about who is using
+the computer.  A single word alone as a command may be all you need, but some
+commands are capable of producing more detailed output when using command line
+arguments and/or command line options and optionally arguments to those options.</p>
+
+<h3 id="question2whatisthedifferenceintheoutputofwhowhenusedasasinglewordcommandandwhenusedwiththetwocommandlineargumentsami">Question 2:  What is the difference in the output of <code>who</code> when used as a single word command and when used with the two command line arguments am i?</h3>
+
+<p><strong>Hint</strong>:  The full command line is:  <code>who am i</code></p>
+
+<p><strong>Extra</strong>:  Try the <code>w</code> command and the <code>id</code> command.</p>
+
+<p>To continue our analysis of the <strong>prompt</strong> we'll look at the word between the colons,
+<em>Desktop</em>. This word is the name of the current directory, often called a folder
+in graphical interfaces. Directories contain files and other directories
+composing a tree like structure that creates the overall filesystem. That being
+said just having the name of the directory can be insufficient. What if we want
+to know exactly where and what folder we're currently in the context of?</p>
+
+<h1 id="goalgetthefullpathofthecurrentdirectory">Goal: Get the full path of the current directory</h1><hr id="hrline">
+
+<p>To do this we will again use a command: <code>pwd</code>, which stands for <strong>p</strong>rint
+<strong>w</strong>orking <strong>d</strong>irectory. A common convention is for command names to either
+describe or be an acronym for their functionality. Let's try it out! Type <code>pwd</code>
+into the command prompt.</p>
+
+<h3 id="question3whatisthenameofyourcurrentworkingdirectory">Question 3: What is the name of your current working directory?</h3>
+
+<p>The output given is formatted as a <strong>path</strong>, but how do we read it?
+Let's begin by noting the importance of <strong>/</strong>. A forward slash is used to
+separate the names of directories that create the <strong>path</strong>. Please
+note that a <strong>/</strong> at the beginning of a file means that it is an <strong>absolute
+path</strong>, or that the path begins from <strong>/</strong> (read as <strong>root</strong>). In other words,
+the path does not depend on the context of the current environment (the current
+directory, user, etc). If your current working directory is
+<em>/home/ieng6/ieng9/cs15x/cs15xyz/Desktop</em>, inside of the <strong>root</strong> directory,
+there is a directory called <em>home</em>, and inside of that directory is another
+called <em>ieng6</em> and so on until you reach the current directory <em>Desktop</em>.</p>
+
+<p>There's more than one way to open your terminal. Go ahead and close the terminal you currently have open, and let's reopen the terminal by clicking on
+<em>Applications</em> in the upper left and navigate to the <em>Terminal</em> under <em>System
+Tools</em>.</p>
+
+<h3 id="question4fromlookingatthepromptwhatisthenameofyourcurrentworkingdirectorynow">Question 4: From looking at the prompt, what is the name of your current working directory now?</h3>
+
+<p>Now, check your current directory using <code>pwd</code> again.</p>
+
+<p>As you can see the name displayed in the prompt, <strong>~</strong>, doesn't match the one
+that <code>pwd</code> produced.</p>
+
+<h3 id="question5whatcanyoudeducefromthecurrentworkingdirectoryasdisplayedinyourpromptandasdisplayedbypwd">Question 5: What can you deduce from the current working directory as displayed in your prompt and as displayed by <code>pwd</code>?</h3>
+
+<p>Your current directory is your <strong>home</strong> directory, or the default directory where
+a shell will start. The directory's name will nearly always match the username
+and is the point at which the user's files begin. Configuration files and other
+user specific files and directories are all located in this folder, the user's
+<strong>home</strong>. The <strong>~</strong> (a tilde) represents the current user's home directory.</p>
+
+<p>Now that we have a pretty good understanding of where we are, and the overall
+structure of the filesystem let's get an idea of what files and directories are
+around us. In a graphical interface we would likely have a list or grid of icons
+representing the files and directories in the current directory. How can we get
+the same information on the command line?</p>
+
+<h1 id="goalviewthecontentsofadirectory">Goal: View the contents of a directory</h1><hr id="hrline">
+
+<p>This time we're going to use the command <code>ls</code> to <strong>l</strong>i<strong>s</strong>t the contents of a
+directory.</p>
+
+<h3 id="question6fromusingthelscommandhowmanyfilesareinyourhomedirectory">Question 6: From using the <code>ls</code> command, how many files are in your home directory?</h3>
+
+<p>How did the <code>ls</code> command know to give us the current directory's contents? Many
+commands are context sensitive, meaning that they will use the current directory
+in the context of the results displayed. In this case, <code>ls</code> will default to showing
+the current directory. Let's try and get the contents of the <em>Desktop</em> folder.</p>
+
+<h1 id="goalviewthecontentsofaspecifieddirectory">Goal: View the contents of a specified directory</h1><hr id="hrline">
+
+<p>To achieve this we're going to supply the <code>ls</code> command with <strong>command line
+arguments</strong>. The <strong>command line arguments</strong> are a space separated list of
+words following the command name. In this case you need to add the name
+of the desired directory to the <code>ls</code> command.</p>
+
+<h3 id="question7fromusingthelscommandwiththedesktopcommandlineargumenthowmanyfilesareinyourdesktopdirectory">Question 7: From using the ls command with the <em>Desktop</em> command line argument, how many files are in your <em>Desktop</em> directory?</h3>
+
+<p>If you execute this command you might not get any output, and the next prompt is
+immediately after the previous command. Don't worry! Nothing went wrong, there's
+just nothing in the <em>Desktop</em> directory yet. The <code>ls</code> command will append the
+given directory name to the current directory's path to construct a full path so
+that it can display the contents. That is, the path depends on the current
+context making it a <strong>relative path</strong>, as opposed to an <strong>absolute path</strong>. If we
+supply <code>ls</code> with an <strong>absolute path</strong> instead we can get the same results
+without relying on the current context. Let's re-write the command using an
+<strong>absolute path</strong>.</p>
+
+<h3 id="question8whatisthecompletelscommandtolistthecontentsofyourdesktopdirectoryusingthe__absolutepath__">Question 8: What is the complete <code>ls</code> command to list the contents of your <em>Desktop</em> directory using the <strong>absolute path</strong>?</h3>
+
+<p>Certainly the lack of output can be rather confusing. How can we tell
+the <code>ls</code> command to be a little bit more explicit with the output it gives us?</p>
+
+<h1 id="goalviewthecontentsofaspecifieddirectoryinmoredetail">Goal: View the contents of a specified directory in more detail</h1><hr id="hrline">
+
+<p>In addition to <strong>command line arguments</strong>, most commands can also take <strong>option flags</strong>.
+Typically, the convention for <strong>option flags</strong> is a dash followed by one or more letters
+representing each option to be enabled. In this case we want to turn on the <strong>l</strong>
+flag for <code>ls</code>, telling it to use <strong>l</strong>ong formatting. The final command will look like this:</p>
+
+<pre><code>[cs15x@ieng6-247]:~:54$ ls -l Desktop
+</code></pre>
+
+<p>This time the <code>ls</code> command explicitly states that the total size of the files
+in the directory (in kB), rather than giving no output!</p>
+
+<h3 id="question9whatisthefulllscommandlinetolistthecontentsofyour__home__directoryusingthe__absolutepath__">Question 9: What is the full <code>ls</code> command line to list the contents of your <strong>home</strong> directory using the <strong>absolute path</strong>?</h3>
+
+<pre><code>total 32
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Desktop
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Documents
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Downloads
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Music
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Pictures
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Public
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Templates
+drwxr-sr-x 2 cs15x cs15x 4096 Dec 23 01:30 Videos
+</code></pre>
+
+<p>In addition to the name of each file or
+directory we also have other information such as file permissions, ownership,
+filesize, timestamps, etc. Please note that each command reads the
+<strong>command line arguments</strong> in a manner specific to that command. Where can we find
+information about the usage and syntax for <strong>command line arguments</strong> of a
+specific command?</p>
+
+<h1 id="goalgetmoreinformationonhowtouseacommand">Goal: Get more information on how to use a command</h1><hr id="hrline">
+
+<p>There are two main ways to ways to get information about a command from within
+the shell: by passing a help flag to the command and an external command <code>man</code>.
+First we'll try getting help information from the command itself. Most commands will
+respond to a <em>--help</em> <strong>command line option</strong>. If a command is issued
+with incorrect syntax the help information, or a message explaining how to get
+the help information will be printed.</p>
+
+<h3 id="question10what__optionflag__canyoupasstolstogethelpinformation">Question 10: What <strong>option flag</strong> can you pass to <code>ls</code> to get help information?</h3>
+
+<p>Depending on the complexity of the command in question, getting all help
+information printed directly to the terminal can be inconvenient, difficult to
+read and doesn't support searching the text to find what we're looking for.
+At this point in the lab you may start to notice that your terminal is beginning
+to become cluttered with previous output, to remedy this you can use the <code>clear</code>
+command to bring the <strong>prompt</strong> to the top of the screen. To get help
+information in an easier to read format we can use the <code>man</code> (short for <strong>man</strong>ual)
+command. We can get information about a command by passing the name of the
+command to <code>man</code> as a <strong>command line argument</strong>.</p>
+
+<h3 id="question11usingmanwhat__optionflag__canwepasstolstodisplayallfilesinthe__home__directory">Question 11: Using <code>man</code>, what <strong>option flag</strong> can we pass to <code>ls</code> to display <em>all</em> files in the <strong>home</strong> directory?</h3>
+
+<p>Note: You can search the <strong>man page</strong> by typing a <strong>/</strong> and entering the string
+to be located and then pushing the return key. To go to the next found instance of the
+search string, push the n key. To quit <code>man</code> push the q key.</p>
+
+<p>Upon successfully listing <em>all</em> contents of the <strong>home</strong> directory you will see
+something similar to the following:</p>
+
+<pre><code>.              .cshrc           .gvfs            .profile       Downloads
+..             .dbus            .imsettings.log  .pulse         Music
+.ICEauthority  .esd_auth        .kshrc           .pulse-cookie  Pictures
+.Xauthority    .gconf           .lesshst         .ssh           Public
+.abrt          .gconfd          .local           .vnc           Templates
+.bash_history  .gnome2          .locallogin      .zprofile      Videos
+.bash_profile  .gnote           .login           .zshenv
+.bashrc        .gnupg           .modulesbegenv   .zshrc
+.cache         .gstreamer-0.10  .nautilus        Desktop
+.config        .gtk-bookmarks   .procmailrc      Documents
+</code></pre>
+
+<p>Notice how many files and directories begin with a <strong>.</strong> this represents that
+they are hidden and will not be displayed when asking for the contents of a
+directory unless specifically asked for using the all option. Many of
+these hidden files are used as configuration files for various
+commands and programs on the system.</p>
+
+<p>Now that we're getting a little bit more familiar with <strong>option flags</strong> we can
+begin to use many of them at once to get the exact output we want.</p>
+
+<h3 id="question12usingmanwhat__optionflags__canwepasstolstodisplaythefilesinthe__home__directoryinalongformatsortedbytimestamps">Question 12: Using <code>man</code>, what <strong>option flags</strong> can we pass to <code>ls</code> to display the files in the <strong>home</strong> directory in a <em>long</em> format, sorted by <em>timestamps</em>?</h3>
+
+<p>The correct output will look similar to this:</p>
+
+<pre><code>total 32
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Videos
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Pictures
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Music
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Documents
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Public
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Templates
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Downloads
+drwxr-sr-x 2 cs15x24 cs15x 4096 Dec 23 01:30 Desktop
+</code></pre>
+
+<p>Up until this point we've been doing actions that read the current context and
+give us information about what is around us. How do we begin to create, move,
+copy, and manipulate the filesystem like we would during normal usage?</p>
+
+<h1 id="goalcreatemoveandcopyfiles">Goal: Create, move, and copy files</h1><hr id="hrline">
+
+<p>Let's stay organized and begin this section by creating a new
+directory where you will put all of the files used in this lab. To do this we
+can use the <code>mkdir</code> command, which stands for <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory. The
+<code>mkdir</code> command works similarly to <code>ls</code> in that we can pass a <strong>path</strong> as a
+<strong>command line argument</strong> to specify the directory to be made.</p>
+
+<h3 id="question13whatisthefullcommandtocreateanewdirectoryinyour__home__directorynamedlab1">Question 13: What is the full command to create a new directory in your <strong>home</strong> directory named <em>Lab1</em>?</h3>
+
+<p>Please note that successful execution of the <code>mkdir</code> command will not produce
+any ouput. How can we verify that desired directory was correctly created?</p>
+
+<h3 id="question14whatcommandcanbeusedtoverifythatthelab1directorywascreatedinyour__home__directory">Question 14: What command can be used to verify that the <em>Lab1</em> directory was created in your <strong>home</strong> directory?</h3>
+
+<p>Now that you have verified that your new directory has been correctly
+created, it will be useful to make that directory the current working
+directory so that its contents can be easily interacted with. To accomplish
+this we can use the <code>cd</code> command, which is an acronym for <strong>c</strong>hange
+<strong>d</strong>irectory. As is the trend with commands that interact with the filesystem
+we can provide a <strong>path</strong> as a <strong>command line argument</strong> to specify the directory
+we would like to change to.</p>
+
+<h3 id="question15whatisthefullcdcommandtomovetoournewlab1directory">Question 15: What is the full <code>cd</code> command to move to our new <em>Lab1</em> directory?</h3>
+
+<p>Upon successfully changing the current working directory to <em>Lab1</em> the <strong>bash
+prompt</strong> should now display the directory as such:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:98$
+</code></pre>
+
+<p>And the output of <code>pwd</code> should be similar to:</p>
+
+<pre><code>/home/linux/ieng6/cs15x/cs15x24/Lab1
+</code></pre>
+
+<h3 id="question16wheredoesthecdcommandgotowhengivennopathinthe__commandlinearguments__">Question 16: Where does the <code>cd</code> command go to when given no path in the <strong>command line arguments</strong>?</h3>
+
+<p>After issuing the <code>cd</code> command by itself, ensure that you're back inside of the
+<em>Lab1</em> directory using <code>pwd</code>, as shown above.</p>
+
+<p>While we're creating directories let's also cover how to remove a directory that
+was created on accident or is no longer needed. The <code>rmdir</code>, <strong>r</strong>e<strong>m</strong>ove
+<strong>dir</strong>ectory command is the complement to <code>mkdir</code> and works in the same fashion
+as <code>mkdir</code>. Let's test the <code>rmdir</code> command by making a new temporary directory
+called <em>deleteMe</em> within our <em>Lab1</em> directory. Verify that it exists with <code>ls</code>.
+Next remove the directory with the <code>rmdir</code> command.</p>
+
+<h3 id="question17whatarethecontentsofthelab1directoryafterremovingthedeletemedirectory">Question 17: What are the contents of the <em>Lab1</em> directory after removing the <em>deleteMe</em> directory?</h3>
+
+<p>Now that we know the commands for creating directories, we can begin looking
+into creating files. Unfortunately, no command's sole purpose is to create a new
+file and there are various ways to create new files, some of which don't involve
+using a command at all. For now, we'll use the <code>touch</code> command. Before you use
+the <code>touch</code> command to create a new file check the <strong>man page</strong> on this command.</p>
+
+<h3 id="question18whatistheactualpurposeofthetouchcommand">Question 18: What is the actual purpose of the <code>touch</code> command?</h3>
+
+<p>You may have also noticed in the man page that if the file argument given to
+<code>touch</code> does not exist it will be created empty.
+Use the <code>touch</code> command to create a new file in the <em>Lab1</em> directory named <em>temporary</em>.</p>
+
+<h3 id="question19whatisthefilesizeofthetemporaryfilecreatedwithtouch">Question 19: What is the <em>filesize</em> of the <em>temporary</em> file created with <code>touch</code>?</h3>
+
+<p>Let's try manipulating this newly created file. We can use the <code>mv</code> command to
+<strong>m</strong>o<strong>v</strong>e files or directories from one directory to another. The <code>mv</code>
+command takes two arguments: the path to a source file and the path to a
+destination file. First create a new directory inside of the <em>Lab1</em> directory
+called <em>names</em>. Then move the <em>temporary</em> file into <em>names</em> directory like so:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:204$ mv temporary names/
+</code></pre>
+
+<p><strong>Extra</strong>: Many times you will be passing paths to commands and typing the entire
+path can be tiring. In these cases you can use <strong>tab completion</strong>. <strong>Tab
+completion</strong> allows you to type part of the file or directory name and then push
+the tab key to autocomplete the rest of the name, allowing you to quickly and
+easily write pathnames. For example in the above command we could type <em>te</em> and
+push tab to complete the name to <em>temporary</em>.</p>
+
+<h3 id="question20whatisthenameofthetemporaryfileafterbeingmovedintothenamesdirectory">Question 20: What is the name of the <em>temporary</em> file after being moved into the <em>names</em> directory?</h3>
+
+<p>Notice that in the above <code>mv</code> command the destination path only contains a
+directory, in this case the source file will maintain its name after being
+moved. However, we can also specify a new name for the file in the destination
+path, allowing us to also use the <code>mv</code> command to rename files. Use <code>mv</code> to
+rename the <em>temporary</em> file now inside of the <em>names</em> directory to your name.</p>
+
+<h3 id="question21whatisthefullcommandusedtorenamethetemporaryfileinsideofthenamesdirectory">Question 21: What is the full command used to rename the <em>temporary</em> file inside of the <em>names</em> directory?</h3>
+
+<p>After renaming the <em>temporary</em> file the contents of the <em>names</em> directory should
+be similar to this:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:211$ ls names
+jordan
+</code></pre>
+
+<p>Where <em>jordan</em> is replaced with your name.
+Now let's create another file in the <em>names</em> directory with your partner's name.
+To achieve this we're going to use the <code>cp</code> command, which allows us to
+<strong>c</strong>o<strong>p</strong>y files. The <code>cp</code> command works in a very similar manner to <code>mv</code> in
+that it takes a source and destination path as arguments, the difference here is
+that the <code>cp</code> command will keep the original file as well. Using the <code>cp</code>
+command make a copy of the file named after you, named after your partner.</p>
+
+<p>The <em>names</em> directory should now look like this:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:218$ ls names/
+gary  jordan
+</code></pre>
+
+<p>Where <em>gary</em> and <em>jordan</em> are replaced with you and your partner's name.</p>
+
+<h3 id="question22whatisthefullcpcommandusedtoachievetheaboveresults">Question 22: What is the full <code>cp</code> command used to achieve the above results?</h3>
+
+<p>We can also use the <code>cp</code> command to copy directories as well. Let's make a copy
+of the <em>names</em> directory named <em>names.bak</em>. To make <code>cp</code> copy directories we
+need to pass the <em>-r</em> <strong>option</strong> so <code>cp</code> knows to copy <strong>r</strong>ecursively.
+The full command will look like this:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:226$ cp -r names/ names.bak
+</code></pre>
+
+<p>And the <em>names.bak</em> folder should contain both files just like the <em>names</em>
+folder:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:245$ ls names
+gary  jordan
+[cs15x@ieng6-202]:Lab1:246$ ls names.bak
+gary  jordan
+</code></pre>
+
+<p>Much like the <code>rmdir</code> command we can use the <code>rm</code> command to <strong>r</strong>e<strong>m</strong>ove
+files. The <code>rm</code> command takes one or many paths that are to be removed. Using
+the <code>rm</code> command, remove one of the files inside the <em>names</em> directory.</p>
+
+<h3 id="question23whatisthefullrmcommandusedtoremoveoneofthefiles">Question 23: What is the full <code>rm</code> command used to remove one of the files?</h3>
+
+<p>What if we wanted to remove the entire <em>names</em> directory and all of its
+contents? One might be tempted to try the <code>rmdir</code> command as we are trying to
+remove a directory.</p>
+
+<h3 id="question24whatdoesthermdircommandoutputifyoutrytoremovethenamesdirectorywhileitstillhasafileinit">Question 24: What does the <code>rmdir</code> command output if you try to remove the <em>names</em> directory while it still has a file in it?</h3>
+
+<p>It should now be clear that we cannot use the <code>rmdir</code> command to delete
+directories that still have contents inside of them. We'll actually need to use
+the <code>rm</code> command for this. Using the <code>rm</code> command remove the <em>names</em> directory
+and all of its contents.</p>
+
+<h3 id="question25what__option__needstobepassedtormforittorecursivelyremovethenamesdirectoryandallcontents">Question 25: What <strong>option</strong> needs to be passed to <code>rm</code> for it to <em>recursively</em> remove the <em>names</em> directory and all contents?</h3>
+
+<p>After removing the <em>names</em> directory we should now just be left with <em>names.bak</em>
+directory:</p>
+
+<pre><code>[cs15x@ieng6-202]:Lab1:255$ ls
+names.bak
+</code></pre>
+
+<p><strong>Extra</strong>: Using <code>rm</code> to recursively delete directories can be extremely dangerous,
+especially when paired with the <em>-f</em> option which will <strong>f</strong>orce the removal,
+bypassing some safety measures. You'll often seen 'troll' or 'joke' posts online
+that will tell new users to Unix to do things like <code>rm -rf /</code> (DO NOT DO THIS). 
+Such commands are extremely dangerous and can be destructive to a system. Please 
+be careful when getting help from the internet, if a command seems fishy double
+check its functionality before running it.</p>
+
+<p>We've now covered all of the basic filesystem manipulations via the command line
+and nearly anything you could do with a graphical interface such as Finder or
+Windows Explorer, you should now be able to do from the <strong>bash shell</strong>!</p>
+
+<h1 id="anintroductiontovim">An Introduction to Vim</h1><hr id="hrline">
+
+<p>In the second portion of the lab we'll be going over the basic usage of a text
+editing program named Vim. Vim stands for <strong>V</strong>i <strong>Im</strong>proved, Vi being
+the predecessor to <strong>Vim</strong>. To continue, Vi is a shortening of <strong>Vi</strong>sual as it is
+a visual editor. While we won't go into depth of the differences between Vi and
+Vim, the basic usage for both is the same and nearly all of what will be learned
+today is applicable to both. Before we go into the basic usage of Vim, let's
+discuss some of the motivations for using it. Basic knowledge and usage of Vim
+is a must know in the Unix world as it has become a standard text editor across
+many systems and knowing how to use Vi or Vim will come in handy if it's the
+only text editor available to you. Vim can run directly in the terminal
+without the need for a graphical interface we can use it while remotely logging
+into other systems where our editor choices may be limited. Even more
+important is Vim's power as a text editor, allowing a user to describe changes
+to a pieces of text as patterns and replicate the changes many times saving a
+lot of time.</p>
+
+<h1 id="goalopeningandclosingvim">Goal: Opening and Closing Vim</h1><hr id="hrline">
+
+<p>In comparison to other text editors you may be used to, Vim does
+not rely on the use of a mouse, and everything is done via the keyboard. While
+there are versions of Vim that have graphical interfaces (GVim, Macvim, etc.),
+they will not be the focus. That being said, using Vim is likely going to be
+very different from what you have used in the past, so be prepared to try
+something new!</p>
+
+<p>Before you begin using Vim, ensure that you're in your <em>Lab1</em> directory. To open
+Vim for the first time, simply issue the <code>vim</code> command.</p>
+
+<h3 id="question26accordingtothetextinthemiddleofthescreenhowcanyouexitvim">Question 26: According to the text in the middle of the screen, how can you exit Vim?</h3>
+
+<p>In addition to the text in the middle of the screen, there should be a column of
+tildes on the left side of the screen and a status bar on the bottom. In the
+upper left there should be a blinking square, this is the cursor which indicates
+the current position in the file.
+Lines that begin with a ~ represent that the line has no text. Now that we've opened Vim,
+how do we close it and get back to <strong>bash</strong>? First we need to understand the
+concept of Vim's <strong>modes</strong>. Vim separates tasks into separate modes to make full
+use of the keyboard, if all letters were bound to insert that letter into the
+document there wouldn't be any keys left for anything else! Over the course of
+the lab we'll go over four of Vim's <strong>modes</strong>: <strong>normal</strong> or <strong>command</strong> <strong>mode</strong>,
+<strong>insert mode</strong>, <strong>visual mode</strong>, and the <strong>command-line</strong> mode. By default Vim
+opens up in the <strong>normal mode</strong>, which is used for navigation and the
+manipulation of text by issuing commands to go with those movements. Generally
+speaking, you can return to the <strong>normal mode</strong> by hitting the Esc key. Next
+is the <strong>command-line mode</strong>, which is used for typing in various Vim commands.
+Please note that the <strong>command-line mode</strong> is not the same as the command line
+in <strong>bash</strong>. To enter the <strong>command-line mode</strong> hit the : (colon) key, followed
+by the command to be executed which will be displayed in the lower left hand
+corner. For now, we want to quit vim so we'll issue the quit editor command.
+The full sequence of keys to to exit is:</p>
+
+<pre><code>:quit
+</code></pre>
+
+<p>or for short:</p>
+
+<pre><code>:q
+</code></pre>
+
+<p>Great! We've gotten in and out of Vim. Next let's actually use it to add some
+text to a file.</p>
+
+<h1 id="goaladdingtexttoafileusingvim">Goal: Adding text to a file using Vim</h1><hr id="hrline">
+
+<p>Let's open Vim again, this time providing the command an argument, telling Vim
+which file to open. Use the filename <em>lab1.sh</em>.</p>
+
+<pre><code>vim lab1.sh
+</code></pre>
+
+<h3 id="question27whatmessageappearsinthelowerleftuponissuingtheabovecommand">Question 27: What message appears in the lower left upon issuing the above command?</h3>
+
+<p>Last time we opened Vim, we didn't tell it what file to opened so Vim defaulted
+to an unnamed <strong>buffer</strong>. A buffer is typically a file loaded into memory so
+that it can be edited, but there are also buffers not associated with files on
+disk. Generally, these buffers are for new files that do not exist on disk yet,
+but will once saved. To begin adding text to our new file, we need to activate
+the <strong>insert mode</strong> allowing us to manually add text to our file. To do so, hit
+the <strong>i</strong> key while in <strong>normal mode</strong> and type the following text:
+<strong>Note</strong>: Upon entering <strong>insert mode</strong> the lower left hand corner of the screen
+should say -- INSERT --.</p>
+
+<pre><code>#Entering insert mode allows you to type text.
+
+echo "Bash is great!"
+echo "I love vim almost as much as coconut water!"
+
+#TODO improve this script later
+</code></pre>
+
+<p>When you are finished typing, hit the Esc key to exit <strong>insert mode</strong>
+and return to the <strong>normal mode</strong>. Issuing the <strong>i</strong> command while in <strong>normal
+mode</strong> is only one of many ways to enter <strong>insert mode</strong>. More specifically,
+<strong>i</strong> will enter <strong>insert mode</strong> leaving the cursor where it currently
+is. Now that we have some text entered into our let's discuss how to navigate a
+file.</p>
+
+<h1 id="goalnavigationandmovementcommands">Goal: Navigation and movement commands</h1><hr id="hrline">
+
+<p>Vim uses a navigation scheme that will likely be new to you. While you can use
+the arrow keys to navigate this is counter productive because it will involve
+you moving your hand to and from the arrow keys. Please note that in in some
+configurations the arrow keys will not work for navigation. It's best to use the
+home row for your right hand, the keys: <strong>h</strong>, <strong>j</strong>, <strong>k</strong>, <strong>l</strong>. The <strong>h</strong>
+key will move the cursor left, <strong>j</strong> will move down, <strong>k</strong> will move up, and
+finally <strong>l</strong> will move to the right. These keybindings will take some time to
+get used to so take a few minutes to move around the file, when you feel
+comfortable continue on.</p>
+
+<p>These are the most basic movement commands and there are many extremely useful
+commands to facilitate navigating the file even more effectively. Next, test the
+following commands on your own: <strong>gg</strong> and <strong>G</strong>. Please note that Vim commands
+are case sensitive!</p>
+
+<h3 id="question28wheredothesecommandsmovethecursorto">Question 28: Where do these commands move the cursor to?</h3>
+
+<p>Next we'll take a look at two more useful movement commands: <strong>w</strong> and <strong>b</strong>.
+These two commands are pairs and will advance the cursor to the beginning of the
+next <strong>w</strong>ord or go <strong>b</strong>ack to the beginning of the previous word. Try using
+the <strong>w</strong> and <strong>b</strong> command to navigate the file.</p>
+
+<p>Now that we're familiar with a few movement commands let's discuss
+multipliers. Many movement commands will allow you multiply the movement by
+prefixing the command with a number. For example: <strong>3j</strong> to move three lines
+down or <strong>4b</strong> to move four words back. As you become more familiar with Vim and
+its movement commands you will be able to move to the desired location in a
+file much quicker than you would be able to if you had scrolled through the file
+and clicked on the location using the mouse. However, the behavior of a
+multiplier on some commands may not be so obvious. For example, <strong>5G</strong> will move
+you to the fifth line of the file, where as <strong>G</strong> by itself will move to the
+bottom of the file.</p>
+
+<p>Next let's discuss how to use commands that manipulate text in the buffer.</p>
+
+<h1 id="goalmanipulatingtextwhilein__normalmode__withactioncommands">Goal: Manipulating text while in <strong>normal mode</strong> with action commands</h1><hr id="hrline">
+
+<p>Vim provides many useful action commands while in <strong>normal mode</strong> to do complex
+manipulations of the text easily. A common task while coding might be needing to
+move the position of a line. Let's do that here by swapping the position of the
+two lines that begin with <em>echo</em>. To do so we'll use the <strong>dd</strong> action command
+which will <strong>d</strong>elete the current line the cursor is on and save it a register
+so that we can paste it later. Next navigate to where you want to <strong>p</strong>aste the line
+we deleted earlier with the <strong>p</strong> action command. If you mess up and the line
+ends up somewhere you didn't mean you can always undo the last change to the
+buffer with the <strong>u</strong> action command. Try rearranging the lines by using <strong>dd</strong>
+and then <strong>p</strong> or <strong>P</strong>.</p>
+
+<h3 id="question29whatisthedifferencebetween__p__and__p__">Question 29: What is the difference between <strong>p</strong> and <strong>P</strong>?</h3>
+
+<p>Another useful action command is <strong>yy</strong> which will <strong>y</strong>ank the current line and
+store it in a register much like <strong>dd</strong> will but instead keeps the original
+line. Try yanking and pasting one of the lines that begin with <em>echo</em>.</p>
+
+<p>Generally, repeating the letter that represents an action command will apply
+that action to the current line. However, we can combine movements with actions
+to apply the action on the exact portion of the text we want. Typically the
+action will be applied starting from the current cursor position and ending
+where the movement would go to. To practice this
+let's try combining movements with some of the actions we learned above.
+First we'll try yanking the entire file. We can think of the entire file as a
+range starting from <strong>gg</strong> and ending at <strong>G</strong>. So first we'll move to the
+beginning of the file by typing <strong>gg</strong>. Next we'll apply the yank command to the
+bottom of the file by typing <strong>yG</strong>. Finally, let's move to the bottom of the file
+and paste the yanked lines by typing <strong>Gp</strong>. Your file should now repeat twice!</p>
+
+<p>Let's learn one more action command and combine it with a movement. The <strong>c</strong>
+command will <strong>c</strong>hange the selection. Meaning, it will remove the selection and
+enter insert mode at the beginning of selection allowing you to replace it.
+Let's say we wanted to change the text inside the quote of this line:</p>
+
+<pre><code>echo "Bash is great!"
+</code></pre>
+
+<p>To begin, position your cursor so that it is over the capital B. Then apply the
+<strong>c</strong>hange command to the next <em>3 words</em>. Do this by being in normal mode and placing your cursor before the 3 words and then typing in <code>c3w</code>. You should now be in <strong>insert mode</strong>
+and can begin typing your new message! Don't forget to hit Esc when you're done
+to return to <strong>normal mode</strong>.</p>
+
+<h3 id="question30whatisthefullvimcommandtoachievetheabovechange">Question 30: What is the full Vim command to achieve the above change?</h3>
+
+<p>By now the power and flexibility of Vim should start to become apparent. Even
+complex manipulations can be broken down into patterns and combinations of
+actions and movements to easily accomplish the desired outcome. We've only scratched
+the surface of what Vim can do, so if you ever find yourself thinking, "There has to
+be a better way...", there almost certainly is! Try poking around online to see
+if you can find out how to do it efficiently!</p>
+
+<p>To end this lab, let's try quitting Vim again by issuing the quit command.
+You will see a message like the following:</p>
+
+<pre><code>E37: No write since last change (add ! to override)
+</code></pre>
+
+<p>That's right! We haven't talked about saving files with Vim. It's good to
+get into a habit of saving often! If Vim has detected any changes to the buffer
+since opening it, it won't allow you to quit. You must either save the file or
+add an ! to the end of the command telling Vim to explicitly quit without
+changes. We want to save so let's issue the write command:</p>
+
+<pre><code>:write
+</code></pre>
+
+<p>or for short</p>
+
+<pre><code>:w
+</code></pre>
+
+<p>This will open the <strong>command-line mode</strong> and issue the write command, writing
+the changes in the buffer to disk. After we have saved all of our changes we can
+quit Vim as before.</p>
+
+<p><strong>Note</strong>: We can combine the write and quit command like so:</p>
+
+<pre><code>:wq
+</code></pre>
+
+<p>This will save our file and then quit Vim all in one command!</p>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ol>
+<li>Lab 0's README</li>
+
+<li>Lab 1 README with the 30 questions above answered.</li>
+</ol></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 1_ Unix and Vim_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 1_ Unix and Vim_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 1_ Unix and Vim_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 1_ Unix and Vim_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 1_ Unix and Vim_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

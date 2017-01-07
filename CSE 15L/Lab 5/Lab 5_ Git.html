@@ -1,0 +1,2682 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 5_ Git_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 5_ Git_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 5_ Git_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 5_ Git_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 5: Git</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#lab5git">Lab 5: Git</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#welcome">Welcome!</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#setupgitsothatitisreadytowork">Set up git so that it is ready to work</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#setuplineendingpreferences">Setup Line Ending Preferences</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#moresetupgetthetutorialmaterialssetupandreadytorun">More Setup: Get the tutorial materials setup and ready to run.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcreateagitrepositoryfromscratch">Goal: create a git repository from scratch.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcheckthestatusoftherepository">Goal: Check the status of the repository</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalmonitorthestateoftheworkingdirectory">Goal: Monitor the state of the working directory</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalstagechangesforlatercommits">Goal: Stage changes for later commits</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#stagingandcommitting">Staging and Committing</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcommitchangestotherepository">Goal: Commit changes to the repository</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goallearnthatgitworkswithchangesnotfiles">Goal: Learn that git works with changes, not files.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalviewthehistoryoftheproject">Goal: View the history of the project.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalsetupaliasesandshortcutsforgitcommands">Goal: Setup aliases and shortcuts for git commands</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcheckoutanyprevioussnapshotintotheworkingdirectory">Goal: Checkout any previous snapshot into the working directory.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goaltagcommitswithnamesforfuturereference">Goal: Tag commits with names for future reference</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalundolocalchangesbeforestaging">Goal: Undo Local Changes (before staging)</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalundostagedchangesbeforecommitting">Goal: Undo Staged Changes (before committing)</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalundocommittedchanges">Goal: Undo Committed Changes</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalremovecommitsfromabranch">Goal: Remove Commits from a Branch</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalremovetheoopstag">Goal: Remove the oops tag</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalamendanexistingcommit">Goal: Amend an existing commit</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalmoveafilewithinarepository">Goal: Move a file within a repository.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goaladdamakefiletoourrepository">Goal: Add a Makefile to our repository</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#gitinternalsthegitdirectory">Git Internals: The.git directory</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#gitinternalsworkingdirectlywithgitobjects">Git Internals: Working directly with Git Objects</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcreatingabranchinarepository">Goal: Creating a Branch in a Repository</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalnavigatebetweenbranches">Goal: Navigate between Branches</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalhandlechangesinmaster">Goal: Handle Changes in Master</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalviewdivergingbranches">Goal: View Diverging Branches</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalmergetwodivergingbranchesintoasinglebranch">Goal: Merge two diverging branches into a single branch</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalcreatingaconflictingchangeinthemasterbranch">Goal: Creating a Conflicting Change in the Master Branch</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalresolveconflictsduringamerge">Goal: Resolve Conflicts during a Merge</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#rebasingvsmerging">Rebasing VS Merging</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalresetthegreetbranchtothepointbeforethefirstmerge">Goal: Reset the Greet Branch to the Point Before the First Merge</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#resettingthemasterbranchtobeforetheconflictingcommit">Resetting the Master Branch to before the Conflicting Commit</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalusetherebasingcommandinsteadofthemergecommand">Goal: Use the Rebasing command instead of the Merge command</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalmergegreetchangesbacktomaster">Goal: Merge greet changes back to master</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#setupgitlabaccounts">Set Up GitLab Accounts</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#addanewprojecttothegitserver">Add a New Project to the Git Server</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goaladdaremote">Goal: Add a Remote</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalpushachangetotheserver">Goal: Push a Change to the Server</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#addacollaborator">Add a Collaborator</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#clonearepository">Clone a Repository</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#goalpullachangefromtheserver">Goal: Pull a Change from the Server</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#checkoff">Checkoff</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab5_cxvkjf/index.html#references">References</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab5git">Lab 5: Git</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has two components: a lab exercise, and a quiz.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine.
+    </li>
+    <li>
+      For the lab quiz, you will work individually.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="welcome">Welcome!</h1><hr id="hrline">
+
+<p>GitHub is the largest code host on the planet with over 11.9 million repositories. GIT is a distributed revision control and source code management (SCM) system with an emphasis on speed.</p>
+
+<p>Gaining an understanding of its features opens to developers a new and liberating approach to source code management. The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand.</p>
+
+<h2 id="ashorthistoryofgit">A Short History of Git</h2>
+
+<p>Git began with a bit of creative destruction and fiery controversy. The Linux kernel is an open source software project of fairly large scope. For most of the lifetime of the Linux kernel maintenance (1991 to 2002), changes to the software were passed around as patches and archived files. In 2002, the Linux kernel project began using a proprietary DVCS system called BitKeeper.</p>
+
+<p>In 2005, the relationship between the community that developed the Linux kernel and the commercial company that developed BitKeeper broke down, and the tool's free-of-charge status was revoked. This prompted the Linux development community (and in particular Linus Torvalds, the creator of Linux) to develop their own tool based on some of the lessons they learned while using BitKeeper. Some of the goals of the new system were as follows:</p>
+
+<ul>
+<li>Speed</li>
+
+<li>Simple design</li>
+
+<li>Strong support for non-linear development (thousands of parallel branches)</li>
+
+<li>Fully distributed</li>
+</ul>
+
+<p>Able to handle large projects like the Linux kernel efficiently (speed and data size) Since its birth in 2005, Git has evolved and matured to be easy to use and yet retain these initial qualities. It's incredibly fast, it's very efficient with large projects, and it has an incredible branching system for non-linear development</p>
+
+<h1 id="setupgitsothatitisreadytowork">Set up git so that it is ready to work</h1><hr id="hrline">
+
+<h2 id="setupnameandemail">Setup Name and Email</h2>
+
+<p>If you have never used git before, you need to do some setup first. Run the following commands so that git knows your name and email. If you have git already setup, you can skip down to the line ending section.</p>
+
+<h4 id="execute">Execute:</h4>
+
+<pre><code>git config --global user.name "Your Name"
+git config --global user.email "your_email@whatever.com"
+</code></pre>
+
+<h1 id="setuplineendingpreferences">Setup Line Ending Preferences</h1><hr id="hrline">
+
+<h4 id="execute-1">Execute:</h4>
+
+<pre><code>git config --global core.autocrlf input
+git config --global core.safecrlf true
+</code></pre>
+
+<h1 id="moresetupgetthetutorialmaterialssetupandreadytorun">More Setup: Get the tutorial materials setup and ready to run.</h1><hr id="hrline">
+
+<h2 id="getthetutorialpackage">Get the Tutorial package.</h2>
+
+<p>Open a terminal. Using the command below, copy the following files to your home directory (it may take few seconds):</p>
+
+<p>Execute:</p>
+
+<pre><code>mkdir Lab5
+cp -r ~/../public/Lab5/* ./Lab5
+</code></pre>
+
+<h2 id="descriptionoffiles">Description of files:</h2>
+
+<p>Look in your Lab5 directory.</p>
+
+<p>Execute:</p>
+
+<pre><code>ls Lab5
+</code></pre>
+
+<p>Lab5 contains two directories:</p>
+
+<p>work — An empty working directory. Create your repos in here.
+repos — Prepackaged Git repositories so you can jump into the tutorial at any point. If you get stuck, just copy the desired lab into your working directory.</p>
+
+<h1 id="goalcreateagitrepositoryfromscratch">Goal: create a git repository from scratch.</h1><hr id="hrline">
+
+<h2 id="createahelloworldprogram">Create a “Hello, World” program</h2>
+
+<p>Starting in the empty working directory, create an empty directory named “hello”, then create a file named <code>Hello.java</code> with the contents below.</p>
+
+<h3 id="execute-2">Execute:</h3>
+
+<pre><code>cd ./Lab5/work
+mkdir hello
+cd hello
+</code></pre>
+
+<p>Open a text editor of your choice and create a file named <code>Hello.java</code>, with contents given below</p>
+
+<h3 id="filehellojava">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        System.out.println( "Hello, World" );
+    }
+}
+</code></pre>
+
+<h2 id="createtherepository">Create the Repository</h2>
+
+<p>You now have a directory with a single file. To create a git repository from that directory, run the <code>git init</code> command.</p>
+
+<h3 id="execute-3">Execute:</h3>
+
+<pre><code>git init
+</code></pre>
+
+<h3 id="output">Output:</h3>
+
+<pre><code>$ git init
+Initialized empty Git repository in /home/linux/ieng6/cs15s/cs15sXX/Lab5/work/hello/.git/
+</code></pre>
+
+<h2 id="addtheprogramtotherepository">Add the program to the repository</h2>
+
+<p>Now let’s add the “Hello, World” program to the repository.</p>
+
+<h3 id="execute-4">Execute:</h3>
+
+<pre><code>git add Hello.java
+git commit -m "First Commit"
+</code></pre>
+
+<p>You should see …</p>
+
+<h3 id="output-1">Output:</h3>
+
+<pre><code>$ git add Hello.java
+$ git commit -m "First Commit"
+[master (root-commit) 9416416] First Commit
+ 1 file changed, 7 insertions(+)
+ create mode 100644 Hello.java
+</code></pre>
+
+<h2 id="checkpoint1">Checkpoint 1</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_1 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalcheckthestatusoftherepository">Goal: Check the status of the repository</h1><hr id="hrline">
+
+<p>Use the <code>git status</code> command to check the current status of the repository.</p>
+
+<h3 id="execute-5">Execute:</h3>
+
+<pre><code>git status
+</code></pre>
+
+<h2 id="question1whatoutputdoyouseefromtheabovecommand">Question 1: What output do you see from the above command?</h2>
+
+<p>The status command should report that there is nothing to commit. This means that the repository has all the current state of the working directory. There are no outstanding changes to record.</p>
+
+<p>We will use the <code>git status</code> command to continue to monitor the state between the repository and the working directory.</p>
+
+<h1 id="goalmonitorthestateoftheworkingdirectory">Goal: Monitor the state of the working directory</h1><hr id="hrline">
+
+<h2 id="changethehelloworldprogram">Change the “Hello, World” program.</h2>
+
+<p>It’s time to change our hello program to take an argument from the command line. Change the file to be:</p>
+
+<h3 id="filehellojava-1">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        System.out.println( "Hello, " + argv[0] + "!" );
+    }
+}
+</code></pre>
+
+<h2 id="checkthestatus">Check the status</h2>
+
+<p>Now check the status of the working directory.</p>
+
+<h3 id="execute-6">Execute:</h3>
+
+<pre><code>git status
+</code></pre>
+
+<h2 id="question2whatoutputdoyounowseewhentypingtheabovecommand">Question 2: What output do you now see when typing the above command?</h2>
+
+<p>Notice that git knows that the <code>Hello.java</code> file has been modified, but git has not yet been notified of these changes.</p>
+
+<p>Also notice that the status message gives you hints about what you need to do next. If you want to add these changes to the repository, then use the <code>git add</code> command. Otherwise the <code>git checkout</code> command can be used to discard the changes.</p>
+
+<h1 id="goalstagechangesforlatercommits">Goal: Stage changes for later commits</h1><hr id="hrline">
+
+<h2 id="addchanges">Add Changes</h2>
+
+<p>Now tell git to stage the changes. Check the status</p>
+
+<h3 id="execute-7">Execute:</h3>
+
+<pre><code>git add Hello.java
+git status
+</code></pre>
+
+<h2 id="question3afterstagingchangeswiththegitaddcommandwhatoutputdoyouseewhencheckingthestatusoftheworkingdirectory">Question 3: After staging changes with the "git add" command, what output do you see when checking the status of the working directory?</h2>
+
+<p>You should see that the change to the <code>Hello.java</code> file has been staged. This means that git now knows about the change, but the change hasn’t been permanently recorded in the repository yet. The next commit operation will include the staged changes.</p>
+
+<p>If you decide you don’t want to commit that change after all, the status command reminds you that the <code>git reset</code> command can be used to unstage that change.</p>
+
+<h1 id="stagingandcommitting">Staging and Committing</h1><hr id="hrline">
+
+<p>A separate staging step in git is in line with the philosophy of getting out of the way until you need to deal with source control. You can continue to make changes to your working directory, and then at the point you want to interact with source control, git allows you to record your changes in small commits that record exactly what you did.</p>
+
+<p>For example, suppose you edited three files (<code>a.java</code>, <code>b.java</code>, and <code>c.java</code>). Now you want to commit all the changes, but you want the changes in a.java and b.java to be a single commit, while the changes to c.java are not logically related to the first two files and should be a separate commit.</p>
+
+<p>You could do the following:</p>
+
+<pre><code>git add a.java
+git add b.java
+git commit -m "Changes for a and b"
+</code></pre>
+
+<pre><code>git add c.java
+git commit -m "Unrelated change to c"
+</code></pre>
+
+<p>By separating staging and committing, you have the ability to easily fine tune what goes into each commit.</p>
+
+<h1 id="goalcommitchangestotherepository">Goal: Commit changes to the repository</h1><hr id="hrline">
+
+<p>Ok, enough about staging. Let’s commit what we have staged to the repository.</p>
+
+<p>When you used <code>git commit</code> previously to commit the initial version of the <code>Hello.java</code> file to the repository, you included the <code>-m</code> flag that gave a comment on the command line. The commit command will allow you to interactively edit a comment for the commit. Let’s try that now.</p>
+
+<p>If you omit the <code>-m</code> flag from the command line, git will pop you into the editor of your choice. The editor is chosen from the following list (in priority order):</p>
+
+<ul>
+<li>GIT_EDITOR environment variable</li>
+
+<li>core.editor configuration setting</li>
+
+<li>VISUAL environment variable</li>
+
+<li>EDITOR environment variable</li>
+</ul>
+
+<p>By default, the EDITOR variable is set to <code>vim</code> on the lab terminals.</p>
+
+<p>So commit now and check the status.</p>
+
+<h3 id="execute-8">Execute:</h3>
+
+<pre><code>git commit
+</code></pre>
+
+<p>You should see the following in your editor</p>
+
+<h3 id="output-2">Output:</h3>
+
+<pre><code># Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#    modified:   Hello.java
+#
+</code></pre>
+
+<p>On the first line, enter the comment: “Using ARGV”. Save the file and exit the editor (in vi editor, use :wq to save and quit). You should see …</p>
+
+<h3 id="output-3">Output:</h3>
+
+<pre><code>$ git commit
+[master 569aa96] Using ARGV
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+
+<h2 id="checkthestatus-1">Check the status</h2>
+
+<p>Execute:</p>
+
+<pre><code>git status
+</code></pre>
+
+<h2 id="question4aftercheckingthestatusafinaltimewhatoutputdoyousee">Question 4: After checking the status a final time, what output do you see?</h2>
+
+<p>The working directory should be clean and ready for you to continue.</p>
+
+<h1 id="goallearnthatgitworkswithchangesnotfiles">Goal: Learn that git works with changes, not files.</h1><hr id="hrline">
+
+<p>Most source control systems work with files. You add a file to source control and the system will track changes to the file from that point on.</p>
+
+<p>Git focuses on the changes to a file rather than the file itself. When you say <code>git add file</code>, you are not telling git to add the file to the repository. Rather you are saying that git should make note of the current state of that file to be committed later.</p>
+
+<p>We will attempt to explore that difference in this lab.</p>
+
+<h2 id="firstchangeallowadefaultname">First Change: Allow a default name</h2>
+
+<p>Change the “Hello, World” program to have a default value if a command line argument is not supplied.</p>
+
+<h3 id="filehellojava-2">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h2 id="addthischange">Add this Change</h2>
+
+<p>Now add this change to the git’s staging area.</p>
+
+<h3 id="execute-9">Execute:</h3>
+
+<pre><code>git add Hello.java
+</code></pre>
+
+<h2 id="secondchangeaddacomment">Second change: Add a comment</h2>
+
+<p>Now add a comment to the “Hello, World” program.</p>
+
+<h3 id="filehellojava-3">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h2 id="checkthecurrentstatus">Check the current status</h2>
+
+<h3 id="execute-10">Execute:</h3>
+
+<pre><code>git status
+</code></pre>
+
+<p>You should see …</p>
+
+<h3 id="output-4">Output:</h3>
+
+<pre><code>$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+        modified:   Hello.java
+
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+        modified:   Hello.java
+</code></pre>
+
+<p>Notice how <code>Hello.java</code> is listed twice in the status. The first change (adding a default) is staged and is ready to be committed. The second change (adding a comment) is unstaged. If you were to commit right now, the comment would not be saved in the repository.</p>
+
+<p>Let’s try that.</p>
+
+<h2 id="committing">Committing</h2>
+
+<p>Commit the staged change (the default value), and then recheck the status.</p>
+
+<h3 id="execute-11">Execute:</h3>
+
+<pre><code>git commit -m "Added a default value"
+git status
+</code></pre>
+
+<p>You should see …</p>
+
+<h3 id="output-5">Output:</h3>
+
+<pre><code>$ git commit -m "Added a default value"
+[master 582495a] Added a default value
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+        modified:   Hello.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>The status command is telling you that <code>Hello.java</code> has unrecorded changes, but is no longer in the staging area.</p>
+
+<h2 id="addthesecondchange">Add the Second Change</h2>
+
+<p>Now add the second change to staging area, then run git status.</p>
+
+<h3 id="execute-12">Execute:</h3>
+
+<pre><code>git add .
+git status
+</code></pre>
+
+<p>Note: We used the current directory (‘.’) as the file to add. This is a really convenient shortcut for adding in all the changes to the files in the current directory and below. But since it adds everything, it is a really good idea to check the status before doing an add ., just to make sure you don’t add any file that is not intended.</p>
+
+<p>I wanted you to see the “add .” trick, but we will continue to add explicit files in the rest of this tutorial just to be safe.</p>
+
+<p>You should see …</p>
+
+<h3 id="output-6">Output:</h3>
+
+<pre><code>$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+        modified:   Hello.java
+</code></pre>
+
+<p>Now the second change has been staged and is ready to commit.</p>
+
+<h2 id="committhesecondchange">Commit the Second Change</h2>
+
+<h3 id="execute-13">Execute:</h3>
+
+<pre><code>git commit -m "Added a comment"
+</code></pre>
+
+<h2 id="checkpoint2">Checkpoint 2</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_2 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalviewthehistoryoftheproject">Goal: View the history of the project.</h1><hr id="hrline">
+
+<p>Getting a listing of what changes have been made is the function of the <code>git log</code> command.</p>
+
+<h3 id="execute-14">Execute:</h3>
+
+<pre><code>git log
+</code></pre>
+
+<p>You should see … (to quit, you can press q)</p>
+
+<h3 id="output-7">Output:</h3>
+
+<pre><code>$ git log
+commit 1f7ec5eaa8f37c2770dae3b984c55a1531fcc9e7
+Author: Jim Weirich &lt;jim (at) neo.com&gt;
+Date:   Sat Apr 13 15:20:42 2013 -0400
+
+    Added a comment
+
+commit 582495ae59ca91bca156a3372a72f88f6261698b
+Author: Jim Weirich &lt;jim (at) neo.com&gt;
+Date:   Sat Apr 13 15:20:42 2013 -0400
+
+    Added a default value
+
+commit 323e28d99a07d404c04f27eb6e415d4b8ab1d615
+Author: Jim Weirich &lt;jim (at) neo.com&gt;
+Date:   Sat Apr 13 15:20:42 2013 -0400
+
+    Using ARGV
+
+commit 94164160adf8faa3119b409fcfcd13d0a0eb8020
+Author: Jim Weirich &lt;jim (at) neo.com&gt;
+Date:   Sat Apr 13 15:20:42 2013 -0400
+
+    First Commit
+Here is a list of all four commits that we have made to the repository so far.
+</code></pre>
+
+<h2 id="onelinehistories">One Line Histories</h2>
+
+<p>You have a great deal of control over exactly what the log command displays. I like the one line format:</p>
+
+<h3 id="execute-15">Execute:</h3>
+
+<pre><code>git log --pretty=oneline
+</code></pre>
+
+<p>You should see …</p>
+
+<h3 id="output-8">Output:</h3>
+
+<pre><code>$ git log --pretty=oneline
+1f7ec5eaa8f37c2770dae3b984c55a1531fcc9e7 Added a comment
+582495ae59ca91bca156a3372a72f88f6261698b Added a default value
+323e28d99a07d404c04f27eb6e415d4b8ab1d615 Using ARGV
+94164160adf8faa3119b409fcfcd13d0a0eb8020 First Commit
+</code></pre>
+
+<h2 id="controllingwhichentriesaredisplayed">Controlling Which Entries are Displayed</h2>
+
+<p>There are a lot of options for selecting which entries are displayed in the log. Play around with the following options:</p>
+
+<pre><code>git log --pretty=oneline --max-count=2
+git log --pretty=oneline --since='5 minutes ago'
+git log --pretty=oneline --until='5 minutes ago'
+git log --pretty=oneline --author=&lt;your name&gt;
+git log --pretty=oneline --all
+</code></pre>
+
+<p>See man git-log for all the details.</p>
+
+<h2 id="gettingfancy">Getting Fancy</h2>
+
+<p>Here’s what I use to review the changes made in the last week. I’ll add <code>--author=jim</code> if I only want to see changes I made.</p>
+
+<pre><code>git log --all --pretty=format:'%h %cd %s (%an)' --since='7 days ago'
+</code></pre>
+
+<h2 id="theultimatelogformat">The Ultimate Log Format</h2>
+
+<p>Over time, I’ve decided that I like the following log format for most of my work.</p>
+
+<h3 id="execute-16">Execute:</h3>
+
+<pre><code>git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+</code></pre>
+
+<p>It looks like this:</p>
+
+<h3 id="output-9">Output:</h3>
+
+<pre><code>$ git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+* 1f7ec5e 2013-04-13 | Added a comment (HEAD, master) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>Let’s look at it in detail:</p>
+
+<ul>
+<li><code>--pretty="..."</code> defines the format of the output.</li>
+
+<li><code>%h</code> is the abbreviated hash of the commit</li>
+
+<li><code>%d</code> are any decorations on that commit (e.g. branch heads or tags)</li>
+
+<li><code>%ad</code> is the author date</li>
+
+<li><code>%s</code> is the comment</li>
+
+<li><code>%an</code> is the author name</li>
+
+<li><code>--graph</code> informs git to display the commit tree in an ASCII graph layout</li>
+
+<li><code>--date=short</code> keeps the date format nice and short</li>
+</ul>
+
+<p>This is a lot to type every time you want to see the log. Fortunately we will learn about git aliases on the next page.</p>
+
+<h2 id="othertools">Other Tools</h2>
+
+<p>Both <code>gitx</code> (for Macs) and <code>gitk</code> (any platform) are useful in exploring log history.</p>
+
+<h1 id="goalsetupaliasesandshortcutsforgitcommands">Goal: Setup aliases and shortcuts for git commands</h1><hr id="hrline">
+
+<h2 id="commonaliases">Common Aliases</h2>
+
+<p><code>git status</code>, <code>git add</code>, <code>git commit</code>, and <code>git checkout</code> are such common commands that it is useful to have abbreviations for them.</p>
+
+<p>Add the following to the <code>.gitconfig</code> file in your $HOME directory (<code>vi ~/.gitconfig</code>).</p>
+
+<h3 id="filegitconfig">File: .gitconfig</h3>
+
+<pre><code>[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+</code></pre>
+
+<p>We’ve covered the commit and status commands already. And we just covered the log command in the previous lab. The checkout command will be coming up soon.</p>
+
+<p>With these aliases defined in the <code>.gitconfig</code> file you can type <code>git co</code> wherever you used to have to type <code>git checkout</code>. Likewise with <code>git st</code> for <code>git status</code> and <code>git ci</code> for <code>git commit</code>. And best of all, <code>git hist</code> will allow you to avoid the really long log command.</p>
+
+<p>Go ahead and give the new commands a try.</p>
+
+<h2 id="definethehistaliasinyourgitconfigfile">Define the <code>hist</code> alias in your <code>.gitconfig</code> file</h2>
+
+<p>For the most part, I will continue to type out the full command in these instructions. The only exception is that I will use the hist alias defined above anytime we need to see the <code>git log</code> output. Make sure you have a hist alias setup in your <code>.gitconfig</code> file before continuing if you wish to follow along.</p>
+
+<h2 id="typeanddump">'Type' and 'Dump'</h2>
+
+<p>We’ve added a few aliases for commands we haven’t covered yet. The <code>git branch</code> command will be coming up soon. And the <code>git cat-file</code> command is useful for exploring git, which we will see in a little while.</p>
+
+<h1 id="goalcheckoutanyprevioussnapshotintotheworkingdirectory">Goal: Checkout any previous snapshot into the working directory.</h1><hr id="hrline">
+
+<p>Going back in history is very easy. The checkout command will copy any snapshot from the repository to the working directory.</p>
+
+<h2 id="getthehashesforpreviousversions">Get the hashes for previous versions</h2>
+
+<h3 id="execute-17">Execute:</h3>
+
+<pre><code>git log
+</code></pre>
+
+<p>Examine the log output and find the hash for the first commit. Use that hash code (the first 7 characters are enough) in the command below. By default, git log lists the commits in reverse chronological order. Once you find the hash for the first commit, then check the contents of the <code>Hello.java</code> file.</p>
+
+<h3 id="execute-18">Execute:</h3>
+
+<pre><code>git checkout &lt;hash&gt;
+</code></pre>
+
+<p><strong>Note</strong>: The commands given here are Unix commands and work on both Mac and Linux boxes. Unfortunately, Windows users will have to translate to their native commands.</p>
+
+<p><strong>Note</strong>: Many commands depend on the hash values in the repository. Since your hash values will vary from mine, whenever you see something like <hash> or <treehash> in the command, substitute in the proper hash value for your repository.</treehash></hash></p>
+
+<p>You should see …</p>
+
+<h3 id="output-10">Output:</h3>
+
+<pre><code>$ git checkout 9416416
+Note: checking out '9416416'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 9416416... First Commit
+</code></pre>
+
+<h2 id="question5typecathellojavawhatoutputdoyousee">Question 5: Type <code>cat Hello.java</code>. What output do you see?</h2>
+
+<p>A “detached HEAD” message in git just means that HEAD (the part of git that tracks what your current working directory should match) is pointing directly to a commit rather than a branch. Any changes that are committed in this state are only remembered as long as you don’t switch to a different branch. As soon as you checkout a new branch or tag, the detached commits will be “lost” (because HEAD has moved). If you want to save commits done in a detached state, you need to create a branch to remember the commits.</p>
+
+<p>Older versions of git will complain about not being on a local branch rather than being in a detached HEAD state. In any case, don’t worry about that for now.</p>
+
+<p>Notice the contents of the <code>Hello.java</code> file are the original contents.</p>
+
+<h2 id="returnthelatestversioninthemasterbranch">Return the latest version in the master branch</h2>
+
+<h3 id="execute-19">Execute:</h3>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>You should see …</p>
+
+<h3 id="output-11">Output:</h3>
+
+<pre><code>$ git checkout master
+Previous HEAD position was 9416416... First Commit
+Switched to branch 'master'
+</code></pre>
+
+<h2 id="question6describethechangestohellojavaafterthelatestcheckouttothemasterbranch">Question 6: Describe the changes to Hello.java after the latest checkout to the master branch.</h2>
+
+<p>‘master’ is the name of the default branch. By checking out a branch by name, you go to the latest version of that branch.</p>
+
+<h1 id="goaltagcommitswithnamesforfuturereference">Goal: Tag commits with names for future reference</h1><hr id="hrline">
+
+<p>Let’s call the current version of the hello program version 1 (v1).</p>
+
+<h2 id="taggingversion1">Tagging version 1</h2>
+
+<h3 id="execute-20">Execute:</h3>
+
+<pre><code>git tag v1
+</code></pre>
+
+<p>Now you can refer to the current version of the program as v1.</p>
+
+<h2 id="taggingpreviousversions">Tagging Previous Versions</h2>
+
+<p>Let’s tag the version immediately prior to the current version v1-beta. First we need to checkout the previous version. Rather than lookup up the hash, we will use the <code>^</code> notation to indicate “the parent of v1”.</p>
+
+<p>If the <code>v1^</code> notation gives you any trouble, you can also try <code>v1~1</code>, which will reference the same version. This notation means “the first ancestor of v1”.</p>
+
+<h3 id="execute-21">Execute:</h3>
+
+<pre><code>git checkout v1^
+cat Hello.java
+</code></pre>
+
+<h3 id="output-12">Output:</h3>
+
+<pre><code>$ git checkout v1^
+Note: checking out 'v1^'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 582495a... Added a default value
+$ cat Hello.java
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<p>See, this is the version with the default value before we added the comment. Let’s make this v1-beta.</p>
+
+<h3 id="execute-22">Execute:</h3>
+
+<pre><code>git tag v1-beta
+</code></pre>
+
+<h2 id="checkingoutbytagname">Checking Out by Tag Name</h2>
+
+<p>Now try going back and forth between the two tagged versions.</p>
+
+<h3 id="execute-23">Execute:</h3>
+
+<pre><code>git checkout v1
+git checkout v1-beta
+</code></pre>
+
+<h3 id="output-13">Output:</h3>
+
+<pre><code>$ git checkout v1
+Previous HEAD position was 582495a... Added a default value
+HEAD is now at 1f7ec5e... Added a comment
+$ git checkout v1-beta
+Previous HEAD position was 1f7ec5e... Added a comment
+HEAD is now at 582495a... Added a default value
+</code></pre>
+
+<h2 id="viewingtagsusingthetagcommand">Viewing Tags using the <code>tag</code> command</h2>
+
+<p>You can see what tags are available using the git tag command.</p>
+
+<h3 id="execute-24">Execute:</h3>
+
+<pre><code>git tag
+</code></pre>
+
+<h3 id="output-14">Output:</h3>
+
+<pre><code>$ git tag
+v1
+v1-beta
+</code></pre>
+
+<h2 id="viewingtagsinthelogs">Viewing Tags in the Logs</h2>
+
+<p>You can also check for tags in the log.</p>
+
+<h3 id="execute-25">Execute:</h3>
+
+<pre><code>git hist master --all
+</code></pre>
+
+<h3 id="output-15">Output:</h3>
+
+<pre><code>$ git hist master --all
+* 1f7ec5e 2013-04-13 | Added a comment (v1, master) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (HEAD, v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>You can see both tags (<code>v1</code> and <code>v1-beta</code>) listed in the log output, along with the branch name (<code>master</code>). Also <code>HEAD</code> shows you the currently checked out commit (which is <code>v1-beta</code> at the moment).</p>
+
+<h1 id="goalundolocalchangesbeforestaging">Goal: Undo Local Changes (before staging)</h1><hr id="hrline">
+
+<h2 id="checkoutmaster">Checkout Master</h2>
+
+<p>Make sure you are on the latest commit in master before proceeding.</p>
+
+<h3 id="execute-26">Execute:</h3>
+
+<pre><code>git checkout master
+</code></pre>
+
+<h2 id="changehellojava">Change Hello.java</h2>
+
+<p>Sometimes you have modified a file in your local working directory and you wish to just revert to what has already been committed. The checkout command will handle that.</p>
+
+<p>Change Hello.java to have a bad comment.</p>
+
+<h3 id="filehellojava-4">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // This is a bad comment.  We want to revert it.
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h2 id="checkthestatus-2">Check the Status</h2>
+
+<p>First, check the status of the working directory.</p>
+
+<h3 id="execute-27">Execute:</h3>
+
+<pre><code>git status
+</code></pre>
+
+<h3 id="output-16">Output:</h3>
+
+<pre><code>$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+        modified:   Hello.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre>
+
+<p>We see that the <code>Hello.java</code> file has been modified, but hasn’t been staged yet.</p>
+
+<h2 id="revertthechangesintheworkingdirectory">Revert the changes in the working directory</h2>
+
+<p>Use the <code>checkout</code> command to checkout the repository’s version of the <code>Hello.java</code> file.</p>
+
+<h3 id="execute-28">Execute:</h3>
+
+<pre><code>git checkout Hello.java
+git status
+cat Hello.java
+</code></pre>
+
+<h3 id="output-17">Output:</h3>
+
+<pre><code>$ git checkout Hello.java
+$ git status
+On branch master
+nothing to commit, working directory clean
+$ cat Hello.java
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<p>The status command shows us that there are no outstanding changes in the working directory. And the “bad comment” is no longer part of the file contents.</p>
+
+<h2 id="checkpoint3">Checkpoint 3</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_3 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalundostagedchangesbeforecommitting">Goal: Undo Staged Changes (before committing)</h1><hr id="hrline">
+
+<h2 id="changethefileandstagethechange">Change the file and stage the change</h2>
+
+<p>Modify the <code>Hello.java</code> file to have a bad comment</p>
+
+<h3 id="filehellojava-5">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // This is an unwanted but staged comment
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<p>And then go ahead and stage it.</p>
+
+<h3 id="execute-29">Execute:</h3>
+
+<pre><code>git add Hello.java
+</code></pre>
+
+<h2 id="checkthestatus-3">Check the Status</h2>
+
+<p>Check the status of your unwanted change.</p>
+
+<h3 id="execute-30">Execute:</h3>
+
+<pre><code>git status
+</code></pre>
+
+<h3 id="output-18">Output:</h3>
+
+<pre><code>$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+        modified:   Hello.java
+</code></pre>
+
+<p>The status output shows that the change has been staged and is ready to be committed.</p>
+
+<h2 id="resetthestagingarea">Reset the Staging Area</h2>
+
+<p>Fortunately the status output tells us exactly what we need to do to unstage the change.</p>
+
+<h2 id="execute-31">Execute:</h2>
+
+<pre><code>git reset HEAD Hello.java
+</code></pre>
+
+<h2 id="output-19">Output:</h2>
+
+<pre><code>$ git reset HEAD Hello.java
+Unstaged changes after reset:
+M    Hello.java
+</code></pre>
+
+<p>The <code>git reset</code> command resets the staging area to be whatever is in HEAD. This clears the staging area of the change we just staged.</p>
+
+<p>The <code>git reset</code> command (by default) doesn’t change the working directory. So the working directory still has the unwanted comment in it. We can use the <code>checkout</code> command of the previous lab to remove the unwanted change from the working directory.</p>
+
+<h2 id="checkoutthecommittedversion">Checkout the Committed Version</h2>
+
+<h3 id="execute-32">Execute:</h3>
+
+<pre><code>git checkout Hello.java
+git status
+</code></pre>
+
+<h3 id="output-20">Output:</h3>
+
+<pre><code>$ git status
+On branch master
+nothing to commit, working directory clean
+</code></pre>
+
+<p>And our working directory is clean once again.</p>
+
+<h1 id="goalundocommittedchanges">Goal: Undo Committed Changes</h1><hr id="hrline">
+
+<h2 id="undoingcommits">Undoing Commits</h2>
+
+<p>Sometimes you realized that a change that you have already committed was not correct and you wish to undo that commit. There are several ways of handling that issue, and the way we are going to use in this lab is always safe.</p>
+
+<p>Essentially we will undo the commit by creating a new commit that reverses the unwanted changes.</p>
+
+<h2 id="changethefileandcommitit">Change the file and commit it.</h2>
+
+<p>Change the <code>Hello.java</code> file to the following.</p>
+
+<h3 id="filehellojava-6">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // This is an unwanted but staged comment
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h3 id="execute-33">Execute:</h3>
+
+<pre><code>git add Hello.java
+git commit -m "Oops, we didn't want this commit"
+</code></pre>
+
+<h2 id="createarevertingcommit">Create a Reverting Commit</h2>
+
+<p>To undo a committed change, we need to generate a commit that removes the changes introduced by our unwanted commit.</p>
+
+<h3 id="execute-34">Execute:</h3>
+
+<pre><code>git revert HEAD
+</code></pre>
+
+<p>This will pop you into the editor. You can edit the default commit message or leave it as is. Save and close the file. You should see …</p>
+
+<h3 id="output-21">Output:</h3>
+
+<pre><code>$ git revert HEAD --no-edit
+[master a10293f] Revert "Oops, we didn't want this commit"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre>
+
+<p>Since we were undoing the very last commit we made, we were able to use <code>HEAD</code> as the argument to revert. We can revert any arbitrary commit earlier in history by simply specifying its hash value.</p>
+
+<p><strong>Note*</strong>: The <code>--no-edit</code> in the output can be ignored. It was necessary to generate the output without opening the editor.</p>
+
+<h2 id="checkthelog">Check the log</h2>
+
+<p>Checking the log shows both the unwanted and the reverting commits in our repository.</p>
+
+<h3 id="execute-35">Execute:</h3>
+
+<pre><code>git hist
+</code></pre>
+
+<h3 id="output-22">Output:</h3>
+
+<pre><code>$ git hist
+* a10293f 2013-04-13 | Revert "Oops, we didn't want this commit" (HEAD, master) [Jim Weirich]
+* 838742c 2013-04-13 | Oops, we didn't want this commit [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>This technique will work with any commit (although you may have to resolve conflicts). It is safe to use even on branches that are publicly shared on remote repositories.</p>
+
+<h1 id="goalremovecommitsfromabranch">Goal: Remove Commits from a Branch</h1><hr id="hrline">
+
+<p>The <code>git revert</code> command of the previous section is a powerful command that lets us undo the effects of any commit in the repository. However, both the original commit and the “undoing” commit are visible in the branch history (using the <code>git log</code> command).</p>
+
+<p>Often we make a commit and immediately realize that it was a mistake. It would be nice to have a “take back” command that would allow us to pretend that the incorrect commit never happened. The “take back” command would even prevent the bad commit from showing up the <code>git log</code> history. It would be as if the bad commit never happened.</p>
+
+<h2 id="thegitresetcommand">The <code>git reset</code> command</h2>
+
+<p>We’ve already seen the <code>git reset</code> command and have used it to set the staging area to be consistent with a given commit (we used the HEAD commit in our previous lab).</p>
+
+<p>When given a commit reference (i.e. a hash, branch or tag name), the 'git reset' command will …</p>
+
+<ol>
+<li>Rewrite the current branch to point to the specified commit</li>
+
+<li>Optionally reset the staging area to match the specified commit</li>
+
+<li>Optionally reset the working directory to match the specified commit</li>
+</ol>
+
+<h2 id="checkourhistory">Check Our History</h2>
+
+<p>Let’s do a quick check of our commit history.</p>
+
+<h3 id="execute-36">Execute:</h3>
+
+<pre><code>git hist
+</code></pre>
+
+<h3 id="output-23">Output:</h3>
+
+<pre><code>$ git hist
+* a10293f 2013-04-13 | Revert "Oops, we didn't want this commit" (HEAD, master) [Jim Weirich]
+* 838742c 2013-04-13 | Oops, we didn't want this commit [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>We see that we have an “Oops” commit and a “Revert Oops” commit as the last two commits made in this branch. Let’s remove them using reset.</p>
+
+<h2 id="firstmarkthisbranch">First, Mark this Branch</h2>
+
+<p>But before we remove the commits, let’s mark the latest commit with a tag so we can find it again.</p>
+
+<h3 id="execute-37">Execute:</h3>
+
+<pre><code>git tag oops
+</code></pre>
+
+<h2 id="resettobeforeoops">Reset to Before Oops</h2>
+
+<p>Looking at the log history (above), we see that the commit tagged ‘v1’ is the commit right before the bad commit. Let’s reset the branch to that point. Since that branch is tagged, we can use the tag name in the reset command (if it wasn’t tagged, we could just use the hash value).</p>
+
+<h3 id="execute-38">Execute:</h3>
+
+<pre><code>git reset --hard v1
+git hist
+</code></pre>
+
+<h3 id="output-24">Output:</h3>
+
+<pre><code>$ git reset --hard v1
+HEAD is now at 1f7ec5e Added a comment
+$ git hist
+* 1f7ec5e 2013-04-13 | Added a comment (HEAD, v1, master) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>Our master branch now points to the v1 commit and the Oops commit and the Revert Oops commit are no longer in the branch. The <code>--hard</code> parameter indicates that the working directory should be updated to be consistent with the new branch head.</p>
+
+<h2 id="nothingiseverlost">Nothing is Ever Lost</h2>
+
+<p>But what happened to the bad commits? It turns out that the commits are still in the repository. In fact, we can still reference them. Remember that at the beginning of this lab we tagged the reverting commit with the tag “oops”. Let’s look at all the commits.</p>
+
+<h3 id="execute-39">Execute:</h3>
+
+<pre><code>git hist --all
+</code></pre>
+
+<h2 id="question7describetheoutputfromtheabovecommand">Question 7: Describe the output from the above command.</h2>
+
+<h3 id="output-25">Output:</h3>
+
+<pre><code>$ git hist --all
+* a10293f 2013-04-13 | Revert "Oops, we didn't want this commit" (oops) [Jim Weirich]
+* 838742c 2013-04-13 | Oops, we didn't want this commit [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (HEAD, v1, master) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>Here we see that the bad commits haven’t disappeared. They are still in the repository. It’s just that they are no longer listed in the master branch. If we hadn’t tagged them, they would still be in the repository, but there would be no way to reference them other than using their hash names. Commits that are unreferenced remain in the repository until the system runs the garbage collection software.</p>
+
+<h2 id="dangersofreset">Dangers of Reset</h2>
+
+<p>Resets on local branches are generally safe. Any “accidents” can usually be recovered from by just resetting again with the desired commit.</p>
+
+<p>However, if the branch is shared on remote repositories, resetting can confuse other users sharing the branch.</p>
+
+<h1 id="goalremovetheoopstag">Goal: Remove the oops tag</h1><hr id="hrline">
+
+<h2 id="removingtagoops">Removing tag oops</h2>
+
+<p>The oops tag has served its purpose. Let’s remove it and allow the commits it referenced to be garbage collected.</p>
+
+<h3 id="execute-40">Execute:</h3>
+
+<pre><code>git tag -d oops
+git hist --all
+</code></pre>
+
+<h3 id="output-26">Output:</h3>
+
+<pre><code>$ git tag -d oops
+Deleted tag 'oops' (was a10293f)
+$ git hist --all
+* 1f7ec5e 2013-04-13 | Added a comment (HEAD, v1, master) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>The oops tag is no longer listed in the repository.</p>
+
+<h1 id="goalamendanexistingcommit">Goal: Amend an existing commit</h1><hr id="hrline">
+
+<h2 id="changetheprogramthencommit">Change the program then commit</h2>
+
+<p>Add an author comment to the program.</p>
+
+<h3 id="filehellojava-7">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        // Author: Jim Weirich
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h3 id="execute-41">Execute:</h3>
+
+<pre><code>git add Hello.java
+git commit -m "Add an author comment"
+</code></pre>
+
+<h2 id="oopsshouldhaveanemail">Oops, Should have an Email</h2>
+
+<p>After you make the commit, you realize that any good author comment should have an email included. Update the hello program to include an email.</p>
+
+<h3 id="filehellojava-8">File: Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        // Author: Jim Weirich (jim@somewhere.com)
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<h2 id="amendthepreviouscommit">Amend the Previous Commit</h2>
+
+<p>We really don’t want a separate commit for just the email. Let’s amend the previous commit to include the email change.</p>
+
+<h3 id="execute-42">Execute:</h3>
+
+<pre><code>git add Hello.java
+git commit --amend -m "Add an author/email comment"
+</code></pre>
+
+<h3 id="output-27">Output:</h3>
+
+<pre><code>$ git add Hello.java
+$ git commit --amend -m "Add an author/email comment"
+[master eb30103] Add an author/email comment
+ 1 file changed, 1 insertion(+)
+</code></pre>
+
+<h2 id="reviewthehistory">Review the History</h2>
+
+<h3 id="execute-43">Execute:</h3>
+
+<pre><code>git hist
+</code></pre>
+
+<h3 id="output-28">Output:</h3>
+
+<pre><code>$ git hist
+* eb30103 2013-04-13 | Add an author/email comment (HEAD, master) [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>We can see the original “author” commit is now gone, and it is replaced by the “author/email” commit. You can achieve the same effect by resetting the branch back one commit and then recommitting the new changes.</p>
+
+<h2 id="checkpoint4">Checkpoint 4</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_4 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalmoveafilewithinarepository">Goal: Move a file within a repository.</h1><hr id="hrline">
+
+<h2 id="movethehellojavafileintoalibdirectory">Move the `Hello.java file into a lib directory.</h2>
+
+<p>We are now going to build up the structure of our little repository. Let’s move the program into a lib directory.</p>
+
+<h3 id="execute-44">Execute:</h3>
+
+<pre><code>mkdir lib
+git mv Hello.java lib
+git status
+</code></pre>
+
+<h3 id="output-29">Output:</h3>
+
+<pre><code>$ mkdir lib
+$ git mv Hello.java lib
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+        renamed:    Hello.java -&gt; lib/Hello.java
+</code></pre>
+
+<p>By using git to do the move, we inform git of 2 things</p>
+
+<ol>
+<li>That the file <code>Hello.java</code> has been deleted.</li>
+
+<li>The file <code>lib/Hello.java</code> has been created.</li>
+</ol>
+
+<p>Both of these bits of information are immediately staged and ready to be committed. The git status command reports that the file has been moved.</p>
+
+<h2 id="anotherwayofmovingfiles">Another way of moving files</h2>
+
+<p>One of the nice things about git is that you can forget about source control until the point you are ready to start committing code. What would happen if we used the operating system command to move the file instead of the git command?</p>
+
+<p>It turns out the following set of commands is identical to what we just did. It’s a bit more work, but the result is the same.</p>
+
+<p>We could have done:</p>
+
+<pre><code>mkdir lib
+mv Hello.java lib
+git add lib/Hello.java
+git rm Hello.java
+</code></pre>
+
+<h2 id="committhenewdirectory">Commit the new directory</h2>
+
+<p>Let’s commit this move.</p>
+
+<h3 id="execute-45">Execute:</h3>
+
+<pre><code>git commit -m "Moved Hello.java to lib"
+</code></pre>
+
+<h1 id="goaladdamakefiletoourrepository">Goal: Add a Makefile to our repository</h1><hr id="hrline">
+
+<p>Let’s add a Makefile to our repository. Create this file in your hello directory. The following one will do nicely.</p>
+
+<h3 id="filemakefile">File: Makefile</h3>
+
+<pre><code>task:
+    @javac ./lib/Hello.java
+    @cd ./lib/; java Hello
+    @rm ./lib/*.class
+</code></pre>
+
+<p><strong>Note</strong>: Make sure you start the lines after the first line with a tab rather than spaces in the Makefile.</p>
+
+<p><strong>Note</strong>: The '@' character prevents the commands in the Makefile from displaying on the terminal when executed.</p>
+
+<p>Add and commit the change.</p>
+
+<h3 id="execute-46">Execute:</h3>
+
+<pre><code>git add Makefile
+git commit -m "Added a Makefile."
+</code></pre>
+
+<p>You should be able to use Make to run your hello program now.</p>
+
+<h3 id="execute-47">Execute:</h3>
+
+<pre><code>make
+</code></pre>
+
+<h3 id="output-30">Output:</h3>
+
+<pre><code>make
+Hello, World!
+</code></pre>
+
+<h1 id="gitinternalsthegitdirectory">Git Internals: The.git directory</h1><hr id="hrline">
+
+<p>(This part is optional for the lab)</p>
+
+<p>Goals
+Learn about the structure of the <code>.git</code> directory</p>
+
+<h2 id="thegitdirectory">The <code>.git</code> Directory</h2>
+
+<p>Time to do some exploring. First, from the root of your project directory…</p>
+
+<h3 id="execute-48">Execute:</h3>
+
+<pre><code>ls -C .git
+</code></pre>
+
+<h3 id="output-31">Output:</h3>
+
+<pre><code>$ ls -C .git
+COMMIT_EDITMSG    ORIG_HEAD   hooks       logs        rr-cache
+HEAD        config      index       objects
+MERGE_RR    description info        refs
+</code></pre>
+
+<p>This is the magic directory where all the git “stuff” is stored. Let’s peek in the objects directory.</p>
+
+<h2 id="theobjectstore">The Object Store</h2>
+
+<h3 id="execute-49">Execute:</h3>
+
+<pre><code>ls -C .git/objects
+</code></pre>
+
+<h3 id="output-32">Output:</h3>
+
+<pre><code>$ ls -C .git/objects
+09    1f  27  43  69  83  97  af  e4  info
+0f    22  28  58  6b  94  9c  b5  e7  pack
+11    24  32  59  78  96  a1  c4  eb
+</code></pre>
+
+<p>You should see a bunch of directories with 2 letter names. The directory names are the first two letters of the sha1 hash of the object stored in git.</p>
+
+<h2 id="deeperintotheobjectstore">Deeper into the Object Store</h2>
+
+<h3 id="execute-50">Execute:</h3>
+
+<pre><code>ls -C .git/objects/&lt;dir&gt;
+</code></pre>
+
+<h3 id="outputweuse09asourexamplesomeofyoumaynothavethisfolder">Output: (we use 09 as our example, some of you may not have this folder)</h3>
+
+<pre><code>$ ls -C .git/objects/09
+6b74c56bfc6b40e754fc0725b8c70b2038b91e    9fb6f9d3a104feb32fcac22354c4d0e8a182c1
+</code></pre>
+
+<p>Look in one of the two-letter directories. You should see some files with 38-character names. These are the files that contain the objects stored in git. These files are compressed and encoded, so looking at their contents directly won’t be very helpful, but we will take a closer look in a bit.</p>
+
+<h2 id="configfile">Config File</h2>
+
+<h3 id="execute-51">Execute:</h3>
+
+<pre><code>cat .git/config
+</code></pre>
+
+<h3 id="output-33">Output:</h3>
+
+<pre><code>$ cat .git/config
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    ignorecase = true
+[user]
+    name = Jim Weirich
+    email = jim (at) neo.com
+</code></pre>
+
+<p>This is a project-specific configuration file. Config entries in here will override the config entries in the <code>.gitconfig</code> file in your home directory, at least for this project.</p>
+
+<h2 id="branchesandtags">Branches and Tags</h2>
+
+<h3 id="execute-52">Execute:</h3>
+
+<pre><code>ls .git/refs
+ls .git/refs/heads
+ls .git/refs/tags
+cat .git/refs/tags/v1
+</code></pre>
+
+<h3 id="output-34">Output:</h3>
+
+<pre><code>$ ls .git/refs
+heads
+tags
+$ ls .git/refs/heads
+master
+$ ls .git/refs/tags
+v1
+v1-beta
+$ cat .git/refs/tags/v1
+1f7ec5eaa8f37c2770dae3b984c55a1531fcc9e7
+</code></pre>
+
+<p>You should recognize the files in the tags subdirectory. Each file corresponds to a tag you created with the <code>git tag</code> command earlier. Its content is just the hash of the commit tied to the tag.</p>
+
+<p>The heads directory is similar, but is used for branches rather than tags. We only have one branch at the moment, so all you will see is master in this directory.</p>
+
+<h2 id="theheadfile">The HEAD File</h2>
+
+<h3 id="execute-53">Execute:</h3>
+
+<pre><code>cat .git/HEAD
+</code></pre>
+
+<h3 id="output-35">Output:</h3>
+
+<pre><code>$ cat .git/HEAD
+ref: refs/heads/master
+</code></pre>
+
+<p>The HEAD file contains a reference to the current branch. It should be a reference to master at this point.</p>
+
+<h1 id="gitinternalsworkingdirectlywithgitobjects">Git Internals: Working directly with Git Objects</h1><hr id="hrline">
+
+<p>(This page is optional for the lab)</p>
+
+<p>Goals</p>
+
+<ul>
+<li>Explore the structure of the object store</li>
+
+<li>Learn how to use the SHA1 hashes to find content in the repository </li>
+</ul>
+
+<p>Now let’s use some tools to probe git objects directly.</p>
+
+<h2 id="findingthelatestcommit">Finding the Latest Commit</h2>
+
+<h3 id="execute-54">Execute:</h3>
+
+<pre><code>git hist --max-count=1
+</code></pre>
+
+<p>This should show the latest commit made in the repository. The SHA1 hash on your system is probably different that what is on mine, but you should see something like this.</p>
+
+<h3 id="output-36">Output:</h3>
+
+<pre><code>$ git hist --max-count=1
+* 96ee164 2013-04-13 | Added a Makefile. (HEAD, master) [Jim Weirich]
+</code></pre>
+
+<h2 id="dumpingthelatestcommit">Dumping the Latest Commit</h2>
+
+<p>Using the SHA1 hash from the commit listed above …</p>
+
+<h3 id="execute-55">Execute:</h3>
+
+<pre><code>git cat-file -t &lt;hash&gt;
+git cat-file -p &lt;hash&gt;
+</code></pre>
+
+<p>Here’s my output …</p>
+
+<h3 id="output-37">Output:</h3>
+
+<pre><code>$ git cat-file -t 96ee164
+commit
+$ git cat-file -p 96ee164
+tree 096b74c56bfc6b40e754fc0725b8c70b2038b91e
+parent 0f36766e05bc55d765ec8afe288430edc69fceea
+author Jim Weirich &lt;jim (at) neo.com&gt; 1365880844 -0400
+committer Jim Weirich &lt;jim (at) neo.com&gt; 1365880844 -0400
+
+Added a Makefile.
+</code></pre>
+
+<p><strong>NOTE</strong>: If you defined the ‘type’ and ‘dump’ aliases from the aliases lab, then you can type <code>git type</code> and <code>git dump</code> rather than the longer cat-file commands (which I never remember).</p>
+
+<p>This is the dump of the commit object that is at the head of the master branch. It looks a lot like the commit object from the presentation earlier.</p>
+
+<h2 id="findingthetree">Finding the Tree</h2>
+
+<p>We can dump the directory tree referenced in the commit. This should be a description of the (top level) files in our project (for that commit). Use the SHA1 hash from the “tree” line listed above.</p>
+
+<h3 id="execute-56">Execute:</h3>
+
+<pre><code>git cat-file -p &lt;treehash&gt;
+</code></pre>
+
+<p>Here’s what my tree looks like…</p>
+
+<h3 id="output-38">Output:</h3>
+
+<pre><code>$ git cat-file -p 096b74c
+100644 blob 28e0e9d6ea7e25f35ec64a43f569b550e8386f90    Makefile
+040000 tree e46f374f5b36c6f02fb3e9e922b79044f754d795    lib
+</code></pre>
+
+<p>Yep, I see the Makefile and the lib directory.</p>
+
+<h2 id="dumpingthelibdirectory">Dumping the lib directory</h2>
+
+<h3 id="execute-57">Execute:</h3>
+
+<pre><code>git cat-file -p &lt;libhash&gt;
+</code></pre>
+
+<h3 id="output-39">Output:</h3>
+
+<pre><code>$ git cat-file -p e46f374
+100644 blob c45f26b6fdc7db6ba779fc4c385d9d24fc12cf72    Hello.java
+</code></pre>
+
+<p>There’s the <code>Hello.java</code> file.</p>
+
+<h2 id="dumpingthehellojavafile">Dumping the <code>Hello.java</code> file</h2>
+
+<h3 id="execute-58">Execute:</h3>
+
+<pre><code>git cat-file -p &lt;javahash&gt;
+</code></pre>
+
+<h3 id="output-40">Output:</h3>
+
+<pre><code>$ git cat-file -p c45f26b
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        // Author: Jim Weirich (jim@somewhere.com)
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<p>There you have it. We’ve dumped commit objects, tree objects and blob objects directly from the git repository. That’s all there is to it, blobs, trees and commits.</p>
+
+<h2 id="exploreonyouown">Explore On You Own</h2>
+
+<p>Explore the git repo manually on your own. See if you can find the original Hello.java file from the very first commit by manually following the SHA1 hash references starting in the latest commit.</p>
+
+<h1 id="goalcreatingabranchinarepository">Goal: Creating a Branch in a Repository</h1><hr id="hrline">
+
+<p>It’s time to do a major rewrite of the hello world functionality. Since this might take awhile, you’ll want to put these changes into a separate branch to isolate them from changes in master.</p>
+
+<h2 id="createabranch">Create a Branch</h2>
+
+<p>Let’s call our new branch ‘greet’.</p>
+
+<h3 id="execute-59">Execute:</h3>
+
+<pre><code>git checkout -b greet
+git status
+</code></pre>
+
+<p><strong>NOTE</strong>: <code>git checkout -b &lt;branchname&gt;</code> is a shortcut for <code>git branch &lt;branchname&gt;</code> followed by a <code>git checkout &lt;branchname&gt;</code>.</p>
+
+<p>Notice that the git status command reports that you are on the ‘greet’ branch.</p>
+
+<h2 id="changesforgreetaddagreeterclass">Changes for Greet: Add a Greeter class.</h2>
+
+<h3 id="filelibgreeterjava">File: lib/Greeter.java</h3>
+
+<pre><code>public class Greeter
+{
+    String who;
+    Greeter(String who)
+    {
+        this.who = who;
+    }
+    String greet()
+    {
+        return "Hello, " + who;
+    }
+}
+</code></pre>
+
+<h3 id="execute-60">Execute:</h3>
+
+<pre><code>git add lib/Greeter.java
+git commit -m "Added greeter class"
+</code></pre>
+
+<h2 id="changesforgreetmodifythemainprogram">Changes for Greet: Modify the main program</h2>
+
+<p>Update the Hello.java file to use greeter</p>
+
+<h3 id="filelibhellojava">File: lib/Hello.java</h3>
+
+<pre><code>public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        Greeter greeter = new Greeter(name);
+        System.out.println(greeter.greet());
+    }
+}
+</code></pre>
+
+<h3 id="execute-61">Execute:</h3>
+
+<pre><code>git add lib/Hello.java
+git commit -m "Hello uses Greeter"
+</code></pre>
+
+<h2 id="changesforgreetupdatethemakefile">Changes for Greet: Update the Makefile</h2>
+
+<p>Update the Makefile to use an external Java process</p>
+
+<h3 id="filemakefile-1">File: Makefile</h3>
+
+<pre><code>task:
+    @javac ./lib/Hello.java ./lib/Greeter.java
+    @cd ./lib/; java Hello
+    @rm ./lib/*.class
+</code></pre>
+
+<h3 id="execute-62">Execute:</h3>
+
+<pre><code>git add Makefile
+git commit -m "Updated Makefile"
+</code></pre>
+
+<p>We now have a new branch called greet with 3 new commits on it.</p>
+
+<h2 id="checkpoint5">Checkpoint 5</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_5 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalnavigatebetweenbranches">Goal: Navigate between Branches</h1><hr id="hrline">
+
+<p>You now have two branches in your project:</p>
+
+<h3 id="execute-63">Execute:</h3>
+
+<pre><code>git hist --all
+</code></pre>
+
+<h3 id="output-41">Output:</h3>
+
+<pre><code>$ git hist --all
+* 28917a4 2013-04-13 | Updated Makefile (HEAD, greet) [Jim Weirich]
+* 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+* 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+* 96ee164 2013-04-13 | Added a Makefile. (master) [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<h2 id="switchtothemasterbranch">Switch to the Master Branch</h2>
+
+<p>Just use the <code>git checkout</code> command to switch between branches.</p>
+
+<h3 id="execute-64">Execute:</h3>
+
+<pre><code>git checkout master
+cat lib/Hello.java
+</code></pre>
+
+<h3 id="output-42">Output:</h3>
+
+<pre><code>$ git checkout master
+Switched to branch 'master'
+$ cat lib/Hello.java
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        // Author: Jim Weirich (jim@somewhere.com)
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        System.out.println( "Hello, " + name + "!" );
+    }
+}
+</code></pre>
+
+<p>You are now on the master branch. You can tell because the Hello.java file doesn’t use the <code>Greeter</code> class.</p>
+
+<h2 id="switchbacktothegreetbranch">Switch Back to the Greet Branch.</h2>
+
+<h3 id="execute-65">Execute:</h3>
+
+<pre><code>git checkout greet
+cat lib/Hello.java
+</code></pre>
+
+<h3 id="output-43">Output:</h3>
+
+<pre><code>$ git checkout greet
+Switched to branch 'greet'
+$ cat lib/Hello.java
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        // Default is "World"
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        Greeter greeter = new Greeter(name);
+        System.out.println(greeter.greet());
+    }
+}
+</code></pre>
+
+<p>The contents of the <code>lib/Hello.java</code> confirms we are back on the <strong>greet</strong> branch.</p>
+
+<h1 id="goalhandlechangesinmaster">Goal: Handle Changes in Master</h1><hr id="hrline">
+
+<p>While you were changing the greet branch, someone else decided to update the master branch. They added a README.</p>
+
+<h2 id="switchtothemasterbranch-1">Switch to the master branch.</h2>
+
+<h3 id="execute-66">Execute:</h3>
+
+<pre><code>git checkout master
+</code></pre>
+
+<h2 id="createthereadme">Create the README.</h2>
+
+<h3 id="filereadme">File: README</h3>
+
+<pre><code>This is the Hello World example from the git tutorial.
+</code></pre>
+
+<h2 id="committhereadmetomaster">Commit the README to master.</h2>
+
+<h3 id="execute-67">Execute:</h3>
+
+<pre><code>git add README
+git commit -m "Added README"
+</code></pre>
+
+<h1 id="goalviewdivergingbranches">Goal: View Diverging Branches</h1><hr id="hrline">
+
+<h2 id="viewthecurrentbranches">View the Current Branches</h2>
+
+<p>We now have two diverging branches in the repository. Use the following log command to view the branches and how they diverge.</p>
+
+<h3 id="execute-68">Execute:</h3>
+
+<pre><code>git hist --all
+</code></pre>
+
+<h3 id="output-44">Output:</h3>
+
+<pre><code>$ git hist --all
+* b59a8c2 2013-04-13 | Added README (HEAD, master) [Jim Weirich]
+| * 28917a4 2013-04-13 | Updated Makefile (greet) [Jim Weirich]
+| * 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+| * 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>Here is our first chance to see the <code>--graph</code> option on <code>git hist</code> in action. Adding the <code>--graph</code> option to <code>git log</code> causes it to draw the commit tree using simple ASCII characters. We can see both branches (greet and master), and that the master branch is the current HEAD. The common ancestor to both branches is the “Added a Makefile” branch.</p>
+
+<p>The <code>--all</code> flag makes sure that we see all the branches. The default is to show only the current branch.</p>
+
+<h1 id="goalmergetwodivergingbranchesintoasinglebranch">Goal: Merge two diverging branches into a single branch</h1><hr id="hrline">
+
+<h2 id="mergethebranches">Merge the branches</h2>
+
+<p>Merging brings the changes in two branches together. Let’s go back to the greet branch and merge master onto greet.</p>
+
+<h3 id="execute-69">Execute:</h3>
+
+<pre><code>git checkout greet
+git merge master
+git hist --all
+</code></pre>
+
+<p><strong>Note</strong>: When you try merging, you will enter the default text editor (vim) where you can edit the message. Just keep the message as it is ("Merge branch 'master' into greet") and exit vim by entering :q</p>
+
+<h3 id="output-45">Output:</h3>
+
+<pre><code>$ git checkout greet
+Switched to branch 'greet'
+$ git merge master
+Merge made by 'recursive' strategy.
+ README |    1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README
+$ git hist --all
+*   844d1ed 2013-04-13 | Merge branch 'master' into greet (HEAD, greet) [Jim Weirich]
+|\  
+| * b59a8c2 2013-04-13 | Added README (master) [Jim Weirich]
+* | 28917a4 2013-04-13 | Updated Makefile [Jim Weirich]
+* | 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+* | 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>By merging master into your greet branch periodically, you can pick up any changes to master and keep your changes in greet compatible with changes in the mainline.</p>
+
+<p>However, it does produce ugly commit graphs. Later we will look at the option of rebasing rather than merging.</p>
+
+<h1 id="goalcreatingaconflictingchangeinthemasterbranch">Goal: Creating a Conflicting Change in the Master Branch</h1><hr id="hrline">
+
+<h2 id="switchbacktomasterandcreateaconflict">Switch back to master and create a conflict</h2>
+
+<p>Switch back to the master branch and make this change:</p>
+
+<h3 id="execute-70">Execute:</h3>
+
+<pre><code>git checkout master
+</code></pre>
+
+<h3 id="filelibhellojava-1">File: lib/Hello.java</h3>
+
+<pre><code>import java.util.Scanner;
+
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        System.out.println("What's your name");
+        Scanner in = new Scanner(System.in);
+        String my_name = in.nextLine();
+
+        System.out.println( "Hello, " + my_name + "!" );
+    }
+}
+</code></pre>
+
+<h3 id="execute-71">Execute:</h3>
+
+<pre><code>git add lib/Hello.java
+git commit -m "Made interactive"
+</code></pre>
+
+<h2 id="viewthebranches">View the Branches</h2>
+
+<h3 id="execute-72">Execute:</h3>
+
+<pre><code>git hist --all
+</code></pre>
+
+<h3 id="output-46">Output:</h3>
+
+<pre><code>$ git hist --all
+* 05f32c0 2013-04-13 | Made interactive (HEAD, master) [Jim Weirich]
+| *   844d1ed 2013-04-13 | Merge branch 'master' into greet (greet) [Jim Weirich]
+| |\
+| |/
+|/|  
+* | b59a8c2 2013-04-13 | Added README [Jim Weirich]
+| * 28917a4 2013-04-13 | Updated Makefile [Jim Weirich]
+| * 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+| * 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>Master at commit “Added README” has been merged to the greet branch, but there is now an additional commit on master that has not been merged back to greet.</p>
+
+<h2 id="checkpoint6">Checkpoint 6</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_6 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalresolveconflictsduringamerge">Goal: Resolve Conflicts during a Merge</h1><hr id="hrline">
+
+<h2 id="mergemastertogreet">Merge master to greet</h2>
+
+<p>Now go back to the greet branch and try to merge the new master.</p>
+
+<h3 id="execute-73">Execute:</h3>
+
+<pre><code>git checkout greet
+git merge master
+</code></pre>
+
+<h3 id="output-47">Output:</h3>
+
+<pre><code>$ git checkout greet
+Switched to branch 'greet'
+$ git merge master
+Auto-merging lib/Hello.java
+CONFLICT (content): Merge conflict in lib/Hello.java
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+
+<p>If you open <code>lib/Hello.java</code>, you will see:</p>
+
+<h3 id="filelibhellojava-2">File: lib/Hello.java</h3>
+
+<pre><code>import java.util.Scanner;
+
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+        // Default is "World"
+        String name = "World";
+        if ( argv.length != 0 )
+        {
+            name = argv[0];
+        }
+
+        Greeter greeter = new Greeter(name);
+        System.out.println(greeter.greet());
+=======
+        System.out.println("What's your name");
+        Scanner in = new Scanner(System.in);
+        String my_name = in.nextLine();
+
+        System.out.println( "Hello, " + my_name + "!" );
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; master
+    }
+}
+</code></pre>
+
+<p>The first section is the version on the head of the current branch (greet). The second section is the version on the master branch.</p>
+
+<h2 id="fixtheconflict">Fix the Conflict</h2>
+
+<p>You need to manually resolve the conflict. Modify <code>lib/Hello.java</code> to be the following.</p>
+
+<h3 id="filelibhellojava-3">File: lib/Hello.java</h3>
+
+<pre><code>import java.util.Scanner;
+
+public class Hello
+{
+    public static void main( String argv[] )
+    {
+        System.out.println("What's your name");
+        Scanner in = new Scanner(System.in);
+        String my_name = in.nextLine();
+
+        Greeter greeter = new Greeter(my_name);
+        System.out.println(greeter.greet());
+    }
+}
+</code></pre>
+
+<h2 id="committheconflictresolution">Commit the Conflict Resolution</h2>
+
+<h3 id="execute-74">Execute:</h3>
+
+<pre><code>git add lib/Hello.java
+git commit -m "Merged master fixed conflict."
+</code></pre>
+
+<h3 id="output-48">Output:</h3>
+
+<pre><code>$ git add lib/Hello.java
+$ git commit -m "Merged master fixed conflict."
+[greet 25f0e8c] Merged master fixed conflict.
+</code></pre>
+
+<h2 id="advancedmerging">Advanced Merging</h2>
+
+<p>git doesn’t provide any graphical merge tools, but it will gladly work with any third party merge tool you wish to use. See <a href="http://onestepback.org/index.cgi/Tech/Git/UsingP4MergeWithGit.red">http://onestepback.org/index.cgi/Tech/Git/UsingP4MergeWithGit.red</a> for a description of using the Perforce merge tool with git.</p>
+
+<h1 id="rebasingvsmerging">Rebasing VS Merging</h1><hr id="hrline">
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Let’s explore the differences between merging and rebasing. In order to do so, we need to rewind the repository back in time before the first merge, and then redo the same steps, but using rebasing rather than merging.</p>
+
+<p>We will make use the of the <code>git reset</code> command to wind the branches back in time.</p>
+
+<h1 id="goalresetthegreetbranchtothepointbeforethefirstmerge">Goal: Reset the Greet Branch to the Point Before the First Merge</h1><hr id="hrline">
+
+<h2 id="resetthegreetbranch">Reset the greet branch</h2>
+
+<p>Let’s go back in time on the greet branch to the point before we merged master onto it. We can <strong>reset</strong> a branch to any commit we want. Essentially this is modifying the branch pointer to point to anywhere in the commit tree.</p>
+
+<p>In this case we want to back greet up to the point prior to the merge with master. We need to find the last commit before the merge.</p>
+
+<h3 id="execute-75">Execute:</h3>
+
+<pre><code>git checkout greet
+git hist
+</code></pre>
+
+<h3 id="output-49">Output:</h3>
+
+<pre><code>$ git checkout greet
+Already on 'greet'
+$ git hist
+*   25f0e8c 2013-04-13 | Merged master fixed conflict. (HEAD, greet) [Jim Weirich]
+|\  
+| * 05f32c0 2013-04-13 | Made interactive (master) [Jim Weirich]
+* |   844d1ed 2013-04-13 | Merge branch 'master' into greet [Jim Weirich]
+|\ \  
+| |/  
+| * b59a8c2 2013-04-13 | Added README [Jim Weirich]
+* | 28917a4 2013-04-13 | Updated Makefile [Jim Weirich]
+* | 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+* | 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>That’s a bit hard to read, but looking at the data we see that the “Updated Makefile” commit was the last commit on the greet branch before merging. Let’s reset the greet branch to that commit.</p>
+
+<h3 id="execute-76">Execute:</h3>
+
+<pre><code>git reset --hard &lt;hash&gt;
+</code></pre>
+
+<h3 id="output-50">Output:</h3>
+
+<pre><code>$ git reset --hard 28917a4
+HEAD is now at 28917a4 Updated Makefile
+</code></pre>
+
+<h2 id="checkthebranch">Check the branch.</h2>
+
+<p>Look at the log for the greet branch. We no longer have the merge commits in its history.</p>
+
+<h3 id="execute-77">Execute:</h3>
+
+<pre><code>git hist --all
+</code></pre>
+
+<h3 id="output-51">Output:</h3>
+
+<pre><code>$ git hist --all
+* 05f32c0 2013-04-13 | Made interactive (master) [Jim Weirich]
+* b59a8c2 2013-04-13 | Added README [Jim Weirich]
+| * 28917a4 2013-04-13 | Updated Makefile (HEAD, greet) [Jim Weirich]
+| * 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+| * 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<h1 id="resettingthemasterbranchtobeforetheconflictingcommit">Resetting the Master Branch to before the Conflicting Commit</h1><hr id="hrline">
+
+<h2 id="resetthemasterbranch">Reset the master branch</h2>
+
+<p>When we added the interactive mode to the master branch, we made a change that conflicted with changes in the greet branch. Let’s rewind the master branch to a point before the conflicting change. This allows us to demonstrate the rebase command without worrying about conflicts.</p>
+
+<h3 id="execute-78">Execute:</h3>
+
+<pre><code>git checkout master
+git hist
+</code></pre>
+
+<h3 id="output-52">Output:</h3>
+
+<pre><code>$ git hist
+* 05f32c0 2013-04-13 | Made interactive (HEAD, master) [Jim Weirich]
+* b59a8c2 2013-04-13 | Added README [Jim Weirich]
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>The ‘Added README’ commit is the one directly before the conflicting interactive mode. We will reset the master branch to ‘Added README’ branch.</p>
+
+<h3 id="execute-79">Execute:</h3>
+
+<pre><code>git reset --hard &lt;hash&gt;
+git hist --all
+</code></pre>
+
+<p>Review the log. It should look like the repository has been wound back in time to the point before we merged anything.</p>
+
+<h3 id="output-53">Output:</h3>
+
+<pre><code>$ git hist --all
+* b59a8c2 2013-04-13 | Added README (HEAD, master) [Jim Weirich]
+| * 28917a4 2013-04-13 | Updated Makefile (greet) [Jim Weirich]
+| * 4dac415 2013-04-13 | Hello uses Greeter [Jim Weirich]
+| * 39347b3 2013-04-13 | Added greeter class [Jim Weirich]
+|/  
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<h1 id="goalusetherebasingcommandinsteadofthemergecommand">Goal: Use the Rebasing command instead of the Merge command</h1><hr id="hrline">
+
+<p>Ok, we are back in time before the first merge and we want to get the changes in master into our greet branch.</p>
+
+<p>This time we will use the rebase command instead of the merge command to bring in the changes from the master branch.</p>
+
+<h3 id="execute-80">Execute:</h3>
+
+<pre><code>git checkout greet
+git rebase master
+git hist
+</code></pre>
+
+<h3 id="output-54">Output:</h3>
+
+<pre><code>$ git checkout greet
+Switched to branch 'greet'
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: Added greeter class
+Applying: Hello uses Greeter
+Applying: Updated Makefile
+$ git hist
+* 2fae0b2 2013-04-13 | Updated Makefile (HEAD, greet) [Jim Weirich]
+* 1c23048 2013-04-13 | Hello uses Greeter [Jim Weirich]
+* 62d7ce0 2013-04-13 | Added greeter class [Jim Weirich]
+* b59a8c2 2013-04-13 | Added README (master) [Jim Weirich]
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<h2 id="mergevsrebase">Merge VS Rebase</h2>
+
+<p>The final result of the rebase is very similar to the merge. The greet branch now contains all of its changes, as well as all the changes from the master branch. However, the commit tree is quite different. The commit tree for the greet branch has been rewritten so that the master branch is a part of the commit history. This leaves the chain of commits linear and much easier to read.</p>
+
+<h2 id="whentorebasewhentomerge">When to Rebase, When to Merge?</h2>
+
+<p>Don’t use rebase …</p>
+
+<ol>
+<li>If the branch is public and shared with others. Rewriting publicly shared branches will tend to screw up other members of the team.</li>
+
+<li>When the exact history of the commit branch is important (since rebase rewrites the commit history).
+Given the above guidelines, I tend to use rebase for short-lived, local branches and merge for branches in the public repository.</li>
+</ol>
+
+<h2 id="finalcheckpoint">Final Checkpoint!</h2>
+
+<p>If you think you messed up somewhere, use the commands</p>
+
+<pre><code>$ cd ~
+$ rm -rf ~/Lab5/work/hello
+$ cp -r ~/Lab5/repos/checkpoint_7 ~/Lab5/work/hello
+</code></pre>
+
+<p>to overwrite your directory with the correct version.</p>
+
+<h1 id="goalmergegreetchangesbacktomaster">Goal: Merge greet changes back to master</h1><hr id="hrline">
+
+<h2 id="mergegreetintomaster">Merge greet into master</h2>
+
+<h3 id="execute-81">Execute:</h3>
+
+<pre><code>git checkout master
+git merge greet
+</code></pre>
+
+<h3 id="output-55">Output:</h3>
+
+<pre><code>$ git checkout master
+Switched to branch 'master'
+$ git merge greet
+Updating b59a8c2..2fae0b2
+Fast-forward
+ Makefile         |    2 +-
+ lib/Greeter.java |    12 ++++++++++++
+ lib/Hello.java   |    4 ++--
+ 3 files changed, 15 insertions(+), 3 deletions(-)
+ create mode 100644 lib/Greeter.java
+</code></pre>
+
+<p>Because the head of master is a direct ancestor of the head of the greet branch, git is able to do a fast-forward merge. When fast-forwarding, the branch pointer is simply moved forward to point to the same commit as the greeter branch.</p>
+
+<p>There will never be conflicts in a fast-forward merge.</p>
+
+<h2 id="reviewthelogs">Review the logs</h2>
+
+<h3 id="execute-82">Execute:</h3>
+
+<pre><code>git hist
+</code></pre>
+
+<h3 id="output-56">Output:</h3>
+
+<pre><code>$ git hist
+* 2fae0b2 2013-04-13 | Updated Makefile (HEAD, master, greet) [Jim Weirich]
+* 1c23048 2013-04-13 | Hello uses Greeter [Jim Weirich]
+* 62d7ce0 2013-04-13 | Added greeter class [Jim Weirich]
+* b59a8c2 2013-04-13 | Added README [Jim Weirich]
+* 96ee164 2013-04-13 | Added a Makefile. [Jim Weirich]
+* 0f36766 2013-04-13 | Moved Hello.java to lib [Jim Weirich]
+* eb30103 2013-04-13 | Add an author/email comment [Jim Weirich]
+* 1f7ec5e 2013-04-13 | Added a comment (v1) [Jim Weirich]
+* 582495a 2013-04-13 | Added a default value (v1-beta) [Jim Weirich]
+* 323e28d 2013-04-13 | Using ARGV [Jim Weirich]
+* 9416416 2013-04-13 | First Commit [Jim Weirich]
+</code></pre>
+
+<p>The greet and master branches are now identical.</p>
+
+<h1 id="setupgitlabaccounts">Set Up GitLab Accounts</h1><hr id="hrline">
+
+<p>Now that you've gone through some of the most commonly used git commands, let's learn how to interact with a Git server. From this point on, we will be interacting with the GitLab server provided by UCSD to host the repository. Log in with your UCSD account (without "@ucsd.edu"), <strong>NOT your 15L account</strong>, and then follow the steps below to set up your account. <a href="https://git.ucsd.edu/">Click here to login to UCSD GitLab</a>.</p>
+
+<p>Setting up SSH Keys
+Before we create a project on GitLab, we must set up SSH keys to establish a secure connection between your computer and GitLab. <a href="https://git.ucsd.edu/help/ssh">Follow the instructions here to generate an SSH key</a>. See the image below to find where to place the SSH key in GitLab.</p>
+
+<p><img src="./Lab 5_ Git_files/setupaccounts.png" alt="Set up SSH Keys"></p>
+
+<h1 id="addanewprojecttothegitserver">Add a New Project to the Git Server</h1><hr id="hrline">
+
+<p>We will start by creating the repository on UCSD's GitLab, and then initializing it on your computer, but you can do this in any order.</p>
+
+<p><strong><em>(Partner 1 should be the driver at this point)</em></strong></p>
+
+<p>We will be using Partner 1's GitLab account. Once you are logged in to GitLab, create a new repository by clicking the "+" button in the top right corner of the page. Fill in the project information as follows, making sure to call the project "Lab5":</p>
+
+<p><img src="./Lab 5_ Git_files/newprojectgitserver.png" alt="Add Repo"></p>
+
+<h1 id="goaladdaremote">Goal: Add a Remote</h1><hr id="hrline">
+
+<p>Once you have created the project on GitLab, we need to set up the repository on your computer. Open up your terminal and execute the following to create a folder to hold the repository. Let's call this folder "lab5-1".</p>
+
+<h3 id="execute-83">Execute:</h3>
+
+<pre><code>mkdir ~/lab5_gitlab
+mkdir ~/lab5_gitlab/lab5-1
+cd ~/lab5_gitlab/lab5-1
+git init
+</code></pre>
+
+<p>In order for you to be able to push your changes to the GitLab server, you need to set up a connection between your working directory and the server with a remote. Set up a remote connection to the GitLab repository with the following command. Make sure to replace "YOURACCOUNT" with your GitLab account.</p>
+
+<h3 id="execute-84">Execute:</h3>
+
+<pre><code>git remote add origin git@git.ucsd.edu:YOURACCOUNT/lab5.git
+</code></pre>
+
+<p>This command will add a remote named <code>origin</code> for the repository at the URL <code>git@git.ucsd.edu:YOURACCOUNT/lab5.git</code>. Ensure that <code>origin</code> has been added to your remotes by executing the following.</p>
+
+<h3 id="execute-85">Execute:</h3>
+
+<pre><code>git remote
+</code></pre>
+
+<p>You should see <code>origin</code> get printed out. You have now established a connection between your local repository and the repository on the Git server.</p>
+
+<h1 id="goalpushachangetotheserver">Goal: Push a Change to the Server</h1><hr id="hrline">
+
+<p>Now that we have a remote to the GitLab repository, let's create a new file "partner1.txt" to put into our online repository.</p>
+
+<h3 id="execute-86">Execute:</h3>
+
+<pre><code>touch partner1.txt
+</code></pre>
+
+<p>Now, let's stage and commit our new "partner1.txt" file.</p>
+
+<h3 id="execute-87">Execute:</h3>
+
+<pre><code>git add partner1.txt
+git commit -m "partner 1 commit"
+</code></pre>
+
+<p>However, there is one more step we need to do to get our changes onto the GitLab server. Since we are currently on the "master" branch by default, our changes are located in the "master" branch. Thus, we use "git push" onto the "origin" remote from our "master" branch with the following command.</p>
+
+<h3 id="execute-88">Execute:</h3>
+
+<pre><code>git push origin master
+</code></pre>
+
+<p>(If you are prompted to log in with "git@git ...", please make sure that you have added your SSH key correctly). You can now check GitLab projects (<a href="https://git.ucsd.edu/dashboard/projects">here</a>) and you should see your commit and the "partner1.txt" file under <code>Lab5 &gt; Files</code>.</p>
+
+<h1 id="addacollaborator">Add a Collaborator</h1><hr id="hrline">
+
+<p>In order to grant others access to our repository, we must give them permission to do so on the server. To do this, navigate to the homepage of your Lab5 project on GitLab (click here and click "Lab5").</p>
+
+<p>Once you are there, click <code>Settings &gt; Members &gt; New Project Member</code> to add a new collaborator.</p>
+
+<p><img src="./Lab 5_ Git_files/addcollaborator.png" alt="Add Collaborator"></p>
+
+<p>Search for Partner 2's GitLab username and grant them permission to edit the repository. You can do this by setting the access level to "Developer".</p>
+
+<p>Now, both partners should have access to the Lab5 repository on GitLab.</p>
+
+<h1 id="clonearepository">Clone a Repository</h1><hr id="hrline">
+
+<p><strong>(Partner 2 should be the driver at this point)</strong></p>
+
+<p>Let's try cloning an existing repository by cloning the Lab5 GitLab repository. On Partner 1's GitLab account (the account with Lab5 on it), navigate to the project home page to find the SSH URL. Click the house icon and copy the SSH link in the box in the top right corner.</p>
+
+<p><img src="./Lab 5_ Git_files/clonerepo.png" alt="Clone a Repo"></p>
+
+<p>You'll notice that this is also the link that we used earlier in when we were adding a remote. This time, you will be using this link to clone this repository.</p>
+
+<p>Open up your terminal and type in the following, replacing <code>THE_LINK_YOU_JUST_COPIED</code> with the link you just copied.</p>
+
+<h3 id="execute-89">Execute:</h3>
+
+<pre><code>cd ~/lab5_gitlab
+git clone THE_LINK_YOU_JUST_COPIED
+</code></pre>
+
+<p>This will clone the repository in a folder called "lab5". Your "lab5_gitlab" directory should now have a "lab5" directory, belonging to Partner 1, and "lab5-1" directory, belonging to partner 1.</p>
+
+<p>Let's execute the following to see our remotes for "lab5".</p>
+
+<h3 id="execute-90">Execute:</h3>
+
+<pre><code>cd ~/lab5_gitlab/lab5
+git remote
+</code></pre>
+
+<p>You'll notice that the remote <code>origin</code> has already been set up for you this time thanks to the <code>git clone</code>, so we don't need to go through the process of adding a remote.</p>
+
+<h1 id="goalpullachangefromtheserver">Goal: Pull a Change from the Server</h1><hr id="hrline">
+
+<p>Staying in our "lab5" folder (<strong>NOT</strong> "lab5-1"), let's create a new file "partner2.txt" to put into our online repository.</p>
+
+<h3 id="execute-91">Execute:</h3>
+
+<pre><code>touch partner2.txt
+</code></pre>
+
+<p>And then let's stage, commit, and push our new "partner2.txt" file.</p>
+
+<h3 id="execute-92">Execute:</h3>
+
+<pre><code>git add partner2.txt
+git commit -m "partner 2 commit"
+git push origin master
+</code></pre>
+
+<p>You can now check to make sure that both "partner1.txt" and "partner2.txt" under <code>Lab5 &gt; Files</code> in your GitLab Lab5 project.</p>
+
+<h2 id="pullingachange">Pulling a Change</h2>
+
+<p>On the terminal, let's go back and look at partner 1's folder, "lab5-1". Notice the difference when we list the items in "lab5" vs "lab5-1".</p>
+
+<h3 id="execute-93">Execute:</h3>
+
+<pre><code>ls ~/lab5_gitlab/lab5
+ls ~/lab5_gitlab/lab5-1
+</code></pre>
+
+<p>"lab5" contains "partner1.txt" and "partner2.txt" while "lab5-1" still only contains "partner1.txt". Since "lab5-1" doesn't have the "partner2.txt" file yet, we will have to do a <code>git pull</code> to get it from the server.</p>
+
+<h3 id="execute-94">Execute:</h3>
+
+<pre><code>git pull origin master
+</code></pre>
+
+<p>Now, if you do an <code>ls</code> in your "lab5-1" directory, you should also see that "partner2.txt" is now there.</p>
+
+<p>You have successfully learned how to do <code>git</code> push and <code>git pull</code>.</p>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ul>
+<li>A history of changes in your UCSD GitLab account</li>
+
+<li>A history of your commits</li>
+
+<li>Lab 5 README file with the questions answered</li>
+</ul>
+
+<p>Additionally, if you want more practice with Git, you can try out GitHub's very fun and cute interactive tutorial here (not required for checkoff). </p>
+
+<h1 id="references">References</h1><hr id="hrline">
+
+<p><a href="http://gitimmersion.com/">http://gitimmersion.com/</a> 
+<a href="http://git-scm.com/book/en/Getting-Started-A-Short-History-of-Git">http://git-scm.com/book/en/Getting-Started-A-Short-History-of-Git</a>
+<a href="https://github.com/features">https://github.com/features</a>
+<a href="https://help.github.com/articles/create-a-repo/">https://help.github.com/articles/create-a-repo/</a>
+<a href="https://git.ucsd.edu/help/ssh">https://git.ucsd.edu/help/ssh</a>
+<a href="https://try.github.io/">https://try.github.io</a></p></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 5_ Git_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 5_ Git_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 5_ Git_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 5_ Git_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 5_ Git_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

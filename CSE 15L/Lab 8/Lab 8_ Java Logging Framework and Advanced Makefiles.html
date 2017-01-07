@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 8: Java Logging Framework and Advanced Makefiles</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#lab8javaloggingframeworkandadvancedmakefiles">Lab 8: Java Logging Framework and Advanced Makefiles</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#sectionabecomingfamiliarwiththejavaloggingframework">Section A: Becoming Familiar with the Java Logging Framework</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#gettingstarted">Getting Started</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#goalproperlyconfigurethejavaloggingframework">Goal: Properly Configure the Java Logging Framework</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#goalunderstandinghowtousedebugtracinginthejavaloggingapi">Goal: Understanding how to use Debug Tracing in the Java Logging API</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#exampledebugexercise">Example Debug Exercise</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#sectionbunderstandingadvancedmakefiles">Section B: Understanding Advanced Makefiles</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#makefiletask">Makefile Task</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#goalcreateacandarchivingsubtaskinmakefile">Goal: Create a C++ and Archiving subtask in Makefile</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#goalcreateajavasubtaskinmakefile">Goal: Create a Java subtask in Makefile</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#goalconsolidatesubtasksintoonemakefiletask">Goal: Consolidate subtasks into one Makefile task</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab8_mpoifw/index.html#checkoff">Checkoff</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab8javaloggingframeworkandadvancedmakefiles">Lab 8: Java Logging Framework and Advanced Makefiles</h1><hr id="hrline">
+
+<!-- This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has two components: a lab exercise, and a quiz.
+    </li>
+    <li>
+      For the lab exercise, youâ€™ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top -->
+
+<h1 id="sectionabecomingfamiliarwiththejavaloggingframework">Section A: Becoming Familiar with the Java Logging Framework</h1><hr id="hrline">
+
+<h1 id="gettingstarted">Getting Started</h1><hr id="hrline">
+
+<p>Open a terminal window. In your home directory, create a directory named Lab8, and cd to it. You will work within that directory for this lab:</p>
+
+<pre><code>$ mkdir Lab8
+$ cd Lab8
+</code></pre>
+
+<h3 id="acquirethelabfiles">Acquire The Lab Files</h3>
+
+<p>Copy all the contents of the public Lab8 directory into what is now your current working directory, Lab8. 
+(Be sure to note the period as the last argument to the cp command here; it is specifying the current working directory as the destination of the copy operation. 
+The -r flag means to recursively copy subdirectories; the * wildcard matches all contents of the public Lab8 directory.)</p>
+
+<pre><code>$ cp -r ~/../public/Lab8/* .
+</code></pre>
+
+<p>Do an <code>ls</code> to see the contents of your cwd. You should see the following files: <strong>Lab8.java, FileUtility.java, FileUtility.class, Uniq.class,logging.properties, input.txt, test.txt, Makefile, makefile_assignment.</strong></p>
+
+<h1 id="goalproperlyconfigurethejavaloggingframework">Goal: Properly Configure the Java Logging Framework</h1><hr id="hrline">
+
+<p>Open the file logging.properties in a text editor of your choice.</p>
+
+<p>The first thing we need to do is to specify the Handlers that we will be using with our Logger objects. 
+Jump to section 1, titled <code>"Global logging properties"</code>, and uncomment the following line (comments start with a # and go to the end of the line):</p>
+
+<pre><code>#handlers=
+</code></pre>
+
+<p>Then add two handlers: </p>
+
+<pre><code>handlers=java.util.logging.FileHandler, \
+     java.util.logging.ConsoleHandler
+</code></pre>
+
+<p>Each log message has an associated log Level. The Level specifies the importance and urgency of a log message. Levels are really integers, with higher values indicating higher priorities.</p>
+
+<p>The <a href="https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html">Level class</a> defines seven standard log levels as named constants, ranging from FINEST (the lowest priority, with the lowest value) to SEVERE (the highest priority, with the highest value).</p>
+
+<h3 id="question1writeoutthesevenstandardloglevelsfromfinesttosevere">Question 1: Write out the seven standard log levels from FINEST to SEVERE.</h3>
+
+<p>Now, we want to set the default global logging Level. We will set the global level to FINEST. This level will apply to all Loggers and Handlers, unless specifically overridden, and means that no messages will be ignored. To change this, we can then specify another level for a particular Logger or Handler. This will allow us to efficiently control which messages we want to print to the console or to the file.</p>
+
+<p>In logging.properties go to section 2, <code>"Default global logging level"</code>, and uncomment the following line:</p>
+
+<pre><code># .level=
+</code></pre>
+
+<p>Change it to read:</p>
+
+<pre><code>.level=FINEST
+</code></pre>
+
+<p>Next, we will set the level of the Handlers separately. Jump to section 3, <code>"Console Handler"</code>, and uncomment the following line:</p>
+
+<pre><code># java.util.logging.ConsoleHandler.level=
+</code></pre>
+
+<p>Change it to read:</p>
+
+<pre><code>java.util.logging.ConsoleHandler.level=FINEST
+</code></pre>
+
+<p>so that the level is set to FINEST for now. (This is the same as the global level you set above; we will be able to change it later though, which will be useful for controlling tracing output.)</p>
+
+<p>Do the same for the FileHandler; set its level to <code>FINEST</code>, at least for now.</p>
+
+<p>Look at the "pattern" property (but do not change it) in section 5. It specifies the pattern of the name of the logfile that FileHandler should use.log for your program. Here it is specified as uniq.log.</p>
+
+<p>Finally, jump to section 7 and set the output formatter of <strong>both</strong> of the Handlers to SimpleFormatter. For example:</p>
+
+<pre><code>java.util.logging.FileHandler.formatter=java.util.logging.SimpleFormatter
+</code></pre>
+
+<p>Your properties file is now ready. We will use it to configure our Loggers for debug tracing. Our Java application can now be launched and pointed to the configuration file by passing the <code>java.util.logging.config.file</code> command line parameter as illustrated here:</p>
+
+<pre><code>java -Djava.util.logging.config.file=  
+</code></pre>
+
+<h3 id="question2whatisthemainpurposeoftheconsolehandlerclassintheloggingframework">Question 2: What is the main purpose of the ConsoleHandler class in the logging framework?</h3>
+
+<h3 id="question3whatlevelwouldiusetoturnoffloggingwhatlevelwouldiusetoenabletheloggingofallmessagesuseleveldocumentation">Question 3: What level would I use to turn off logging? What level would I use to enable the logging of all messages? (Use Level Documentation)</h3>
+
+<h1 id="goalunderstandinghowtousedebugtracinginthejavaloggingapi">Goal: Understanding how to use Debug Tracing in the Java Logging API</h1><hr id="hrline">
+
+<p>Tracing involves logging messages which report the state of the application at different stages of execution. In the Java logging framework, there are three levels that should be used for tracing: <code>FINE</code>, <code>FINER</code> and <code>FINEST</code>.</p>
+
+<p><strong>FINE:</strong> Use this level for significant events that explain the flow or state of the system when trying to understand or debug a problem. These are usually at the level of object creation, catch clauses for exceptions that do not constitute errors, and so on.</p>
+
+<p><strong>FINER:</strong> There is a set of Logger methods that generate messages with a FINER level. These are <code>entry(...)</code>, <code>exit(..)</code>, <code>finer(..)</code> (This is a method named finer; different from a logging level called FINER) and <code>throwing(..)</code>. Entering and exiting should be used for tracing method entry and exit; arguments and return values can be specified. Finer can be used for any tracing that is more verbose than desired for fine, but is not method entry/exit or used before throwing an exception. Throwing should be used when you are about to throw or re-throw an exception.</p>
+
+<p><strong>FINEST:</strong> Finest is usually thought of as developer or debug tracing. This is used during development, when attempting to learn the behavior of a system at a fine level of detail and when trying to diagnose difficult problems once the code is released. This level of tracing can be used to track the state of instance variables in a class e.g. before a method call, inside a method or a loop and after a method call.</p>
+
+<p>You are required to implement tracing at the <strong>FINER</strong> and <strong>FINEST</strong> levels for this lab. The file Lab8.java contains a skeleton that a developer might use to trace the execution of a program in order to uncover the bugs in the removeDuplicates() method.</p>
+
+<h1 id="exampledebugexercise">Example Debug Exercise</h1><hr id="hrline">
+
+<p>Program Specification: The Java program named Lab8.java should emulate the main functionality of the GNU (Linux) uniq program. It is a simplified version that sorts the contents of a file and does a case insensitive comparison of consecutive lines. It outputs a file with consecutive identical lines collapsed to just one copy.</p>
+
+<p>The version of the program given to you in the Lab8.java file has one bug. It is your job to make it meet the specification above and work correctly on the sample input. You will use the logger output to find and fix the bug.</p>
+
+<p>First let's test our input file with a <strong>bug free implementation</strong> of the program, which has been compiled as the bytecode file <strong>Uniq.class</strong>. In the following example, the "$" represents the command prompt. Example:</p>
+
+<pre><code>$ cat input.txt 
+hello 
+world 
+collections 
+linked 
+Hello 
+list
+</code></pre>
+
+<pre><code>$ java -Djava.util.logging.config.file=logging.properties Uniq input.txt output.txt
+or 
+$ make uniq
+</code></pre>
+
+<pre><code>$ cat output.txt 
+collections 
+hello 
+linked 
+list 
+world
+</code></pre>
+
+<p><em>Notes:</em></p>
+
+<ol>
+<li><em>Test the program using a different set of inputs to verify correctness</em></li>
+
+<li><em>The functions defined in FileUtility.java can be assumed to be bug free</em></li>
+</ol>
+
+<p>Open Lab8.java and get started on the debugging exercise. The Logger has already been defined for you at the bottom of the class:</p>
+
+<p><code>private Logger logger = Logger.getLogger(Lab8.class.getName());</code></p>
+
+<p>At the top of the run(..) method, type in the following code, to implement <strong>FINER tracing.</strong></p>
+
+<pre><code>logger.entering(Lab8.class.getName(), "run(String[] args)", args);
+</code></pre>
+
+<p>Do the same at the end of the run method:</p>
+
+<pre><code>logger.exiting(Lab8.class.getName(), "run(String[] args)"); 
+</code></pre>
+
+<p>We create a message at level Fine to indicate whether the private member linked list is empty, as an example:</p>
+
+<pre><code>//FINE Log : Whether the linked list is empty or not? 
+logger.fine("words.empty() = " + words.isEmpty());
+</code></pre>
+
+<p>Now look for the comments in function run() which indicate that FINE log should be added:
+<code>//FINE Log : What is the size of the linked list?</code></p>
+
+<p>Learn from the previous example and try to implement a FINE tracing here.</p>
+
+<h2 id="switchdriver">[SWITCH DRIVER]</h2>
+
+<p>The function <code>removeDuplicates()</code> has <strong>one bug</strong>. Your job is to find that bug by adding logging calls in a smart way, and looking at the logging output. Follow the following steps to find and fix the bug:</p>
+
+<p>Implement FINEST tracing for the removeDuplicates() method. Comments in the code indicate some places where it might be useful to trace the state of local variables. For example you might want to see if a remove gets called.</p>
+
+<p>Compile Lab8.java and observe output from the console and the log file. The command line parameter uses the <strong>logging.properties</strong> file to configure the logging settings.</p>
+
+<pre><code>$ javac Lab8.java
+$ java -Djava.util.logging.config.file=logging.properties Lab8 input.txt output.txt 
+</code></pre>
+
+<p>(You can use <strong>make Lab8</strong> instead of those two commands.)</p>
+
+<p>The log file (whose name is specified by the Filehandler pattern in <code>logging.properties</code>) should contain a trace of all the log messages in Lab8.java.</p>
+
+<p>Use the output from your log file (tracing the state of local variables), the program specification and the example run to help you to reason about the location of the bug.</p>
+
+<p>Once you are satisfied that the program is working according to the specification and example run, you'll want to verify the correctness (make sure it runs correctly) of the program by running the test input test.txt. Modify test.txt and insert your own words and duplicates, and then run the following:</p>
+
+<pre><code>$ make test
+</code></pre>
+
+<p>Now you have debugged the program. Since debugging is done, we will disable the tracing output.</p>
+
+<p>One way is to edit the Lab8.java source file to remove the tracing logger calls. But editing source code is error prone. It is better to edit the properties file instead, to specify a higher level for the Handlers; say, SEVERE. Then console output should be disabled for these low-level, FINEST messages. Essentially, only the SEVERE messages and higher are displayed. Since SEVERE is the highest level, only SEVERE log messages will be printed as there is no other messages of higher level.</p>
+
+<pre><code># 3. --- ConsoleHandler --- 
+# Override of global logging level 
+java.util.logging.ConsoleHandler.level=SEVERE 
+# 4. --- FileHandler --- 
+# Override of global logging level 
+java.util.logging.FileHandler.level=SEVERE 
+</code></pre>
+
+<p>Another way is to run the program without using -D to specify a logging properties file at all. Then the default levels will be used for all Handlers and Loggers, which is higher than FINER. Look at the rule for notrace in Makefile, and try it.</p>
+
+<h2 id="checkpoint">Checkpoint!</h2>
+
+<p>Make sure you check the following before moving on with the rest of the lab.</p>
+
+<p>Yes or No:</p>
+
+<p><em>_</em>_ FINER and FINEST tracing implemented for run(..) method</p>
+
+<p><em>_</em>_ FINER and FINEST tracing implemented for removeDuplicates(..) method</p>
+
+<p><em>_</em>_ removeDuplicates produces correct output for input.txt</p>
+
+<p><em>_</em>_ removeDuplicates produces correct output for test.txt</p>
+
+<h1 id="sectionbunderstandingadvancedmakefiles">Section B: Understanding Advanced Makefiles</h1><hr id="hrline">
+
+<p>In this section, you are responsible for constructing a multi-level Makefile scheme for the supplied directory tree. The directory tree contains C, SPARC assembly, C++, and Java source in various subdirectories.In order to complete this lab, modifying the source files and/or the actual directory tree is <strong>NOT</strong> necessary.</p>
+
+<p><strong>NOTE:</strong> Each Makefile you construct should be able to recognize changes in any of the files it depends on or generates. For example, a change in one of the header files in the "sfiles" directory of the "C subtask" should result in a recompile the next time "make" is run in that directory.</p>
+
+<p><strong>NOTE:</strong> This part of the lab is just an introduction. It is okay if you do not get through this part of the lab as you will encounter this lab again next time.</p>
+
+<p><strong>Useful Link:</strong></p>
+
+<p><a href="http://www.gnu.org/software/make/">http://www.gnu.org/software/make/</a> </p>
+
+<p>Additionally, you can always turn to command:</p>
+
+<pre><code>$ man make
+</code></pre>
+
+<h3 id="question4writeoutthegeneralformatforamakefiletargetdependencyactionorcommand">Question 4: Write out the general format for a Makefile target/dependency/action or command.</h3>
+
+<h1 id="makefiletask">Makefile Task</h1><hr id="hrline">
+
+<p>Change directory to your <strong>Lab8</strong> folder, and then type following command:</p>
+
+<pre><code>$ cd makefile_assignment
+</code></pre>
+
+<p>The directory tree you will be working with has the following root:</p>
+
+<p>makefile_assignment/: &lt;== Goto this directory</p>
+
+<p>The directory <strong>makefile_assignment</strong> contains the following four subdirectories:</p>
+
+<pre><code>bin/        c/        cpp/        java/
+</code></pre>
+
+<p>Except for <strong>makefile_assignment</strong>, each subdirectory above represents a subtask. Be aware that there are further subtasks in <strong>C++ and archiving subtask</strong>! These subtasks will be described before the "Makefile task", because "Makefile task" depends on all of them as subtasks.</p>
+
+<p><strong>Useful</strong>:</p>
+
+<ul>
+<li><a href="http://www.cs.bu.edu/teaching/cpp/writing-makefiles/">http://www.cs.bu.edu/teaching/cpp/writing-makefiles/</a></li>
+
+<li><a href="http://mrbook.org/blog/tutorials/make/">http://mrbook.org/blog/tutorials/make/</a></li>
+</ul>
+
+<h1 id="goalcreateacandarchivingsubtaskinmakefile">Goal: Create a C++ and Archiving subtask in Makefile</h1><hr id="hrline">
+
+<h2 id="createanarchivingsubtask">Create an Archiving subtask</h2>
+
+<p>The directory <code>makefile_assignment/cpp/lib/</code> contains the following C++ source and header files:</p>
+
+<pre><code>factorial.h         sum_4_numbers.h         summation.h
+factorial.cpp       sum_4_numbers.cpp       summation.cpp
+</code></pre>
+
+<p>For this subtask ("Archiving subtask"), you must write a Makefile in the <code>cpp/lib</code> directory to do the tasks below. To create a Makefile, open up a text editor of your choice and save the file as "Makefile":</p>
+
+<h3 id="defaulttarget">default target:</h3>
+
+<p>Compile all source files into object code files.\
+Using the archiver, <code>ar</code>, archive the object code files into an archive named <code>libFunctions.a</code>. You can use the command below for this step:</p>
+
+<pre><code>ar rcs libFunctions.a factorial.o sum_4_numbers.o summation.o
+</code></pre>
+
+<p><strong>Useful</strong>: <a href="http://www.ibm.com/support/knowledgecenter/ssw_aix_61/com.ibm.aix.cmds1/ar.htm">http://www.ibm.com/support/knowledgecenter/ssw_aix_61/com.ibm.aix.cmds1/ar.htm</a>  </p>
+
+<p>Example for compiling source file, <code>file_name.cpp</code> into object code file: </p>
+
+<pre><code>g++ -c file_name.cpp
+</code></pre>
+
+<h3 id="cleantarget">clean target:</h3>
+
+<ol>
+<li>Delete the archive "libFunctions.a".</li>
+
+<li>Delete the object code files in this directory. \
+Use <code>rm -f</code> to remove specified files.</li>
+</ol>
+
+<h3 id="newtarget">new target:</h3>
+
+<ol>
+<li>"make" the "clean" target.</li>
+
+<li>"make" the "default" target.</li>
+</ol>
+
+<h2 id="createacsubtaskinmakefile">Create a C++ subtask in Makefile</h2>
+
+<p><strong>Useful</strong>: How to call another Makefile from within a Makefile: <a href="http://stackoverflow.com/questions/2206128/makefile-calling-another-makefile">http://stackoverflow.com/questions/2206128/makefile-calling-another-makefile</a></p>
+
+<h2 id="csubtask">C++ subtask</h2>
+
+<p>For this subtask ("C++ subtask"), you must write a Makefile (in the cpp directory) to do the following:</p>
+
+<h3 id="defaulttarget-1">default target:</h3>
+
+<ol>
+<li>"make" the "lib/" directory contents. To execute Makefile of subfolder lib, from inside parent directory Makefile, use:</li>
+</ol>
+
+<pre><code>make -C lib/ [target]
+</code></pre>
+
+<p>Replace target with new, clean, etc. as required.</p>
+
+<ol>
+<li>Compile the source file in this directory (cpp), "main.cpp", into an object code file.</li>
+
+<li>Link all object code files into a executable named "cpp.exe". Remember that the "Archiving subtask" creates an archive (.a file) on which "main.cpp" depends. Link that archive file as well.</li>
+
+<li>Copy "cpp.exe" into the directory "../bin/".</li>
+</ol>
+
+<p><strong>Hints:</strong></p>
+
+<ul>
+<li>Example for compiling <code>file_name.cpp</code>: </li>
+</ul>
+
+<pre><code>g++ -c file_name.cpp
+</code></pre>
+
+<ul>
+<li>Example for linking files: <code>file_name1.o</code>, <code>file_name2.o</code>, <code>archive_file.a</code> into <code>file_name.exe</code>:</li>
+</ul>
+
+<pre><code>g++ -o file_name.exe file_name1.o file_name2.o archive_file.a
+</code></pre>
+
+<h3 id="cleantarget-1">clean target:</h3>
+
+<ol>
+<li>Clean the "lib" directory.</li>
+
+<li>Delete the object code files in this directory.</li>
+</ol>
+
+<h3 id="newtarget-1">new target:</h3>
+
+<ol>
+<li>"make" the "clean" target.</li>
+
+<li>"make" the "default" target.</li>
+</ol>
+
+<h1 id="goalcreateajavasubtaskinmakefile">Goal: Create a Java subtask in Makefile</h1><hr id="hrline">
+
+<p>The directory <code>makefile_assignment/java/</code> contains a single Java source file, <code>Main.java</code>, and no subdirectories.</p>
+
+<p>For this subtask ("Java subtask"), you must write a Makefile in the <strong>java</strong> directory to do the following:</p>
+
+<h3 id="defaulttarget-2">default target:</h3>
+
+<ol>
+<li>Compile the Java source file in this directory, "Main.java", into a <strong>Java</strong> class file.\</li>
+
+<li>Copy "Main.class" into the directory "../bin/".</li>
+</ol>
+
+<h3 id="cleantarget-2">clean target:</h3>
+
+<ul>
+<li>Delete the Java class files in this directory.</li>
+</ul>
+
+<h3 id="newtarget-2">new target:</h3>
+
+<ol>
+<li>"make" the "clean" target.</li>
+
+<li>"make" the "default" target.</li>
+</ol>
+
+<h1 id="goalconsolidatesubtasksintoonemakefiletask">Goal: Consolidate subtasks into one Makefile task</h1><hr id="hrline">
+
+<p>This is the rest of "Makefile task", which has you producing yet another Makefile to tie all the subtasks together. Make sure to use <code>.PHONY</code> when creating the Makefile <a href="http://stackoverflow.com/questions/2145590/what-is-the-purpose-of-phony-in-a-makefile">(more info about that here)</a>. This Makefile in <code>makefile_assignment</code> directory must be capable of carrying out the following:</p>
+
+<p>Put this at the top of your Makefile.</p>
+
+<pre><code>.PHONY: cpp java
+</code></pre>
+
+<h3 id="defaulttarget-3">default target:</h3>
+
+<ul>
+<li>"make" the targets "cpp", and "java"</li>
+</ul>
+
+<h3 id="cpptarget">cpp target:</h3>
+
+<ul>
+<li>"make" the contents of the directory <code>makefile_assignment/cpp/</code></li>
+</ul>
+
+<h3 id="javatarget">java target:</h3>
+
+<ul>
+<li>"make" the contents of the directory <code>makefile_assignment/java/</code></li>
+</ul>
+
+<h3 id="cleantarget-3">clean target:</h3>
+
+<ol>
+<li>Clean the "cpp/" directory.</li>
+
+<li>Clean the "java/" directory.</li>
+
+<li>Delete all executables in the "bin/" directory.</li>
+</ol>
+
+<h3 id="newtarget-3">new target:</h3>
+
+<ol>
+<li>"make" the "clean" target</li>
+
+<li>"make" the "default" target</li>
+</ol>
+
+<h3 id="question5whatsthepurposeofphonyinamakefile">Question 5: What's the purpose of .PHONY in a makefile?</h3>
+
+<h3 id="question6howdoyoucallaanothermakefileinamakefile">Question 6: How do you call a another makefile in a makefile?</h3>
+
+<h3 id="question7howwouldyouwriteacommandtoarchiveobjectfilesintoanarchive">Question 7: How would you write a command to archive object files into an archive?</h3>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Congratulations, you have now completed Lab 8! When you are ready, ask a tutor for the checkoff. Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show a lab tutor the following:</p>
+
+<ol>
+<li>Your README with all 7 questions answered</li>
+
+<li>Your completed Makefiles</li>
+</ol></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 8_ Java Logging Framework and Advanced Makefiles_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>

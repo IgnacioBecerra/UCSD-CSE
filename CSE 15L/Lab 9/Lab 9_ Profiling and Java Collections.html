@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link href="./Lab 9_ Profiling and Java Collections_files/bootstrap.css" rel="stylesheet">
+  <link href="./Lab 9_ Profiling and Java Collections_files/bootstrap-theme.css" rel="stylesheet">
+  <link href="./Lab 9_ Profiling and Java Collections_files/CSE15L.css" rel="stylesheet">
+  <link href="./Lab 9_ Profiling and Java Collections_files/prettify.css" rel="stylesheet">
+  <title class="title">Lab 9: Profiling and Java Collections</title>
+</head>
+<body>
+
+
+<header class="navbar-default navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a href="http://ieng6.ucsd.edu/~cs15x/labs/">« CSE 15L</a></div>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#" class="dropdown-toggle" data-toggle="dropdown">Table of Contents</a>
+          <ul id="table_of_contents" class="dropdown-menu text-left">
+            
+        
+      <li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#lab9profilingandjavacollections">Lab 9: Profiling and Java Collections</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalusedatastructureswhileprogrammingwithouthavingtoimplementthem">Goal: Use data structures while programming without having to implement them.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalcompareandcontrastcollectionprofiles">Goal: Compare and contrast collection profiles</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalanalyzealgorithmstogenerateaccuratepredictions">Goal: Analyze algorithms to generate accurate predictions.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalcreatetestprogramstoanalyzecoderuntime">Goal: Create test programs to analyze code runtime.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalcomputingmeanandstandarddeviation">Goal: Computing Mean and Standard Deviation</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalcontrolexperimentsfromthecommandline">Goal: Control Experiments from the Command Line</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#goalfindouthowresourcesarebeingusedduringprogramexecution">Goal: Find out how resources are being used during program execution.</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#checkoff">Checkoff</a></li><li><a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/index.html#references">References</a></li></ul>
+    </li></ul></nav>
+  </div>
+</header>
+
+
+<div id="main_content" class="container">
+ 
+<h1 id="lab9profilingandjavacollections">Lab 9: Profiling and Java Collections</h1><hr id="hrline">
+
+<!-- Leave this alone This is the code for the terminal thingie at the top -->
+
+<div class="text-left terminal type-wrap">
+<div>
+  <span id="command">$ cat lab_readme.txt</span><span id="typed-cursor">|</span>
+</div>
+
+<p><br></p>
+
+<div class="readme" style="display: block;">
+  <ol>
+    <li>
+      This CSE 15L lab has only one component: the lab exercise.
+    </li>
+    <li>
+      For the lab exercise, you’ll be working in a team of two: pair programming, two people to one machine. You just need to login as ONE of you, using your cs15xxx user name.
+    </li>
+    <li>
+       Switch drivers (student on the keyboard) every 20 minutes.
+    </li>
+    <li>
+        Complete CAPE evaluations for CSE 15L before you get checked off. 
+    </li>
+  </ol>
+</div>
+
+</div>
+<!-- End of the terminal thingie at the top; you can start lab content after this -->
+
+<h1 id="goalusedatastructureswhileprogrammingwithouthavingtoimplementthem">Goal: Use data structures while programming without having to implement them.</h1><hr id="hrline">
+
+<p>A collection — sometimes called a container — is simply an object that groups multiple elements into a single unit. Collections are used to store, retrieve, manipulate, and communicate aggregate data. Typically, they represent data items that form a natural group, such as a poker hand (a collection of cards), a mail folder (a collection of letters), or a telephone directory (a mapping of names to phone numbers). If you have used the Java programming language — or just about any other programming language — you are already familiar with collections. </p>
+
+<h2 id="whatisacollectionsframework">What is a Collections Framework?</h2>
+
+<p>A collections framework is a unified architecture for representing and manipulating collections. All collections frameworks contain the following:</p>
+
+<ul>
+<li><p>Interfaces: These are abstract data types that represent collections. Interfaces allow collections to be manipulated independently of the details of their representation. In object-oriented languages, interfaces generally form a hierarchy.</p></li>
+
+<li><p>Implementations: These are the concrete implementations of the collection interfaces. In essence, they are reusable data structures.</p></li>
+
+<li><p>Algorithms: These are the methods that perform useful computations, such as searching and sorting, on objects that implement collection interfaces. The algorithms are said to be polymorphic: that is, the same method can be used on many different implementations of the appropriate collection interface. In essence, algorithms are reusable functionality.</p></li>
+</ul>
+
+<p>Apart from the Java Collections Framework, the best-known examples of collections frameworks are the C++ Standard Template Library (STL) and Smalltalk's collection hierarchy. Historically, collections frameworks have been quite complex, which gave them a reputation for having a steep learning curve. We believe that the Java Collections Framework breaks with this tradition, as you will learn for yourself in this lab.</p>
+
+<p>The following list describes the core collection interfaces:</p>
+
+<ul>
+<li><p><code>Collection</code>: The root of the collection hierarchy. A collection represents a group of objects known as its elements. The Collection interface is the least common denominator that all collections implement and is used to pass collections around and to manipulate them when maximum generality is desired. Some types of collections allow duplicate elements, and others do not. Some are ordered and others are unordered. The Java platform doesn't provide any direct implementations of this interface but provides implementations of more specific subinterfaces, such as Set and List. Also see The Collection Interface section.</p></li>
+
+<li><p><code>Set</code>: A collection that cannot contain duplicate elements. This interface models the mathematical set abstraction and is used to represent sets, such as the cards comprising a poker hand, the courses making up a student's schedule, or the processes running on a machine. See also The Set Interface section.</p></li>
+
+<li><p><code>List</code>: An ordered collection (sometimes called a sequence). List's can contain duplicate elements. The user of a List generally has precise control over where in the list each element is inserted and can access elements by their integer index (position). If you've used Vector, you're familiar with the general flavor of List. Also see The List Interface section.</p></li>
+
+<li><p><code>Queue</code>: A collection used to hold multiple elements prior to processing. Besides basic Collection operations, a Queue provides additional insertion, extraction, and inspection operations.</p>
+
+<p>Queue's typically, but do not necessarily, order elements in a FIFO (first-in, first-out) manner. Among the exceptions are priority queues, which order elements according to a supplied comparator or the elements' natural ordering. Whatever the ordering used, the head of the queue is the element that would be removed by a call to remove or poll. In a FIFO queue, all new elements are inserted at the tail of the queue. Other kinds of queues may use different placement rules. Every Queue implementation must specify its ordering properties. Also see The Queue Interface section.</p></li>
+
+<li><p><code>Deque</code>: A collection used to hold multiple elements prior to processing. Besides basic Collection operations, a Deque provides additional insertion, extraction, and inspection operations.</p>
+
+<p>Deque's can be used both as FIFO (first-in, first-out) and LIFO (last-in, first-out). In a deque all new elements can be inserted, retrieved and removed at both ends. Also see The Deque Interface section.</p></li>
+
+<li><p><code>Map</code>: An object that maps keys to values. A Map cannot contain duplicate keys; each key can map to at most one value. If you've used Hashtable, you're already familiar with the basics of Map. Also see The Map Interface section.</p></li>
+</ul>
+
+<h3 id="question1whichcollectionsshouldyouuseifyouwanttoweedoutduplicateentries">Question 1: Which collection(s) should you use if you want to weed out duplicate entries?</h3>
+
+<h2 id="thecollectioninterface">The Collection Interface</h2>
+
+<p>A Collection represents a group of objects known as its elements. The Collection interface is used to pass around collections of objects where maximum generality is desired. For example, by convention all general-purpose collection implementations have a constructor that takes a Collection argument. This constructor, known as a conversion constructor, initializes the new collection to contain all of the elements in the specified collection, whatever the given collection's subinterface or implementation type. In other words, it allows you to convert the collection's type.</p>
+
+<p>Suppose, for example, that you have a Collection<string> c, which may be a List, a Set, or another kind of Collection. This idiom creates a new ArrayList (an implementation of the List interface), initially containing all the elements in c:</string></p>
+
+<pre><code>List&lt;String&gt; list = new ArrayList&lt;String&gt;(c);
+</code></pre>
+
+<h1 id="goalcompareandcontrastcollectionprofiles">Goal: Compare and contrast collection profiles</h1><hr id="hrline">
+
+<h2 id="setup">Setup</h2>
+
+<ol>
+<li><p>After logging in, open a terminal window. In your home directory, create a directory named Lab9, and cd to it. You will work within that directory when doing this lab:</p>
+
+<pre><code>$ mkdir Lab9
+$ cd Lab9
+</code></pre></li>
+
+<li><p>Copy all the contents of the public Lab9 directory into what is now your current working directory, Lab9. (Be sure to note the period as the last argument to the cp command here; it is specifying the current working directory as the destination of the copy operation. The –r flag means to recursively copy subdirectories; the * wildcard matches all contents of the public Lab9 directory.)</p>
+
+<pre><code>$ cp -r ~/../public/Lab9/* .
+</code></pre></li>
+</ol>
+
+<h2 id="experiment1profilingcollections">Experiment 1: Profiling Collections</h2>
+
+<p>Your task in this lab is to measure the profiles of different collections in Java. </p>
+
+<ol>
+<li><p>As you are performing your measurements, fill out the following table:</p>
+
+<table>
+<thead>
+<tr>
+<th>Collection Type</th>
+<th>Number of Elements Inserted/Removed</th>
+<th>Time Taken</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>LinkedList</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>PriorityQueue</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>ArrayList</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Vector</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>ArrayDeque</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Stack</td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table></li>
+
+<li><p>Create a java file called <code>ProfileCollections.java</code> and use the <a href="http://ieng6.ucsd.edu/~cs15x/labs/lab9_mkerfs/ProfileCollections.txt">skeleton code found here</a>, which is currently using a LinkedList. This is not a complete implementation and you may need to add/remove/update methods and then perform profiling.</p></li>
+
+<li><p>Make sure you understand what the skeleton code is doing before moving forward: To measure the time it takes to do a computation, query the system clock before the computation starts, query it again after the computation is done, and take the difference. In Java, System.nanoTime() returns a long giving the current system time in nanoseconds. In addition, it can help to call System.gc() before starting to time a computation, to attempt to run the Java garbage collector before and not during the computation (if it runs during the computation, it will skew the results). In this lab, you will be finding the time it takes to add and then remove a large number of Integer objects in a collection. </p></li>
+
+<li><p>The current code should allow you to measure the LinkedList's add and remove operations. You can compile the code as follows:</p>
+
+<pre><code>$ javac ProfileCollections.java
+</code></pre>
+
+<p>Then run the file:</p>
+
+<pre><code>$ java ProfileCollections
+</code></pre></li>
+
+<li><p>You should modify the above program to measure each collection's add and remove operation as follows:</p></li>
+</ol>
+
+<ul>
+<li><p>Correctly initialize each collection. Within the skeleton code, replace <code>List&lt;Integer&gt; linkedList = new LinkedList&lt;Integer&gt;();</code> with any of the following, depending on which collection you are currently profiling.</p>
+
+<pre><code>Queue&lt;Integer&gt; pQueue = new PriorityQueue&lt;Integer&gt;();
+List&lt;Integer&gt; arrayList = new ArrayList&lt;Integer&gt;();
+List&lt;Integer&gt; vectorList = new Vector&lt;Integer&gt;();
+Deque&lt;Integer&gt; arrayDeque = new ArrayDeque&lt;Integer&gt;();
+Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+</code></pre></li>
+
+<li><p>Perform the add operation to fill the collection you are profiling with a large number of integers. You will want to add the same number of integers for each collection to keep your measurements consistent. <strong>Note</strong>: You may need to reference the following webpage to find out the methods and parameters required for adding and removing objects in different collections:
+<a href="http://docs.oracle.com/javase/7/docs/technotes/guides/collections/reference.html">http://docs.oracle.com/javase/7/docs/technotes/guides/collections/reference.html</a></p></li>
+
+<li><p>Perform the remove operation on all the integers. <strong>When remove() method is not available in a collection, select a method that helps you in removing Integers in INCREASING order.</strong></p></li>
+</ul>
+
+<p><strong>Note</strong>: For a list, you should start removing from a location other than the start of the list since removing from a list can be slow: <a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/List.html#remove(java.lang.Object)">http://docs.oracle.com/javase/1.5.0/docs/api/java/util/List.html#remove(java.lang.Object)</a></p>
+
+<h3 id="question2rankyourfindingsfromlowesttimetakentohighest">Question 2: Rank your findings from lowest time taken to highest.</h3>
+
+<h3 id="question3explainwhythefastestcollectionsweresofasthintcomparetheunderlyingdatastructuresandhowwelltheycanperforminsertandremove">Question 3: Explain why the fastest collections were so fast. (Hint: compare the underlying data structures and how well they can perform Insert and Remove.)</h3>
+
+<h1 id="goalanalyzealgorithmstogenerateaccuratepredictions">Goal: Analyze algorithms to generate accurate predictions.</h1><hr id="hrline">
+
+<p>Make sure you are in your ~/Lab9 directory, where you copied files from the public directory. For today’s lab, we will use the <code>IntegerList</code> class from previous lab and measure the execution time of two versions of its <code>removeRange(int fromIndex, int toIndex)</code> method.</p>
+
+<ol>
+<li><p>In your cwd, you should see, a file <code>IntegerList.java</code>. Open this file in an editor, or just cat it to your terminal screen. You will see the implementation of two versions of the <code>removeRange()</code> method, namely <code>removeRange()</code> and <code>removeRangeV2()</code>. Analyze the code and try to understand how the versions differ.</p></li>
+
+<li><p>Based on your analysis of the two removeRange methods, provide the values of <code>fromIndex</code> and <code>toIndex</code> which result in best-case and worst-case performance for the two methods. Assume the size of the list is N.</p>
+
+<p><code>removeRange(int fromIndex, int toIndex)</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>removeRange</th>
+<th>fromIndex</th>
+<th>toIndex</th>
+<th>Time Complexity Big-O Notation</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Best-Case</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Worst-Case</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+
+<p><code>removeRangeV2(int fromIndex, int toIndex)</code>:</p>
+
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><table>
+<thead>
+<tr>
+<th>removeRangeV2</th>
+<th>fromIndex</th>
+<th>toIndex</th>
+<th>Time Complexity Big-O Notation</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Best-Case</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Worst-Case</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table><p></p></li>
+</ol>
+
+<h3 id="question4whichversionwouldyouprefertouseinyourprogramsandwhy">Question 4: Which version would you prefer to use in your programs and why?</h3>
+
+<h1 id="goalcreatetestprogramstoanalyzecoderuntime">Goal: Create test programs to analyze code runtime.</h1><hr id="hrline">
+
+<p>Create a new file <code>TimeSimpleList.java</code> in the current working directory, implementing a class TimeSimpleList.</p>
+
+<pre><code>public class TimeSimpleList {
+
+  public static void main(String args[]) {
+
+  }
+
+}
+</code></pre>
+
+<p>The initial size <code>S</code> of the <code>IntegerList</code> array, the increment in size <code>I</code> during consecutive experiments, the maximum size <code>M</code> and the number of trials <code>T</code> for each experiment should be provided from the command line.</p>
+
+<p>Use the args[] argument passed to the <code>main()</code> method to retrieve these inputs and parse them as integers. For this, first check whether 4 arguments have been passed:</p>
+
+<pre><code>if (args.length != 4) {
+
+  System.out.println("Usage: java TimeSimpleList initSize increment maxSize trials");
+
+  System.exit(1);
+
+}
+
+int S = Integer.parseInt(args[0]);
+int I = Integer.parseInt(args[1]);
+int M = Integer.parseInt(args[2]);
+int T = Integer.parseInt(args[3]);
+</code></pre>
+
+<p>Use nested for-loops to conduct the experiments. The <strong>outer</strong> for-loop iterates over the sizes of the IntegerList array for each experiment, while the <strong>inner</strong> for-loop iterates over the number of trials within each experiment.</p>
+
+<p>Here, <code>j</code> is size of the List and <code>k</code> is the trial number:</p>
+
+<pre><code>// Each iteration for this outer-loop is an experiment!
+for( int j = S; j &lt; M+1; j+= I) {
+
+  for(int k = 0; k &lt; T ; k++) {
+
+    // each trial within an experiment  
+
+  }
+
+}
+</code></pre>
+
+<p>Create a new <code>IntegerList</code> array of size <code>j</code> within the outer for-loop. This serves as the array for each experiment. Also, create an array <code>executionTimes</code> in the outer loop to store the measurements from each trial.</p>
+
+<pre><code>IntegerList myList = new IntegerList(j);
+
+double executionTimes[] = new double[T];
+
+int elements = j/2; //number of elements to remove
+</code></pre>
+
+<p>Within the inner loop, use the <code>add(int element)</code> method in <code>IntegerList</code> class to insert elements into <code>myList</code>. Insert up to <code>j</code> elements using another for-loop. (Your list should have <code>j</code> number of integers in the end. The actual value of those integers is not relevant in the current scenario.)</p>
+
+<p>To measure the time it takes to do a computation, query the system clock before the computation starts, query it again after the computation is done, and take the difference. In Java, <code>System.nanoTime()</code> returns a long giving the current system time in nanoseconds. In addition, it can help to call <code>System.gc()</code> before starting to time a computation, to attempt to run the Java garbage collector before and not during the computation (if it runs during the computation, it will skew the results). So, you can do something like this:</p>
+
+<pre><code>System.gc();
+
+long start = 0, end = 0;
+
+start = System.nanoTime();
+
+myList.removeRange(0,elements);
+
+end = System.nanoTime();
+</code></pre>
+
+<p>Divide the difference by 1.0e9 (that is 10^9, to get the time in seconds) and store it in the array <code>executionTimes</code>. Clear <code>myList</code>.</p>
+
+<h1 id="goalcomputingmeanandstandarddeviation">Goal: Computing Mean and Standard Deviation</h1><hr id="hrline">
+
+<p>At this point, <strong>SWITCH DRIVER AND NAVIGATOR</strong> (If you’ve been controlling the mouse and keyboard, it’s time for your partner to do so).</p>
+
+<p>To compute the mean and standard deviation, implement a new static method, say <code>computeAndDisplay(double executionTimes[], int elements)</code>. Note that the method takes an array and an integer as input and will compute the mean and standard deviation of an amount of items. This method will compute the mean and standard deviation of an amount of items (<code>elements</code>) inside of an array of doubles called <code>executionTimes</code>.</p>
+
+<pre><code>public static void computeAndDisplay(double executionTimes[], int elements)
+</code></pre>
+
+<p>To compute the mean, initialize a double variable, say <code>sum</code>, to 0 and use a loop to iterate over the input array adding each element to sum. The mean can be computed as <code>sum/length</code>, where <code>length</code> is the size of the input array.</p>
+
+<pre><code>double mean = sum/length;
+</code></pre>
+
+<p>To compute the standard deviation, initialize a double variable, say <code>sumSquared</code>, to 0 and iterate over the input array adding the square of each element to <code>sumSquared</code>. The standard deviation can then be computed as:</p>
+
+<pre><code>double standardDeviation = Math.sqrt((sumSquared/length) – (mean*mean));
+</code></pre>
+
+<p>The computed results can be printed to standard output as:</p>
+
+<pre><code>System.out.format("%d %.5f %.5f\n", elements,mean,standardDeviation);
+</code></pre>
+
+<p>Call the <code>computeAndDisplay</code> method at the <strong>end of each experiment</strong> (and not trial) in the earlier outer for loop passing the array <code>executionTimes</code> and <code>elements</code> (the number of elements removed) as input.</p>
+
+<h2 id="experiment2comparingremoverangeandremoverangev2">Experiment 2: Comparing <code>removeRange()</code> and <code>removeRangeV2()</code></h2>
+
+<p>Do a ls to see the contents of your cwd. We have provided you with a completed makefile that has rules to test the implementation that you will work on and to run the experiments.</p>
+
+<ul>
+<li><p><code>make test</code> will compile TimeSimpleList.java and run the program with output redirected to the terminal</p></li>
+
+<li><p><code>make versionOne</code> will compile TimeSimpleList.java and run the program with the -DversionOne=1 property specified to the Java Runtime Environment. The output is redirected to the file <strong>versionOne.txt</strong></p></li>
+
+<li><p><code>make versionTwo</code> will compile TimeSimpleList.java and run the program with the -DversionTwo=1 property specified to the Java Runtime Environment. The output is redirected to the file <strong>versionTwo.txt</strong></p></li>
+</ul>
+
+<p>More information will be provided on how to instrument the code for testing.</p>
+
+<p>Compile and run the <code>make test</code>. Measurements can be affected by many factors, therefore make sure you provide enough trials for each experiments to get a good average measurement (100 is a good starting value for this experiment). You should see the results printed out to the terminal.</p>
+
+<p>If you suspect that results are incorrect, it may be due to optimization by the Hotspot JIT compiler to improve performance for code that is executed repeatedly. To disable the optimization, change the makefile rules to run the program with the <code>-Xint</code> option.</p>
+
+<pre><code>$ java -Xint TimeSimpleList 2000 2000 10000 100
+</code></pre>
+
+<p>Using specific inputs (ex: an increment I equal to the initial size S), the time complexity involved of the algorithm used can be deduced from the results. </p>
+
+<h3 id="question5whatstepsdidyoutaketomeasurethetimecomplexityofyouralgorithmdotheresultsmatchyourearlierprediction">Question 5: What steps did you take to measure the time complexity of your algorithm? Do the results match your earlier prediction?</h3>
+
+<p>Replace the call to <code>removeRange()</code> method with a call to <code>removeRangeV2()</code> and repeat the experiments.</p>
+
+<p>Compare the output with the results of the first experiment.</p>
+
+<h3 id="question6whichmethodrunsfaster">Question 6: Which method runs faster?</h3>
+
+<h1 id="goalcontrolexperimentsfromthecommandline">Goal: Control Experiments from the Command Line</h1><hr id="hrline">
+
+<p>In the last step, you had to change the call to a different version of the remove range method and recompile the code. We can instrument the code to allow us to run a different version of the method depending on properties passed to the Java Runtime Environment. This is achieved using the <code>-D</code> switch at run time, and the property which runs the program with the original version versionOne is specified as follows:</p>
+
+<pre><code>$ java -Xint -DversionOne=1 TimeSimpleList 2000 2000 10000 100
+</code></pre>
+
+<p>This has been added to the makefile for your convenience.</p>
+
+<p>The next step is to define variables that track the state of the <code>versionOne</code> and <code>versionTwo</code> system properties i.e. whether each property is set or not. Add the following declarations to your program:</p>
+
+<pre><code>static boolean versionOne = System.getProperty("versionOne") == null ? false:true;
+
+static boolean versionTwo = System.getProperty("versionTwo") == null ? false:true;
+</code></pre>
+
+<h3 id="question7whereshouldweputtheabovelinesofcodehintwhyaretheystatic">Question 7: Where should we put the above lines of code? (Hint: Why are they static?)</h3>
+
+<p>Next, change the measurement part of your program to include two if statements to check which version of the program we are supposed to run. Add the following lines of code (<code>versionTwo</code> will run by default if none of the variables are true):</p>
+
+<pre><code>if (versionOne) {
+
+  start= System.nanoTime();
+
+  myList.removeRange(0, elements);
+
+  end =  System.nanoTime();
+
+}
+
+if (versionTwo || !versionOne) {
+
+  start= System.nanoTime();
+
+  myList.removeRangeV2(0, elements);
+
+  end =  System.nanoTime();
+
+}
+</code></pre>
+
+<p>We use output redirection to save the printed results in to a file. This can be accomplished while running the program:</p>
+
+<pre><code>$ java -Xint -DversionOne=1 TimeSimpleList 2000 2000 10000 100 &gt; versionOne.txt
+</code></pre>
+
+<p>The makefile contains the rules to run the code for each version of the remove range method. On the console, simply type in <code>make versionOne</code> and then <code>make versionTwo</code> to run each version and collect the data in file for processing with gnuplot.</p>
+
+<h1 id="goalfindouthowresourcesarebeingusedduringprogramexecution">Goal: Find out how resources are being used during program execution.</h1><hr id="hrline">
+
+<p>By using CPU Usage Times Profile <code>cpu=times</code>, HPROF collects CPU usage information by injecting code into every method entry and exit, keeping track of exact method call counts and the time spent in each method. This uses Byte Code Injection (BCI) and runs considerably slower than cpu=samples.</p>
+
+<h3 id="question8whatsthedifferencebetweentimesandsampleshintwhatdotheymeasure">Question 8: What's the difference between times and samples? (Hint: What do they measure?)</h3>
+
+<p>Use the following command to evaluate CPU usage:</p>
+
+<pre><code>$ java -agentlib:hprof=cpu=times TimeSimpleList 2000 2000 10000 100
+</code></pre>
+
+<p>This will run hprof and generate a java.hprof.txt file. Look at the CPU TIME table at the end of the file, and find the self column to see how much time each method costs.</p>
+
+<p>Use gnuplot to draw graphs using the saved results. Using the load command will instruct gnuplot to run our script plot.p which contains commands to plot our output as two different graphs. Open plot.p and edit it to match the output file names from the experiments that you ran.</p>
+
+<pre><code>$ gnuplot
+gnuplot&gt; load "plot.p"
+</code></pre>
+
+<h1 id="checkoff">Checkoff</h1><hr id="hrline">
+
+<p>Before you leave, please make sure that you are checked off and that you receive an email confirming that you have been checked off (remember, this is your receipt!). To get checked off, please raise your hand and show the following to a lab tutor:</p>
+
+<ol>
+<li>Lab 9 README with the 8 questions above answered.</li>
+
+<li>Experiment results for BOTH programs.
+
+
+<ul>
+<li>Collections analysis: table of measurement results</li>
+
+<li>removeRange analysis: gnuplot of both removeRange methods</li></ul>
+</li>
+
+<li>Complete CAPE evaluations for CSE 15L and 12 (if you are enrolled). Both you and your partner must fill out and show the submitted CAPE evaluation(s) to the lab tutor who is checking you off!</li>
+
+<li><strong>Make sure you have your midterm exam before you leave the lab!</strong></li>
+
+<li>For next week's lab, please bring a Windows laptop or a Mac laptop in order to complete next week's lab. </li>
+</ol>
+
+<h1 id="references">References</h1><hr id="hrline">
+
+<ul>
+<li><p><a href="http://www.bharaththippireddy.net/2012/02/ant-hands-on%3Cem%3E9001.html">http://www.bharaththippireddy.net/2012/02/ant-hands-on9001.html</a></p></li>
+
+<li><p><a href="http://www.cs.okstate.edu/newuser/">http://www.cs.okstate.edu/newuser/</a></p></li>
+
+<li><p><a href="http://linux.101hacks.com/toc/">http://linux.101hacks.com/toc/</a></p></li>
+
+<li><p><a href="http://docs.oracle.com/javase/7/docs/technotes/guides/collections/">http://docs.oracle.com/javase/7/docs/technotes/guides/collections/</a></p></li>
+
+<li><p><a href="http://docs.oracle.com/javase/7/docs/technotes/guides/collections/reference.html">http://docs.oracle.com/javase/7/docs/technotes/guides/collections/reference.html</a></p></li>
+
+<li><p><a href="http://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html">http://docs.oracle.com/javase/7/docs/technotes/guides/collections/overview.html</a></p></li>
+
+<li><p><a href="http://docs.oracle.com/javase/tutorial/collections/">http://docs.oracle.com/javase/tutorial/collections/</a></p></li>
+</ul></div> <!-- End main_content -->
+
+
+<script type="text/javascript" src="./Lab 9_ Profiling and Java Collections_files/jquery-1.11.0.js.download"></script>
+<script type="text/javascript" src="./Lab 9_ Profiling and Java Collections_files/bootstrap.js.download"></script>
+<script type="text/javascript" src="./Lab 9_ Profiling and Java Collections_files/prettify.js.download"></script>
+<script type="text/javascript" src="./Lab 9_ Profiling and Java Collections_files/typed.js.download"></script>
+<script type="text/javascript" src="./Lab 9_ Profiling and Java Collections_files/showdown.min.js.download"></script>
+<script type="text/javascript">
+(function(jQuery){
+  jQuery( document ).ready( function() {
+    prettyPrint();
+  } );
+}(jQuery))
+
+$.ajax({
+  url: "index.md",
+  context: document.body,
+  success: function(mdText){
+    //where text will be the text returned by the ajax call
+    var converter = new showdown.Converter();
+    converter.setOption('simplifiedAutoLink', true);
+    converter.setOption('tables', true);
+    converter.setOption('parseImgDimensions', true);
+    converter.setOption('strikethrough', true);
+    var htmlText = converter.makeHtml(mdText);
+    $("#main_content").append(htmlText); //append this to a div with class outputDiv
+
+  
+    // use jquery to add anchor links, style h1 a bit more, and add to table of contents
+    $('h1').each(function(i, obj) {
+      if (i == 0) {
+        $(".title").append(obj.innerHTML);
+      }
+      $("<hr id='hrline'>").insertAfter(obj);
+      $("#table_of_contents").append("<li><a href=#"+ obj.id + ">" + obj.innerHTML + "</a></li>");
+    });
+
+
+    // terminal animation at the top
+    $(function(){
+
+      $("#command").typed({
+        strings: ["cat lab_readme.txt"],
+        typeSpeed: 10,
+        callback: function(){ foo(); }
+      });
+
+      function foo(){ console.log("Callback");
+      $(".readme").delay(300).show(0); }
+
+    });
+
+  }
+});
+
+ 
+</script>
+
+
+
+
+</body></html>
